@@ -127,7 +127,7 @@
     }
 
     h1 {
-      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-size: 1.6rem;
       line-height: 1.06;
     }
 
@@ -302,6 +302,29 @@
       gap: 0.85rem;
     }
 
+    .gallery figure,
+    .case-gallery figure {
+      margin: 0;
+      border: 1px solid #d7e3f1;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fbfdff;
+    }
+
+    .gallery img,
+    .case-gallery img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .gallery figcaption,
+    .case-gallery figcaption {
+      padding: 0.65rem 0.75rem;
+      color: #4f6384;
+      font-size: 0.84rem;
+    }
+
     .project-text {
       margin-top: 0.95rem;
       display: grid;
@@ -348,8 +371,103 @@
     .case-study-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 0.9rem;
+      gap: 0.75rem;
       margin-top: 0.85rem;
+    }
+
+    .case-hero {
+      border: 1px solid #d7e3f1;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #10223d 0%, #143a67 55%, #0f766e 100%);
+      color: #eef5ff;
+      padding: 1.15rem;
+      box-shadow: 0 18px 40px rgba(16, 38, 78, 0.14);
+      margin-top: 0.85rem;
+    }
+
+    .case-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .case-hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #9fe9dc;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      margin-bottom: 0.55rem;
+    }
+
+    .case-hero h3 {
+      font-size: clamp(1.55rem, 4vw, 2.35rem);
+      line-height: 1.08;
+      margin-bottom: 0.55rem;
+      color: #ffffff;
+    }
+
+    .case-hero p {
+      margin: 0;
+      color: #d7e8ff;
+      font-size: 0.96rem;
+      line-height: 1.65;
+      max-width: 78ch;
+    }
+
+    .case-hero-side {
+      display: grid;
+      gap: 0.7rem;
+      align-content: start;
+    }
+
+    .case-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .case-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      padding: 0.38rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .case-badge strong {
+      font-family: "Clash Display", sans-serif;
+      font-size: 1rem;
+      color: #9fe9dc;
+    }
+
+    .case-hero-stat {
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 0.8rem;
+    }
+
+    .case-hero-stat strong {
+      display: block;
+      color: #ffffff;
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .case-hero-stat span {
+      color: #d7e8ff;
+      font-size: 0.86rem;
+      line-height: 1.45;
     }
 
     .case-card {
@@ -405,21 +523,59 @@
       max-width: 62ch;
     }
 
-    .case-lane {
+    .case-quickfacts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+      margin-top: 0.75rem;
+    }
+
+    .case-quickfact {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.6rem;
+      align-items: start;
+      background: #ffffff;
+      border: 1px solid #d8e4f3;
+      border-radius: 12px;
+      padding: 0.72rem 0.8rem;
+    }
+
+    .case-quickfact strong {
+      color: #0b57d0;
+      font-family: "Clash Display", sans-serif;
+      font-size: 1rem;
+      min-width: 3.5rem;
+    }
+
+    .case-quickfact span {
+      color: #324766;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .case-editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+      margin-top: 0.85rem;
+    }
+
+    .case-overview {
       display: grid;
       grid-template-columns: 1fr;
       gap: 0.6rem;
       margin-top: 0.7rem;
     }
 
-    .case-block {
+    .case-panel {
       background: #ffffff;
       border: 1px solid #d8e4f3;
       border-radius: 12px;
       padding: 0.78rem 0.85rem;
     }
 
-    .case-block strong {
+    .case-panel strong {
       display: block;
       color: #0b57d0;
       margin-bottom: 0.3rem;
@@ -428,7 +584,7 @@
       letter-spacing: 0.4px;
     }
 
-    .case-block p {
+    .case-panel p {
       margin: 0;
       color: #334969;
       font-size: 0.92rem;
@@ -463,97 +619,41 @@
       line-height: 1.45;
     }
 
-    .gallery button {
-      all: unset;
-      cursor: zoom-in;
-      display: block;
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.7rem;
+      margin-top: 0.8rem;
     }
 
-    .gallery img {
-      transition: transform 180ms ease, filter 180ms ease;
-    }
-
-    .gallery button:hover img {
-      transform: scale(1.01);
-      filter: saturate(1.03) contrast(1.02);
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(12, 21, 38, 0.78);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      z-index: 50;
-    }
-
-    .modal.open {
-      display: flex;
-    }
-
-    .modal-dialog {
-      width: min(1200px, 96vw);
-      background: #ffffff;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
-    }
-
-    .modal-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.8rem 1rem;
-      border-bottom: 1px solid #e1e7f1;
+    .timeline-step {
+      border: 1px solid #d8e4f3;
       background: #f8fbff;
+      border-radius: 12px;
+      padding: 0.78rem;
     }
 
-    .modal-title {
-      font-weight: 700;
-      color: #16386b;
-      font-size: 0.95rem;
-    }
-
-    .modal-close {
-      border: none;
-      background: #0b57d0;
-      color: #fff;
-      border-radius: 999px;
-      width: 34px;
-      height: 34px;
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-
-    .modal-image {
+    .timeline-step strong {
       display: block;
-      width: 100%;
-      max-height: 82vh;
-      object-fit: contain;
-      background: #0b1220;
+      color: #0b57d0;
+      margin-bottom: 0.3rem;
+      font-size: 0.88rem;
+      letter-spacing: 0.25px;
+      text-transform: uppercase;
     }
 
-    figure {
+    .timeline-step p {
       margin: 0;
-      border: 1px solid #d7e3f1;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #fbfdff;
+      color: #324766;
+      font-size: 0.9rem;
+      line-height: 1.55;
     }
 
-    figure img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    figcaption {
-      padding: 0.65rem 0.75rem;
-      color: #4f6384;
-      font-size: 0.84rem;
+    .case-gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+      margin-top: 0.85rem;
     }
 
     .footer {
@@ -574,38 +674,17 @@
     }
 
     @media (min-width: 860px) {
-      .hero-grid {
-        grid-template-columns: 1.2fr 0.8fr;
-      }
-
-      .split {
-        grid-template-columns: 1.2fr 0.8fr;
-      }
-
-      .gallery {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .project-text {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .case-study-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .case-lane {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .case-header {
-        grid-template-columns: 1fr auto;
-        align-items: start;
-      }
-
-      .case-metrics {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
+      .hero-grid { grid-template-columns: 1.2fr 0.8fr; }
+      .split { grid-template-columns: 1.2fr 0.8fr; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .project-text { grid-template-columns: 1fr 1fr; }
+      .case-study-grid { grid-template-columns: 1fr 1fr; }
+      .case-hero-grid { grid-template-columns: 1.3fr 0.7fr; align-items: start; }
+      .case-quickfacts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .case-header { grid-template-columns: 1fr auto; align-items: start; }
+      .case-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .case-editorial-grid { grid-template-columns: 1.05fr 0.95fr; }
+      .case-gallery { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -626,6 +705,7 @@
         <a href="#impact">Impact</a>
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
+        <a href="#projects">Snapshots</a>
         <a href="#case-study">Case Study</a>
       </nav>
     </div>
@@ -635,7 +715,7 @@
     <section class="hero" id="hero">
       <div class="hero-grid">
         <div>
-          <h1>Designing clarity for complex SaaS systems.</h1>
+          <h1>Senior Product Designer | Transforming Complex B2B/B2C SaaS & AI Workflows into High-Adoption Platforms</h1>
           <p class="hero-sub">Senior UX/UI and Product Designer with 8 years of experience in enterprise SaaS, B2B/B2C platforms, and data-heavy workflows. I transform backend complexity into intuitive products that improve adoption, speed delivery, and reduce support load.</p>
           <div class="meta">
             <span class="pill">Malmo, Sweden</span>
@@ -756,80 +836,119 @@
 
     <section class="section" id="case-study">
       <h2>Case Study: LEKAB Communication Systems AB</h2>
-      <p>This section replaces the old snapshots and expands the PDF into a full written portfolio story.</p>
+      <p>This section follows the same flow shown in the PDF and turns it into a cleaner portfolio story.</p>
+
+      <div class="case-hero">
+        <div class="case-hero-grid">
+          <div>
+            <div class="case-hero-kicker"><span class="case-icon">✦</span> Featured Case Study</div>
+            <h3>Designing for secure, high-stakes communication workflows.</h3>
+            <p>LEKAB is a communication and workflow automation platform used across healthcare, finance, logistics, public sector, retail, and manufacturing. The work centered on reducing friction, increasing trust, and making complex flows feel calm and structured.</p>
+          </div>
+          <div class="case-hero-side">
+            <div class="case-badges">
+              <span class="case-badge"><strong>8</strong> years experience</span>
+              <span class="case-badge"><strong>12</strong> step flow</span>
+              <span class="case-badge"><strong>1</strong> platform redesign</span>
+            </div>
+            <div class="case-hero-stat">
+              <strong>LEKAB AB</strong>
+              <span>End-to-end UX ownership across research, architecture, design, validation, and handoff for sandbox and production portals.</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="case-study-grid">
         <article class="case-card">
           <div class="case-header">
             <div>
-              <div class="case-kicker"><span class="case-icon">↗</span> High-Stakes Product Redesign</div>
-              <h3>Designing for Secure Communication Workflows</h3>
+              <div class="case-kicker"><span class="case-icon">01</span> Problem</div>
+              <h3>Users were blocked by manual access and unclear data requirements.</h3>
             </div>
           </div>
-          <p class="case-summary">LEKAB Communication Systems AB provides secure communication and workflow automation for healthcare, finance, logistics, public sector, retail, and manufacturing. The redesign focused on making a complex B2B platform more usable, reliable, and scalable.</p>
-
-          <div class="case-overview">
-            <div class="case-panel">
-              <strong>Problem</strong>
-              <p>Users had to contact an admin for access codes, key data was often incomplete or wrong, and the experience created abandonment, trust issues, and extra operational work.</p>
-            </div>
-            <div class="case-panel">
-              <strong>Objective</strong>
-              <p>Create a user-friendly onboarding flow that gradually collects accurate data, reduces abandonment, and explains the value of providing each detail.</p>
-            </div>
-            <div class="case-panel">
-              <strong>Platform Context</strong>
-              <ul>
-                <li><strong>Sandbox:</strong> safe testing space for messaging APIs and workflow automation.</li>
-                <li><strong>App.LEKAB:</strong> live production portal for real-time messaging and mission-critical workflows.</li>
-                <li><strong>Channels:</strong> SMS, voice, email, mobile app, WhatsApp, alerts, and OTP flows.</li>
-              </ul>
-            </div>
+          <p class="case-summary">Users had to contact an admin for an ID and access code, and many abandoned the flow when too much information was requested upfront. Missing or incorrect data created risk, support overhead, and poor trust.</p>
+          <div class="case-quickfacts">
+            <div class="case-quickfact"><strong>Who</strong><span>Enterprise users, admins, and support teams.</span></div>
+            <div class="case-quickfact"><strong>Pain</strong><span>Abandonment, missing data, and operational friction.</span></div>
+            <div class="case-quickfact"><strong>Need</strong><span>A clearer, safer, and more progressive onboarding experience.</span></div>
           </div>
-
           <div class="case-metrics">
-            <div class="mini-metric"><strong>Healthcare</strong><span>Critical coordination and workforce communication.</span></div>
-            <div class="mini-metric"><strong>Finance</strong><span>Secure onboarding and OTP delivery.</span></div>
-            <div class="mini-metric"><strong>Logistics</strong><span>Real-time alerts and status updates.</span></div>
-            <div class="mini-metric"><strong>Retail</strong><span>Automated communication and SMS marketing.</span></div>
+            <div class="mini-metric"><strong>Risk</strong><span>Incorrect data affected security and personalization.</span></div>
+            <div class="mini-metric"><strong>Support</strong><span>Admin workload increased because of manual steps.</span></div>
+            <div class="mini-metric"><strong>Trust</strong><span>The upfront flow felt heavy and unclear.</span></div>
+            <div class="mini-metric"><strong>Drop-off</strong><span>Many users abandoned the process early.</span></div>
           </div>
         </article>
 
         <article class="case-card">
           <div class="case-header">
             <div>
-              <div class="case-kicker"><span class="case-icon">⚙</span> Delivery Ownership</div>
-              <h3>Workflow Architecture, UI Design, and Handoff</h3>
+              <div class="case-kicker"><span class="case-icon">02</span> Objective</div>
+              <h3>Make signup feel guided, safe, and easy to complete.</h3>
             </div>
           </div>
-          <p class="case-summary">I led discovery, mapped workflows, designed high-fidelity interfaces, and aligned the design system so the product could scale with consistency and less implementation friction.</p>
+          <p class="case-summary">The goal was to implement a user-friendly signup flow that reduces abandonment while collecting accurate information gradually. The experience had to explain why details matter without compromising security.</p>
+          <div class="case-quickfacts">
+            <div class="case-quickfact"><strong>Goal</strong><span>Reduce abandonment while improving data quality.</span></div>
+            <div class="case-quickfact"><strong>Tone</strong><span>Clear, reassuring, and high trust.</span></div>
+            <div class="case-quickfact"><strong>Constraint</strong><span>Security and compliance remained non-negotiable.</span></div>
+          </div>
+          <div class="case-metrics">
+            <div class="mini-metric"><strong>Explain</strong><span>Why each field is required.</span></div>
+            <div class="mini-metric"><strong>Progressive</strong><span>Ask for data step by step.</span></div>
+            <div class="mini-metric"><strong>Minimize</strong><span>Admin involvement and confusion.</span></div>
+            <div class="mini-metric"><strong>Increase</strong><span>Accuracy and completeness of records.</span></div>
+          </div>
+        </article>
+      </div>
 
+      <div class="case-editorial-grid">
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">03</span> Approach</div>
+              <h3>Map the workflow, remove friction, and validate early.</h3>
+            </div>
+          </div>
+          <p class="case-summary">User research identified the key friction points, so the flow was redesigned as a phased signup with minimal upfront input. Wireframes and prototypes were developed collaboratively with engineers and product managers with a strong focus on accessibility, responsiveness, and visual consistency.</p>
           <div class="case-overview">
             <div class="case-panel">
-              <strong>Process</strong>
-              <ul>
-                <li>Discovery and research to identify bottlenecks, high-risk actions, and usability failures.</li>
-                <li>Workflow architecture to define hierarchy and simplify decision points.</li>
-                <li>High-fidelity design with accessible, responsive, and clean UI components.</li>
-                <li>Design system alignment to reduce debt and support engineering speed.</li>
-              </ul>
+              <strong>Discovery and Research</strong>
+              <p>Led user research to identify bottlenecks, risky steps, and places where users lost confidence.</p>
             </div>
             <div class="case-panel">
-              <strong>Key Flows</strong>
-              <ul>
-                <li>Account signup and login with phased onboarding.</li>
-                <li>Password reset with email, confirmation code, and new password steps.</li>
-                <li>Validation and usability testing before handoff.</li>
-                <li>Iteration based on trust, clarity, and error reduction.</li>
-              </ul>
+              <strong>Workflow Architecture</strong>
+              <p>Mapped the end-to-end logic and reorganized information hierarchy to keep each step focused.</p>
+            </div>
+            <div class="case-panel">
+              <strong>Prototype and Test</strong>
+              <p>Built high-fidelity prototypes and validated them with usability checks before handoff.</p>
             </div>
           </div>
+        </article>
 
-          <div class="case-metrics">
-            <div class="mini-metric"><strong>35%</strong><span>Usability improvement through modernization.</span></div>
-            <div class="mini-metric"><strong>40%</strong><span>Faster time-to-market through design system scale.</span></div>
-            <div class="mini-metric"><strong>50%</strong><span>Fewer visual bugs through token alignment.</span></div>
-            <div class="mini-metric"><strong>22%</strong><span>Conversion uplift by reducing friction.</span></div>
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">04</span> Solution</div>
+              <h3>A phased signup flow with clearer explanations and less stress.</h3>
+            </div>
+          </div>
+          <p class="case-summary">The solution introduced a phased signup flow to reduce friction, with clear explanations for why specific information is required. Notifications and admin processes were streamlined to improve efficiency, and the flow was validated through usability testing to ensure smooth completion and accurate data collection.</p>
+          <div class="case-overview">
+            <div class="case-panel">
+              <strong>What Changed</strong>
+              <p>Users could provide data at the right moment instead of being overwhelmed at the start.</p>
+            </div>
+            <div class="case-panel">
+              <strong>System Impact</strong>
+              <p>Admin processes were simplified, and the platform felt more mature and dependable.</p>
+            </div>
+            <div class="case-panel">
+              <strong>Design Outcome</strong>
+              <p>The experience became more readable, responsive, and consistent across screens.</p>
+            </div>
           </div>
         </article>
       </div>
@@ -837,51 +956,92 @@
       <article class="case-card" style="margin-top: 1rem;">
         <div class="case-header">
           <div>
-            <div class="case-kicker"><span class="case-icon">01</span> Process Breakdown</div>
-            <h3>12-Step Design and Delivery Flow</h3>
-          </div>
-        </div>
-        <div class="timeline-grid">
-          <div class="timeline-step"><strong>01 Discovery and Research</strong><p>Interviews, user needs, workflow pain points, and security constraints.</p></div>
-          <div class="timeline-step"><strong>02 Synthesis and Insights</strong><p>Research themes, behavior patterns, and usability priorities grouped together.</p></div>
-          <div class="timeline-step"><strong>03 Problem Definition</strong><p>Business goals aligned with clear design problems and success criteria.</p></div>
-          <div class="timeline-step"><strong>04 Workflow and Structure</strong><p>Existing flows mapped and simplified step by step.</p></div>
-          <div class="timeline-step"><strong>05 Information Architecture</strong><p>Content hierarchy and navigation logic organized for enterprise use.</p></div>
-          <div class="timeline-step"><strong>06 Wireframing</strong><p>Low-fidelity screens tested hierarchy and interaction patterns.</p></div>
-          <div class="timeline-step"><strong>07 Interactive Prototyping</strong><p>Clickable flows explored the most critical user journeys.</p></div>
-          <div class="timeline-step"><strong>08 UI Design</strong><p>High-fidelity interfaces created with accessible styling.</p></div>
-          <div class="timeline-step"><strong>09 Design System Alignment</strong><p>Components and patterns standardized across the platform.</p></div>
-          <div class="timeline-step"><strong>10 Validation and Testing</strong><p>Usability reviews and trust checks verified clarity and behavior.</p></div>
-          <div class="timeline-step"><strong>11 Iteration</strong><p>Feedback used to reduce friction and errors.</p></div>
-          <div class="timeline-step"><strong>12 Handoff and Delivery</strong><p>Final files and guidance prepared for engineering implementation.</p></div>
-        </div>
-      </article>
-
-      <article class="case-card" style="margin-top: 1rem;">
-        <div class="case-header">
-          <div>
-            <div class="case-kicker"><span class="case-icon">✓</span> Impact</div>
-            <h3>Measured Outcomes and Business Value</h3>
+            <div class="case-kicker"><span class="case-icon">05</span> Impact</div>
+            <h3>Measured outcomes and business value.</h3>
           </div>
         </div>
         <div class="case-overview">
           <div class="case-panel">
             <strong>Impact Summary</strong>
-            <p>The redesign reduced signup abandonment, improved accuracy of collected information, increased trust and satisfaction, and lowered administrative workload for account creation.</p>
+            <p>The updated flow reduced signup abandonment, improved the accuracy and completeness of user information, increased user trust and satisfaction, and lowered the administrative workload required for account creation.</p>
           </div>
           <div class="case-panel">
-            <strong>System Benefits</strong>
-            <p>The work supported scalability, consistency, and cross-functional alignment while making the product feel more mature and reliable for enterprise users.</p>
+            <strong>Business Value</strong>
+            <p>The redesign reduced friction in a high-stakes environment while strengthening the platform’s credibility and operational efficiency.</p>
           </div>
           <div class="case-panel">
             <strong>Editorial Takeaway</strong>
-            <p>The page now tells the project as a full written portfolio story rather than a snapshot gallery, which is better for a polished web case study.</p>
+            <p>This version mirrors the structure of the PDF, but it reads more cleanly on the web and is easier for a portfolio reviewer to scan.</p>
           </div>
         </div>
       </article>
 
+      <div class="case-editorial-grid">
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">06</span> 12-Step Flow</div>
+              <h3>End-to-end design process</h3>
+            </div>
+          </div>
+          <div class="timeline-grid">
+            <div class="timeline-step"><strong>01 Discovery and research</strong><p>User interviews, workflow observations, and bottleneck analysis.</p></div>
+            <div class="timeline-step"><strong>02 Synthesis and insights</strong><p>Patterns, risks, and opportunities grouped into themes.</p></div>
+            <div class="timeline-step"><strong>03 Problem definition</strong><p>Clear problem statements aligned with business goals and constraints.</p></div>
+            <div class="timeline-step"><strong>04 Workflow and structure</strong><p>Redundant steps removed and decision points clarified.</p></div>
+            <div class="timeline-step"><strong>05 Information architecture</strong><p>Content hierarchy simplified and labels clarified.</p></div>
+            <div class="timeline-step"><strong>06 Wireframing</strong><p>Low-fidelity layouts tested screen hierarchy and flow.</p></div>
+            <div class="timeline-step"><strong>07 Interactive prototyping</strong><p>Clickable prototypes explored realistic user journeys.</p></div>
+            <div class="timeline-step"><strong>08 UI design</strong><p>Accessible, responsive interfaces were refined with strong visual consistency.</p></div>
+            <div class="timeline-step"><strong>09 Design system alignment</strong><p>Reusable components and patterns kept the product scalable.</p></div>
+            <div class="timeline-step"><strong>10 Validation and testing</strong><p>Direct user sessions checked trust, clarity, and behavior.</p></div>
+            <div class="timeline-step"><strong>11 Iteration</strong><p>Feedback was applied to reduce friction and visual noise.</p></div>
+            <div class="timeline-step"><strong>12 Handoff and delivery</strong><p>Final designs, prototypes, and implementation notes were prepared for engineers.</p></div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">07</span> Screen Sequence</div>
+              <h3>Signup, login, and reset flows shown as a visual story.</h3>
+            </div>
+          </div>
+          <div class="case-overview">
+            <div class="case-panel">
+              <strong>Login</strong>
+              <p>Start with a clean welcome screen, username and password, remember-me, and forgot-password support.</p>
+            </div>
+            <div class="case-panel">
+              <strong>Create Account</strong>
+              <p>Use a phased account creation flow with email input, additional details, and sign-up confirmation.</p>
+            </div>
+            <div class="case-panel">
+              <strong>Password Reset</strong>
+              <p>Flow through email capture, code verification, password creation, and return to login.</p>
+            </div>
+          </div>
+          <div class="case-gallery">
+            <figure>
+              <img src="case study.jpeg" alt="LEKAB case study screenshot showing the problem, objective, research, and design strategy sections." />
+              <figcaption>Exact screenshot from the case-study flow, preserved as a visual reference.</figcaption>
+            </figure>
+            <figure>
+              <img src="figma-task-snapshot.png" alt="Figma canvas snapshot showing the broader layout reference for the LEKAB design work." />
+              <figcaption>Figma snapshot used as the layout reference for the final web presentation.</figcaption>
+            </figure>
+          </div>
+          <div class="case-metrics">
+            <div class="mini-metric"><strong>Clear</strong><span>Screen states are easy to understand at a glance.</span></div>
+            <div class="mini-metric"><strong>Connected</strong><span>Each step follows naturally into the next.</span></div>
+            <div class="mini-metric"><strong>Trusted</strong><span>The experience feels safer and more predictable.</span></div>
+            <div class="mini-metric"><strong>Beautified</strong><span>The flow is now presented as a polished portfolio story.</span></div>
+          </div>
+        </article>
+      </div>
+
       <div class="note-box">
-        The old task-and-work snapshots were removed and replaced with detailed project content from <strong>Recent-Tasks-in-Lekab.pdf</strong>.
+        The page now follows the same flow shown in the PDF and presents the LEKAB work as a cleaner, more portfolio-like story.
       </div>
     </section>
 
