@@ -345,6 +345,197 @@
       text-decoration: none;
     }
 
+    .case-study-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+      margin-top: 0.85rem;
+    }
+
+    .case-card {
+      border: 1px solid #d7e3f1;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fbfdff 0%, #f7fbff 100%);
+      padding: 1rem;
+      box-shadow: 0 10px 28px rgba(16, 38, 78, 0.05);
+    }
+
+    .case-card h3 {
+      font-size: 1.05rem;
+      color: #16386b;
+      margin-bottom: 0.65rem;
+    }
+
+    .case-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #0b57d0;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 0.55rem;
+    }
+
+    .case-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #0b57d0, #0a7f7b);
+      color: #fff;
+      font-size: 0.92rem;
+      box-shadow: 0 8px 18px rgba(11, 87, 208, 0.18);
+    }
+
+    .case-header {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .case-summary {
+      color: #486184;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      max-width: 62ch;
+    }
+
+    .case-lane {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+    }
+
+    .case-block {
+      background: #ffffff;
+      border: 1px solid #d8e4f3;
+      border-radius: 12px;
+      padding: 0.78rem 0.85rem;
+    }
+
+    .case-block strong {
+      display: block;
+      color: #0b57d0;
+      margin-bottom: 0.3rem;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .case-block p {
+      margin: 0;
+      color: #334969;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .case-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.9rem;
+    }
+
+    .mini-metric {
+      border: 1px solid #d8e4f3;
+      border-radius: 12px;
+      padding: 0.72rem;
+      background: #ffffff;
+    }
+
+    .mini-metric strong {
+      display: block;
+      color: #073a79;
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .mini-metric span {
+      color: #4a6282;
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .gallery button {
+      all: unset;
+      cursor: zoom-in;
+      display: block;
+    }
+
+    .gallery img {
+      transition: transform 180ms ease, filter 180ms ease;
+    }
+
+    .gallery button:hover img {
+      transform: scale(1.01);
+      filter: saturate(1.03) contrast(1.02);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 21, 38, 0.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 50;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-dialog {
+      width: min(1200px, 96vw);
+      background: #ffffff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid #e1e7f1;
+      background: #f8fbff;
+    }
+
+    .modal-title {
+      font-weight: 700;
+      color: #16386b;
+      font-size: 0.95rem;
+    }
+
+    .modal-close {
+      border: none;
+      background: #0b57d0;
+      color: #fff;
+      border-radius: 999px;
+      width: 34px;
+      height: 34px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .modal-image {
+      display: block;
+      width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+      background: #0b1220;
+    }
+
     figure {
       margin: 0;
       border: 1px solid #d7e3f1;
@@ -397,6 +588,23 @@
 
       .project-text {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .case-study-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .case-lane {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .case-header {
+        grid-template-columns: 1fr auto;
+        align-items: start;
+      }
+
+      .case-metrics {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
     }
 
@@ -551,11 +759,15 @@
       <p>The first snapshot was captured from the shared Figma task link. The second image is from your local case study asset.</p>
       <div class="gallery">
         <figure>
-          <img src="figma-task-snapshot.png" alt="Figma task board snapshot" />
+          <button type="button" class="zoom-trigger" data-src="figma-task-snapshot.png" data-title="Figma task board snapshot">
+            <img src="figma-task-snapshot.png" alt="Figma task board snapshot" />
+          </button>
           <figcaption>Figma task board snapshot from provided project link.</figcaption>
         </figure>
         <figure>
-          <img src="case study.jpeg" alt="Case study snapshot" />
+          <button type="button" class="zoom-trigger" data-src="case study.jpeg" data-title="Case study snapshot">
+            <img src="case study.jpeg" alt="Case study snapshot" />
+          </button>
           <figcaption>Case study visual from your repository asset.</figcaption>
         </figure>
       </div>
@@ -577,7 +789,124 @@
       </div>
     </section>
 
+    <section class="section" id="case-study">
+      <h2>Case Study</h2>
+      <p>Structured summary of two representative projects from your portfolio, using the Problem, Process, Solution, and Impact format.</p>
+
+      <div class="case-study-grid">
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">↗</span> Enterprise Experience</div>
+              <h3>Enterprise Self-Service Redesign</h3>
+            </div>
+          </div>
+          <p class="case-summary">A workflow redesign that turned manual, support-heavy account tasks into a guided self-service journey for enterprise users.</p>
+          <div class="case-lane">
+            <div class="case-block">
+              <strong>Problem</strong>
+              <p>Enterprise users had to complete manual IT-gated actions for account provisioning and subscription changes, which created friction, support dependency, and billing confusion.</p>
+            </div>
+            <div class="case-block">
+              <strong>Process</strong>
+              <p>I mapped the end-to-end workflow, aligned with product and engineering on constraints, then used Figma prototypes and QA walkthroughs to refine edge cases and handoff details.</p>
+            </div>
+            <div class="case-block">
+              <strong>Solution</strong>
+              <p>I redesigned the experience into a guided self-service model with clearer billing states, simpler navigation, and a more predictable path for complex actions.</p>
+            </div>
+          </div>
+
+          <div class="case-metrics">
+            <div class="mini-metric"><strong>30%</strong><span>Support overhead reduced after introducing self-service flows.</span></div>
+            <div class="mini-metric"><strong>Improved</strong><span>Billing transparency across account and subscription actions.</span></div>
+            <div class="mini-metric"><strong>Guided</strong><span>Higher trust through predictable workflow steps.</span></div>
+            <div class="mini-metric"><strong>Faster</strong><span>Less dependency on manual IT intervention for common tasks.</span></div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">⚙</span> Delivery System</div>
+              <h3>Design System and Delivery Reliability</h3>
+            </div>
+          </div>
+          <p class="case-summary">A token-aware design-system foundation that improved implementation consistency, QA speed, and handoff reliability across teams.</p>
+          <div class="case-lane">
+            <div class="case-block">
+              <strong>Problem</strong>
+              <p>Teams were losing time to inconsistent UI implementation, visual debt, and repeated QA issues across builds and features.</p>
+            </div>
+            <div class="case-block">
+              <strong>Process</strong>
+              <p>I created a token-aware component foundation in Figma, documented reusable patterns, and used manual test frameworks plus edge-case lists to validate delivery.</p>
+            </div>
+            <div class="case-block">
+              <strong>Solution</strong>
+              <p>I standardized handoff artifacts, aligned design intent with development tokens, and created a single source of truth for engineering and design collaboration.</p>
+            </div>
+          </div>
+
+          <div class="case-metrics">
+            <div class="mini-metric"><strong>20%</strong><span>Front-end delivery velocity improved through clearer design foundations.</span></div>
+            <div class="mini-metric"><strong>33%</strong><span>Regression effort reduced with manual testing and edge-case coverage.</span></div>
+            <div class="mini-metric"><strong>50%</strong><span>Visual bugs reduced through token alignment and QA.</span></div>
+            <div class="mini-metric"><strong>Single Source</strong><span>One system of truth for engineering and design collaboration.</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="modal" id="imageModal" aria-hidden="true" role="dialog" aria-label="Image preview modal">
+      <div class="modal-dialog">
+        <div class="modal-top">
+          <div class="modal-title" id="modalTitle">Preview</div>
+          <button type="button" class="modal-close" id="modalClose" aria-label="Close preview">&times;</button>
+        </div>
+        <img class="modal-image" id="modalImage" alt="Preview image" />
+      </div>
+    </div>
+
     <p class="footer">Built from your CV content in CV-M-long-AhsanJavaid.pdf. Last updated: August 2026.</p>
   </main>
+
+  <script>
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalClose = document.getElementById('modalClose');
+    const zoomTriggers = document.querySelectorAll('.zoom-trigger');
+
+    function openModal(src, title) {
+      modalImage.src = src;
+      modalImage.alt = title || 'Preview image';
+      modalTitle.textContent = title || 'Preview';
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      modalImage.src = '';
+      document.body.style.overflow = '';
+    }
+
+    zoomTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        openModal(trigger.dataset.src, trigger.dataset.title);
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+  </script>
 </body>
 </html>
