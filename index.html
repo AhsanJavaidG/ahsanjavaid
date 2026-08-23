@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahsan Javaid | Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --paper: #fffdf9;
+      --ink: #1d2a2b;
+      --muted: #4f6163;
+      --line: #c9d5d1;
+      --accent: #0f766e;
+      --accent-soft: #d7eeea;
+      --chip: #e8f2ef;
+      --shadow: 0 18px 40px rgba(17, 34, 35, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #e6efe9 0 20%, transparent 20%),
+        radial-gradient(circle at 90% 5%, #f5e9d9 0 18%, transparent 18%),
+        var(--bg);
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .resume {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      animation: rise 600ms ease-out;
+    }
+
+    .hero {
+      padding: 2.25rem;
+      background: linear-gradient(140deg, #f8f3e8 0%, #ecf7f4 55%, #e0f0ea 100%);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      top: -35px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(15, 118, 110, 0.08);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 0.4px;
+    }
+
+    .tagline {
+      margin-top: 0.5rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 780px;
+    }
+
+    .meta {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #b8d7d0;
+      background: var(--chip);
+      color: #184744;
+      border-radius: 999px;
+      padding: 0.35rem 0.72rem;
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.1rem;
+      padding: 1.4rem;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.1rem;
+      background: #ffffff;
+      animation: fade 700ms ease both;
+    }
+
+    .card h2 {
+      margin: 0 0 0.6rem;
+      font-family: "Fraunces", serif;
+      color: var(--accent);
+      font-size: 1.2rem;
+      letter-spacing: 0.3px;
+    }
+
+    .experience-item + .experience-item {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--line);
+    }
+
+    .role {
+      font-weight: 700;
+    }
+
+    .company {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .period {
+      color: #416162;
+      font-size: 0.92rem;
+      margin: 0.2rem 0 0.5rem;
+    }
+
+    ul {
+      margin: 0.4rem 0 0 1.1rem;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .skills span {
+      border: 1px solid #d4dfdb;
+      padding: 0.28rem 0.55rem;
+      border-radius: 8px;
+      background: #f9fcfb;
+      font-size: 0.88rem;
+      color: #294849;
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 0.8rem 1rem 1.3rem;
+      color: #5d7071;
+      font-size: 0.9rem;
+    }
+
+    @keyframes rise {
+      from { transform: translateY(14px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: 1.25fr 0.75fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+      .wrap {
+        margin: 0;
+        max-width: 100%;
+        padding: 0;
+      }
+      .resume {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <article class="resume">
+      <header class="hero" id="about">
+        <h1>Ahsan Javaid</h1>
+        <p class="tagline">Senior Product Designer | MSc, HCI | UX Architecture for Complex Data Ecosystems</p>
+        <div class="meta">
+          <span class="chip">Malmö, Sweden</span>
+          <span class="chip">EU Citizenship (Danish)</span>
+          <span class="chip">Mobility: SE / DK / Hybrid / Remote</span>
+          <span class="chip">+46 73 553 7366</span>
+          <span class="chip">+45 22 25 80 16</span>
+          <span class="chip">ahsang2003@yahoo.com</span>
+        </div>
+      </header>
+
+      <section class="grid">
+        <div>
+          <section class="card" id="summary">
+            <h2>Professional Summary</h2>
+            <p>Senior Product Designer with 8+ years of experience designing fintech, enterprise SaaS, AI-assisted workflows, and complex B2B products. Skilled in turning data-heavy systems into intuitive experiences that increase adoption, reduce support effort, and speed up delivery.</p>
+            <p>Combines product strategy, user research, interaction design, accessibility, and DesignOps with practical collaboration across product and engineering teams. Strong command of Figma workflows, design tokens, and production-ready specifications.</p>
+          </section>
+
+          <section class="card" id="experience">
+            <h2>Professional Experience</h2>
+
+            <div class="experience-item">
+              <div class="role">UX/UI Design and Quality Engineer</div>
+              <div class="company">LEKAB Communication System AB, Stockholm, Sweden</div>
+              <div class="period">2022 - 2025</div>
+              <ul>
+                <li>Led end-to-end UX architecture for enterprise products, modernizing the self-service portal and launching a business messaging platform for SMS and RCS campaigns.</li>
+                <li>Improved usability by 35% and reduced support calls by 30% by redesigning complex account, billing, and messaging workflows.</li>
+                <li>Established the first tokenized Figma design system, increasing development velocity by 20% and reducing visual bugs by 50%.</li>
+              </ul>
+            </div>
+
+            <div class="experience-item">
+              <div class="role">UX/UI and Design Consultant</div>
+              <div class="company">Nordic and Global Client Engagements (Hybrid/Remote)</div>
+              <div class="period">2018 - 2022</div>
+              <ul>
+                <li>Delivered end-to-end UX/UI architecture for SaaS products across Nordic and Asian markets.</li>
+                <li>Improved onboarding and retention through user research, customer interviews, and funnel analysis.</li>
+                <li>Built scalable, code-aligned design systems and dev-ready handoffs for distributed engineering teams.</li>
+              </ul>
+            </div>
+
+            <div class="experience-item">
+              <div class="role">Design Assistant</div>
+              <div class="company">LØLØ, Copenhagen, Denmark</div>
+              <div class="period">2016 - 2018</div>
+              <ul>
+                <li>Owned visual design consistency across marketing assets and digital layouts for web, mobile, and print.</li>
+              </ul>
+            </div>
+
+            <div class="experience-item">
+              <div class="role">Graphic and Web Designer</div>
+              <div class="company">MS Tech, Copenhagen, Denmark</div>
+              <div class="period">2015 - 2017</div>
+              <ul>
+                <li>Created responsive websites and campaign visuals in direct collaboration with business stakeholders.</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+        <aside>
+          <section class="card" id="skills">
+            <h2>Core Expertise</h2>
+            <div class="skills">
+              <span>Product Discovery</span>
+              <span>UX Strategy</span>
+              <span>Information Architecture</span>
+              <span>User Research</span>
+              <span>User Flows</span>
+              <span>Wireframing</span>
+              <span>Interaction Design</span>
+              <span>Prototyping</span>
+              <span>Design Systems</span>
+              <span>Design Tokens</span>
+              <span>Accessibility (WCAG)</span>
+              <span>Design QA</span>
+              <span>Usability Testing</span>
+              <span>Agile Collaboration</span>
+            </div>
+          </section>
+
+          <section class="card" id="education">
+            <h2>Education</h2>
+            <ul>
+              <li>MCS in Information Studies (Human Centered Informatics), Aalborg University (2015 - 2017)</li>
+              <li>IT-com, ICT Certification, Aalborg University (2014 - 2015)</li>
+              <li>Bachelor's Top-up, Digital Concept Development, Business Academy Copenhagen (2010 - 2012)</li>
+              <li>AP Degree, Multimedia Design and Communication, Lyngby Business Academy (2005 - 2007)</li>
+            </ul>
+          </section>
+
+          <section class="card" id="languages">
+            <h2>Languages</h2>
+            <ul>
+              <li>English (Fluent)</li>
+              <li>Danish (Good understanding)</li>
+              <li>Swedish (Actively advancing)</li>
+            </ul>
+          </section>
+        </aside>
+      </section>
+      <div class="footer-note">Resume page generated from CV-M-AhsanJavaid.pdf.</div>
+    </article>
+  </main>
+</body>
+</html>

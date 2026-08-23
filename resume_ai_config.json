@@ -1,0 +1,13 @@
+{
+  "gemini_api_key": "",
+  "gemini_api_key_env": "GEMINI_API_KEY",
+  "gemini_model": "gemini-1.5-pro",
+  "input_pdf": "CV-M-AhsanJavaid.pdf",
+  "job_description_path": "job_description.txt",
+  "job_description_text": "",
+  "output_docx": "Ahsan_Javaid_Tailored_Resume.docx",
+  "target_role": "Senior Product Designer",
+  "target_company": "",
+  "tone": "concise, executive, impact-oriented",
+  "max_bullets_per_role": 4
+}

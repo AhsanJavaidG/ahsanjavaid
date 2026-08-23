@@ -1,0 +1,69 @@
+AHSAN JAVAID
+Senior Product Designer | MSc, HCI | UX Architecture for Complex Data Ecosystems
+Location: Malmö, Sweden | Mobility: SE / DK / Hybrid / Remote | Open to Relocate | Citizenship: EU (Danish)
+Contact: +46 73 553 7366 (SE) · +45 22 25 80 16 (DK) · ahsang2003@yahoo.com LinkedIn Profile | Featured Work and Case Studies
+Professional Summary
+Senior Product Designer with 8+ years designing fintech, enterprise SaaS, AI-driven workflows, and complex B2B platforms. I specialize in simplifying data-heavy experiences into intuitive products that boost adoption, reduce support costs, and help teams ship faster.
+My experience spans product strategy, user research, interaction design, design systems, accessibility, and DesignOps. Working closely with PMs and engineers, I translate business goals into scalable products using modern Figma workflows, design tokens, and production-ready specifications.
+
+Work Experience
+UX/UI Design and Quality Engineer LEKAB Communication System AB | Stockholm, SE | 2022 - 2025
+
+Led end-to-end design and architecture of LEKAB's enterprise product portfolio, modernizing their core Self-Service Portal while building a Business Messaging platform from scratch for SMS and RCS campaigns. Mapping complex account, billing, and messaging workflows into intuitive interfaces improved usability by 35% and cut support calls by 30% via a digital complaint-tracking system that gave customers self-service resolution and leadership real-time analytics.
+Partnered with product, engineering, and data teams across discovery and delivery to produce user flows, interactive prototypes, and production-ready specifications for intricate business requirements. To streamline operations and scale execution, I designed a cross-team support platform and established the company's first tokenized Figma design system, accelerating development velocity by 20%, cutting visual bugs by 50%, and minimizing sprint rework through early validation.
+
+UX/UI & Design Consultant
+
+Nordic and Global Client Engagements
+
+| Hybrid/Remote | 2018 - 2022
+
+Delivered end-to-end UX/UI architecture for web and mobile SaaS products across Nordic and Asian markets, driving client engagements autonomously from initial discovery through production. By leveraging user research, customer interviews, and funnel analysis to overhaul onboarding experiences, I significantly reduced registration drop-offs while improving long-term product adoption and user retention. Operating as an independent lead sharpened my end-to-end accountability and cross-cultural adaptability when tailoring product strategy to diverse international markets.
+Streamlined feature delivery and cross-team alignment by establishing scalable, code-aligned Figma design systems, interactive prototypes, and clear dev-ready handoff specifications. Partnering with distributed engineering squads across multiple time zones in Agile/Jira environments, I integrated AI-assisted workflows and rapid prototyping to eliminate design redundancies, enhance user personalization, and accelerate overall sprint velocity.
+
+Design Assistant
+
+LêLê
+
+| Copenhagen, DK | 2016 - 2018
+
+Accountable for visual design execution and brand strategy across marketing assets and digital layouts, maintaining flawless consistency across web, mobile, and print channels.
+
+Graphic and Web Designer
+
+MS Tech
+
+| Copenhagen, DK | 2015 - 2017
+
+Led visual design for responsive websites and marketing assets, collaborating directly with clients to translate business requirements into polished digital layouts.
+
+Languages
+English (Fluent), Danish (Good understanding), Swedish (Actively advancing)
+
+Expertise
+Product Strategy and Vision: Product Discovery, UX Strategy, Information Architecture (IA), Complex Systems, User Research, User Flows, Wireframing, Interaction Design, Prototyping
+Design Systems and Infrastructure: Design Systems, Scalable Infrastructure, DesignOps, Design Tokens, Accessibility (WCAG), Component Libraries, Cross-Platform and Responsive Design
+Analytics and Quality Assurance: Data-Driven Design, Product Analytics, Technical Validation, Design QA, Usability Testing
+Product Delivery and Leadership: Agile and Scrum, Backlog Prioritization, Stakeholder Workshops, Cross-Functional Leadership, Developer Handoff, Agile Collaboration
+
+Education
+
+MCS in Information Studies (Human Centered Informatics)
+IT-com, ICT Certification
+Bachelor's Top-up, Digital Concept Development
+
+Aalborg University
+
+2015 - 2017
+
+Aalborg University
+
+2014 - 2015
+
+Business Academy Copenhagen 2010 - 2012
+
+AP Degree, Multimedia Design and Communication Lyngby Business Academy
+
+2005 - 2007
+
+

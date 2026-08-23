@@ -1,0 +1,4 @@
+Paste the target job description here.
+
+Example:
+Senior Product Designer role focused on B2B SaaS, design systems, product discovery, accessibility, and cross-functional collaboration.
