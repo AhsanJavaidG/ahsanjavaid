@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cross-Team Support Platform — Service design board | Ahsan Javaid</title>
+  <meta name="description" content="UX/UI case study presented as a working FigJam board — service design, ecosystem mapping, and co-design of an internal cross-team support platform." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ========================================================================
+       Case 04 · Cross-Team Support Platform
+       Theme: FIGJAM BLUEPRINT — grid paper, sticky notes, dashed connectors
+       ======================================================================== */
+    :root {
+      --paper: #fafaf7;
+      --grid: #e4e2dc;
+      --grid-strong: #cfccc4;
+      --ink: #1a1a1a;
+      --ink-2: #3d3d3a;
+      --muted: #7a7a75;
+      --muted-2: #a5a49f;
+      --blueprint: #0055aa;
+      --blueprint-2: #4a89dc;
+      --coral: #ff6b4a;
+      --coral-2: #ff9576;
+      --sticky-yellow: #fff3a0;
+      --sticky-pink: #ffc8d1;
+      --sticky-blue: #c6dcff;
+      --sticky-mint: #c3f0d1;
+      --tape: rgba(255, 209, 102, 0.4);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      /* Graph paper grid */
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 24px 24px;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1200px, 94%); margin: 0 auto; position: relative; }
+
+    /* ===== Topbar ===== */
+    .topbar {
+      background: rgba(250, 250, 247, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--ink);
+      position: sticky; top: 0; z-index: 40;
+    }
+    .topbar-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 0;
+    }
+    .brand {
+      font-family: "Caveat", cursive;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .brand span { color: var(--blueprint); font-size: 1rem; }
+    .nav-side { display: none; gap: 1.2rem; }
+    .nav-side a {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .nav-side a:hover { color: var(--blueprint); }
+    .back-link {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    /* ===== Board hero ===== */
+    .board {
+      padding: 3.5rem 0 2rem;
+      position: relative;
+    }
+    .kicker-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--sticky-yellow);
+      padding: 0.4rem 0.9rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transform: rotate(-1.5deg);
+      box-shadow: 2px 3px 0 rgba(0,0,0,0.06);
+      margin-bottom: 2rem;
+    }
+    .kicker-tag::before {
+      content: "📌";
+      font-size: 1rem;
+    }
+    h1.display {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 0 0 1.5rem;
+      max-width: 20ch;
+      color: var(--ink);
+      position: relative;
+    }
+    h1.display em {
+      font-family: "Caveat", cursive;
+      font-style: normal;
+      color: var(--coral);
+      font-weight: 700;
+      display: inline-block;
+      transform: rotate(-2deg);
+    }
+    h1.display .underline {
+      background-image: linear-gradient(120deg, var(--coral) 0%, var(--coral-2) 100%);
+      background-repeat: no-repeat;
+      background-size: 100% 0.2em;
+      background-position: 0 88%;
+    }
+    .deck {
+      font-size: 1.1rem;
+      color: var(--ink-2);
+      max-width: 62ch;
+      line-height: 1.65;
+      margin: 0 0 2.5rem;
+    }
+
+    /* Handwritten annotation */
+    .anno {
+      font-family: "Caveat", cursive;
+      font-size: 1.25rem;
+      color: var(--coral);
+      font-weight: 500;
+      line-height: 1.3;
+      position: relative;
+      padding: 0.3rem 0;
+    }
+    .anno.arrow-down::before {
+      content: "";
+      position: absolute;
+      left: -20px; top: 8px;
+      width: 12px; height: 14px;
+      background: no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'%3E%3Cpath d='M10 2 L10 20 M4 14 L10 20 L16 14' stroke='%23ff6b4a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+
+    /* ===== Board panels (framed like FigJam frames) ===== */
+    .frame {
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 3rem 0;
+      position: relative;
+      box-shadow: 4px 4px 0 rgba(26, 26, 26, 0.08);
+    }
+    .frame-label {
+      position: absolute;
+      top: -0.85rem; left: 1.5rem;
+      background: var(--paper);
+      padding: 0 0.7rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blueprint);
+    }
+    .frame-label::before { content: "◈ "; }
+
+    /* ===== Meta strip ===== */
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 3rem 0;
+      background: var(--paper);
+      border: 1.5px dashed var(--muted-2);
+      padding: 1.5rem;
+    }
+    .meta > div {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+    }
+    .meta > div strong {
+      display: block;
+      color: var(--muted-2);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      font-size: 0.65rem;
+    }
+    .meta > div span {
+      font-family: "Fraunces", serif;
+      font-size: 0.9rem;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ===== Sections ===== */
+    section {
+      padding: 4rem 0 3rem;
+    }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--sticky-pink);
+      padding: 0.35rem 0.85rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transform: rotate(-0.8deg);
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.06);
+      margin-bottom: 1.4rem;
+    }
+    h2.head {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.2rem;
+      max-width: 24ch;
+      color: var(--ink);
+    }
+    .lede {
+      font-size: 1.05rem;
+      color: var(--ink-2);
+      max-width: 62ch;
+      margin: 0 0 2.5rem;
+      line-height: 1.65;
+    }
+    .lede em { font-family: "Caveat", cursive; font-style: normal; color: var(--coral); font-weight: 600; font-size: 1.15em; }
+
+    /* ===== Sticky note (for insights, quotes, etc.) ===== */
+    .sticky {
+      background: var(--sticky-yellow);
+      padding: 1.2rem 1.3rem;
+      border-radius: 2px;
+      box-shadow: 3px 4px 0 rgba(0,0,0,0.08);
+      transform: rotate(-1deg);
+      font-family: "Caveat", cursive;
+      font-size: 1.15rem;
+      line-height: 1.35;
+      color: var(--ink);
+      position: relative;
+    }
+    .sticky.pink { background: var(--sticky-pink); transform: rotate(1deg); }
+    .sticky.blue { background: var(--sticky-blue); transform: rotate(-0.5deg); }
+    .sticky.mint { background: var(--sticky-mint); transform: rotate(1.5deg); }
+    .sticky::before {
+      content: "";
+      position: absolute;
+      top: -8px; left: 50%;
+      transform: translateX(-50%);
+      width: 60px; height: 14px;
+      background: var(--tape);
+      border-radius: 2px;
+    }
+    .sticky b {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ===== Ecosystem map ===== */
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+      position: relative;
+    }
+    .eco-node {
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      padding: 1.2rem;
+      position: relative;
+      transition: transform 0.2s;
+    }
+    .eco-node:hover { transform: translateY(-3px); }
+    .eco-node.customer { border-color: var(--coral); background: #fff5f2; }
+    .eco-node.support { border-color: var(--blueprint); background: #eff6ff; }
+    .eco-node.ops { border-color: #b8860b; background: #fdf7e4; }
+    .eco-node.eng { border-color: #2d7a4a; background: #eefaf1; }
+    .eco-node.shadow { border-style: dashed; border-color: var(--muted-2); background: #f4f4f0; }
+    .eco-role {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .eco-node.customer .eco-role { color: var(--coral); }
+    .eco-node.support .eco-role { color: var(--blueprint); }
+    .eco-node.ops .eco-role { color: #b8860b; }
+    .eco-node.eng .eco-role { color: #2d7a4a; }
+    .eco-node b {
+      display: block;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+    .eco-node p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .eco-annotation {
+      font-family: "Caveat", cursive;
+      font-size: 1.05rem;
+      color: var(--coral);
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    /* ===== Process spiral ===== */
+    .process-board {
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      padding: 2.5rem 1.5rem;
+      overflow-x: auto;
+      margin: 3rem 0;
+    }
+    .process-steps {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      min-width: 960px;
+      position: relative;
+    }
+    .p-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0 0.5rem;
+      position: relative;
+    }
+    .p-step-num {
+      width: 40px; height: 40px;
+      border: 1.5px solid var(--ink);
+      border-radius: 50%;
+      background: var(--paper);
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Caveat", cursive;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--ink);
+      z-index: 3;
+    }
+    .p-step.active .p-step-num {
+      background: var(--coral);
+      color: var(--paper);
+      border-color: var(--coral);
+    }
+    .p-step b {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .p-step span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.05em;
+      max-width: 14ch;
+      line-height: 1.4;
+    }
+    .p-step .anno-hand {
+      font-family: "Caveat", cursive;
+      font-size: 0.95rem;
+      color: var(--coral);
+      margin-top: 0.4rem;
+      text-align: center;
+      font-weight: 500;
+    }
+    .p-connector {
+      flex: 0 0 32px;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, var(--muted-2) 0 6px, transparent 6px 12px);
+      align-self: center;
+      margin-top: 1rem;
+    }
+
+    /* ===== Blueprint (service blueprint) ===== */
+    .blueprint {
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+    .bp-row {
+      display: grid;
+      grid-template-columns: 140px repeat(4, 1fr);
+      border-bottom: 1.5px solid var(--ink);
+      min-width: 780px;
+    }
+    .bp-row:last-child { border-bottom: none; }
+    .bp-row > div {
+      padding: 1rem;
+      border-right: 1px dashed var(--muted-2);
+      font-size: 0.85rem;
+      color: var(--ink-2);
+      line-height: 1.4;
+    }
+    .bp-row > div:last-child { border-right: none; }
+    .bp-row .lane {
+      background: var(--paper);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      display: flex; align-items: center;
+      border-right: 1.5px solid var(--ink);
+    }
+    .bp-row.stage {
+      background: var(--sticky-blue);
+    }
+    .bp-row.stage > div {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--blueprint);
+    }
+    .bp-row.stage .lane {
+      background: var(--blueprint);
+      color: var(--paper);
+    }
+    .bp-row.pain-row > div { background: rgba(255, 107, 74, 0.08); }
+    .bp-row.pain-row .lane { color: var(--coral); }
+    .bp-cell b { display: block; margin-bottom: 0.3rem; font-family: "Fraunces", serif; font-weight: 500; color: var(--ink); }
+    .bp-cell .anno-hand-inline {
+      display: block;
+      font-family: "Caveat", cursive;
+      color: var(--coral);
+      font-size: 0.95rem;
+      margin-top: 0.4rem;
+    }
+
+    /* ===== Role personas (as post-its) ===== */
+    .roles {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .role {
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      padding: 1.4rem;
+      position: relative;
+    }
+    .role.support { background: var(--sticky-blue); }
+    .role.ops { background: var(--sticky-yellow); }
+    .role.eng { background: var(--sticky-mint); }
+    .role-head {
+      display: flex; align-items: center; gap: 0.8rem;
+      padding-bottom: 0.9rem; margin-bottom: 0.9rem;
+      border-bottom: 1.5px solid var(--ink);
+    }
+    .role-avatar {
+      width: 44px; height: 44px;
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Caveat", cursive;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .role-head b {
+      display: block;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+    }
+    .role-head span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .role-item { margin: 0.6rem 0; }
+    .role-item strong {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+    .role-item p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--ink-2);
+      line-height: 1.5;
+    }
+    .role-quote {
+      font-family: "Caveat", cursive;
+      font-size: 1.15rem;
+      color: var(--ink);
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1.5px dashed var(--muted-2);
+      line-height: 1.3;
+    }
+
+    /* ===== Screens (final UI) ===== */
+    .screens {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin: 2rem 0;
+    }
+    .screen-card {
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      padding: 1.4rem;
+      position: relative;
+    }
+    .screen-stamp {
+      position: absolute;
+      top: -14px; right: 20px;
+      background: var(--coral);
+      color: var(--paper);
+      padding: 0.25rem 0.7rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transform: rotate(3deg);
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+    }
+    .screen-card h4 {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin: 0 0 0.4rem;
+    }
+    .screen-card p {
+      color: var(--muted);
+      margin: 0 0 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* ===== Beauty role-viewpoint mockups (rich UI per role) ===== */
+    .rui {
+      background: #fafcff;
+      border: 1.4px solid #d0d8e5;
+      border-radius: 8px;
+      padding: 0.75rem;
+      display: flex; flex-direction: column; gap: 0.55rem;
+      position: relative;
+    }
+    .rui-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dashed #d0d8e5;
+    }
+    .rui-crumb {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .rui-p1 {
+      background: #fee2e2; color: #b91c1c;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 3px;
+      letter-spacing: 0.06em;
+    }
+
+    /* Customer card with avatar */
+    .r-cust {
+      display: flex; align-items: center; gap: 8px;
+      background: #fff;
+      border: 1px solid #d0d8e5;
+      border-radius: 8px;
+      padding: 0.5rem 0.6rem;
+    }
+    .r-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+    .r-avatar.blue { background: linear-gradient(145deg, var(--blueprint), var(--blueprint-2)); }
+    .r-avatar.warm { background: linear-gradient(145deg, #b8860b, #d4a668); }
+    .r-avatar.mint { background: linear-gradient(145deg, #2d7a4a, #6ca88a); }
+    .r-cust .cname {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 0.78rem;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+    .r-cust .ctag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.55rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+    }
+    .r-cust .tier {
+      margin-left: auto;
+      background: #fef3c7;
+      color: #92400e;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.58rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Chat bubble */
+    .r-bubble {
+      background: #f3f4f6;
+      border-radius: 10px 10px 10px 3px;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.75rem;
+      color: var(--ink-2);
+      line-height: 1.4;
+      position: relative;
+      font-family: "Fraunces", serif;
+      font-style: italic;
+    }
+    .r-bubble::before {
+      content: "";
+      position: absolute;
+      left: -6px; top: 8px;
+      width: 8px; height: 8px;
+      background: #f3f4f6;
+      transform: rotate(45deg);
+    }
+    .r-bubble .who {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-style: normal;
+      font-size: 0.55rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    /* Runbook link chip */
+    .r-runbook {
+      display: flex; align-items: center; gap: 8px;
+      padding: 0.4rem 0.55rem;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      font-size: 0.68rem;
+    }
+    .r-runbook svg { color: var(--blueprint); flex-shrink: 0; }
+    .r-runbook b { color: var(--ink); font-family: "Fraunces", serif; font-weight: 500; font-size: 0.75rem; }
+    .r-runbook span { color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 0.6rem; margin-left: auto; }
+
+    /* Waiting pill */
+    .r-waiting {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #fef3c7;
+      color: #92400e;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      width: fit-content;
+    }
+    .r-waiting .spin {
+      width: 8px; height: 8px;
+      border: 1.5px solid #92400e;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: r-spin 1s linear infinite;
+    }
+    @keyframes r-spin { to { transform: rotate(360deg); } }
+
+    /* CTA */
+    .r-cta {
+      background: linear-gradient(135deg, var(--blueprint), var(--blueprint-2));
+      color: #fff;
+      text-align: center;
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+      box-shadow: 0 4px 12px rgba(0, 85, 170, 0.28), inset 0 1px 0 rgba(255,255,255,0.25);
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .r-cta.warn {
+      background: linear-gradient(135deg, #dc2626, #f87171);
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.28), inset 0 1px 0 rgba(255,255,255,0.25);
+    }
+    .r-cta.mint {
+      background: linear-gradient(135deg, #059669, #10b981);
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.28), inset 0 1px 0 rgba(255,255,255,0.25);
+    }
+
+    /* Ops — cluster health SVG */
+    .cluster-panel {
+      background: #fff;
+      border: 1px solid #d0d8e5;
+      border-radius: 8px;
+      padding: 0.6rem;
+    }
+    .cluster-head {
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .cluster-head b { color: var(--ink); font-family: "Fraunces", serif; font-weight: 500; font-size: 0.85rem; letter-spacing: -0.01em; }
+    .health-line svg { width: 100%; height: auto; display: block; }
+    .cluster-legend {
+      display: flex; gap: 10px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.58rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .cluster-legend b { color: var(--ink); font-family: "JetBrains Mono", monospace; font-weight: 700; }
+    .cluster-legend .d {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      margin-right: 4px;
+    }
+    .cluster-legend .d.g { background: #10b981; }
+    .cluster-legend .d.r { background: #ef4444; }
+
+    /* Service state row */
+    .svc-row {
+      background: #fff;
+      border: 1px solid #d0d8e5;
+      border-left: 3px solid #ef4444;
+      border-radius: 6px;
+      padding: 0.5rem 0.6rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.7rem;
+    }
+    .svc-row b { font-family: "Fraunces", serif; font-weight: 500; color: var(--ink); }
+    .svc-row .code { font-family: "JetBrains Mono", monospace; color: #ef4444; font-size: 0.62rem; font-weight: 600; }
+
+    /* Eng — terminal diff */
+    .term {
+      background: #0f172a;
+      border-radius: 8px;
+      padding: 0.6rem 0.7rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      overflow: hidden;
+    }
+    .term .prompt { color: #64748b; }
+    .term .sig { color: #ef4444; }
+    .term .ok { color: #10b981; }
+    .term .k { color: #7dd3fc; }
+
+    .deploy-line {
+      display: flex; gap: 3px; align-items: end;
+      padding: 0.5rem 0;
+    }
+    .deploy-line i {
+      flex: 1;
+      background: #d0d8e5;
+      border-radius: 2px 2px 0 0;
+      transition: background 0.3s;
+    }
+    .deploy-line i.v1 { height: 12px; }
+    .deploy-line i.v2 { height: 18px; }
+    .deploy-line i.v3 { height: 14px; }
+    .deploy-line i.v4 { height: 22px; }
+    .deploy-line i.v5 { height: 16px; }
+    .deploy-line i.bad {
+      background: linear-gradient(180deg, #ef4444, #f87171);
+      height: 28px;
+      box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+    }
+    .deploy-line i.rollback {
+      background: linear-gradient(180deg, #10b981, #34d399);
+      height: 20px;
+      opacity: 0.5;
+    }
+    .deploy-caption {
+      display: flex; justify-content: space-between;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.55rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-top: -4px;
+    }
+    .deploy-caption b { color: #ef4444; font-weight: 700; }
+
+    /* Postmortem — resolution + timeline */
+    .resolve-card {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border: 1px solid #a7f3d0;
+      border-radius: 8px;
+      padding: 0.6rem 0.75rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .resolve-card .emo {
+      width: 26px; height: 26px;
+      background: #10b981;
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .resolve-card .t {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: #065f46;
+      line-height: 1.1;
+    }
+    .resolve-card .s {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.55rem;
+      color: #059669;
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+    }
+
+    .timeline-mini {
+      background: #fff;
+      border: 1px solid #d0d8e5;
+      border-radius: 8px;
+      padding: 0.7rem 0.75rem;
+    }
+    .timeline-mini h6 {
+      margin: 0 0 6px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .tl-row {
+      display: grid;
+      grid-template-columns: 40px 12px 1fr;
+      gap: 6px;
+      align-items: center;
+      padding: 3px 0;
+      font-size: 0.68rem;
+      color: var(--ink-2);
+    }
+    .tl-row .time {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+    }
+    .tl-row .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #cbd5e1;
+      justify-self: center;
+      position: relative;
+    }
+    .tl-row .dot.on { background: var(--blueprint); box-shadow: 0 0 0 3px rgba(0, 85, 170, 0.15); }
+    .tl-row .dot.ok { background: #10b981; }
+    .tl-row .dot.bad { background: #ef4444; }
+    .tl-row .text { font-family: "Fraunces", serif; }
+    .tl-row .text b { font-weight: 500; color: var(--ink); }
+
+    .metric-inline {
+      display: flex; gap: 8px;
+      background: #f9fafb;
+      border-radius: 6px;
+      padding: 0.35rem 0.55rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+    }
+    .metric-inline b { color: var(--ink); font-family: "Fraunces", serif; font-weight: 500; font-size: 0.72rem; }
+    .metric-inline span { color: #10b981; margin-left: auto; font-weight: 600; }
+    .ui {
+      background: #fafcff;
+      border: 1px solid var(--muted-2);
+      border-radius: 6px;
+      padding: 0.8rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .ui-row {
+      background: var(--paper);
+      border: 1px solid var(--grid-strong);
+      border-radius: 5px;
+      padding: 0.45rem 0.6rem;
+      display: flex; justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--ink-2);
+    }
+    .ui-row.hi { background: #eff6ff; border-color: var(--blueprint); color: var(--blueprint); }
+    .ui-row b { color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+    .ui-cta {
+      background: var(--blueprint);
+      color: var(--paper);
+      text-align: center;
+      padding: 0.55rem;
+      border-radius: 5px;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 0.82rem;
+      margin-top: 0.3rem;
+    }
+
+    /* ===== Outcome stamps ===== */
+    .outcomes {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+    .stamp {
+      background: var(--paper);
+      border: 3px double var(--ink);
+      border-radius: 8px;
+      padding: 1.8rem;
+      text-align: center;
+      position: relative;
+    }
+    .stamp b {
+      display: block;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 3rem;
+      color: var(--coral);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .stamp strong {
+      display: block;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .stamp span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+    .stamp .anno-hand-tag {
+      position: absolute;
+      top: -0.6rem; right: 0.8rem;
+      font-family: "Caveat", cursive;
+      font-size: 0.95rem;
+      color: var(--coral);
+      background: var(--paper);
+      padding: 0 0.4rem;
+    }
+
+    /* ===== Reflection ===== */
+    .reflect {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .reflect-note {
+      background: var(--paper);
+      border-left: 4px solid var(--blueprint);
+      padding: 1.4rem 1.6rem;
+    }
+    .reflect-note strong {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blueprint);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .reflect-note p {
+      margin: 0 0 0.8rem;
+      font-size: 0.95rem;
+      color: var(--ink-2);
+      line-height: 1.65;
+    }
+    .reflect-note em {
+      font-family: "Caveat", cursive;
+      font-style: normal;
+      color: var(--coral);
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+
+    /* ===== Footer ===== */
+    .cta-board {
+      padding: 5rem 0;
+      border-top: 2px solid var(--ink);
+      text-align: center;
+    }
+    .cta-board h2 {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 2rem;
+      margin: 0 0 0.5rem;
+    }
+    .cta-board h2 em { font-family: "Caveat", cursive; font-style: normal; color: var(--coral); }
+    .cta-board p {
+      font-family: "Caveat", cursive;
+      font-size: 1.35rem;
+      color: var(--muted);
+      margin: 0 0 2rem;
+    }
+    .cta-row { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+    .cta-row a {
+      padding: 0.75rem 1.3rem;
+      border: 1.5px solid var(--ink);
+      border-radius: 6px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--paper);
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.08);
+      transition: transform 0.15s;
+    }
+    .cta-row a:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 rgba(0,0,0,0.1); }
+    .cta-row a.primary { background: var(--coral); color: var(--paper); border-color: var(--coral); }
+    .foot {
+      padding: 1.5rem 0;
+      text-align: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      background: var(--paper);
+      border-top: 1px solid var(--grid-strong);
+    }
+
+    /* Responsive */
+    @media (min-width: 720px) {
+      .nav-side { display: flex; }
+      .meta { grid-template-columns: repeat(3, 1fr); }
+      .ecosystem-grid { grid-template-columns: repeat(2, 1fr); }
+      .roles { grid-template-columns: repeat(3, 1fr); }
+      .screens { grid-template-columns: repeat(2, 1fr); gap: 1.8rem; }
+      .outcomes { grid-template-columns: repeat(2, 1fr); }
+      .reflect { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 960px) {
+      .meta { grid-template-columns: repeat(6, 1fr); }
+      .ecosystem-grid { grid-template-columns: repeat(4, 1fr); }
+      .outcomes { grid-template-columns: repeat(4, 1fr); }
+      .screens { grid-template-columns: repeat(4, 1fr); gap: 1.4rem; }
+    }
+    @media (max-width: 480px) {
+      .board { padding: 2.5rem 0 1.5rem; }
+      section { padding: 3rem 0 2rem; }
+      .frame { padding: 1.4rem; margin: 2rem 0; }
+      .screens { gap: 2rem; }
+      .screen-card { padding: 1.1rem; }
+      .roles { gap: 1rem; }
+      .role { padding: 1.1rem; }
+      .meta { gap: 1rem; padding: 1.2rem; }
+      .stat-tile { padding: 1.4rem 1.2rem; }
+      .cta-board { padding: 3.5rem 0; }
+      h1.display { font-size: 2.2rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="enhancements.css" />
+</head>
+<body>
+
+  <!-- ============ TOPBAR ============ -->
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">Ahsan's board <span>· case 04</span></a>
+      <nav class="nav-side">
+        <a href="#overview">01 Overview</a>
+        <a href="#process">02 Process</a>
+        <a href="#ecosystem">03 Ecosystem</a>
+        <a href="#roles">04 Roles</a>
+        <a href="#blueprint">05 Blueprint</a>
+        <a href="#screens">06 Screens</a>
+        <a href="#outcome">07 Outcome</a>
+      </nav>
+      <a class="back-link" href="index.html">← portfolio</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="board">
+    <div class="wrap">
+      <div class="kicker-tag reveal">Case 04 · Service design · Internal tool</div>
+      <h1 class="display reveal d1">One workspace for three teams that used to <em>talk in tickets.</em></h1>
+      <p class="deck reveal d2">
+        LEKAB's support, ops, and engineering teams shared a customer but not a workspace. Every
+        incident bounced across three tools, four Slack channels, and two spreadsheets. This board
+        documents how service design — ecosystem mapping, blueprinting, and co-design — replaced
+        the ticket ping-pong with a single owned artifact.
+      </p>
+
+      <div class="anno arrow-down">
+        &nbsp; ↳ &nbsp; before we built anything, we mapped the whole ecosystem
+      </div>
+
+      <div class="meta">
+        <div><strong>role</strong><span>Lead + service designer</span></div>
+        <div><strong>client</strong><span>LEKAB · internal</span></div>
+        <div><strong>timeline</strong><span>Jan – May 2023</span></div>
+        <div><strong>method</strong><span>Ecosystem · Blueprint · Co-design</span></div>
+        <div><strong>platform</strong><span>Web · Desktop-only</span></div>
+        <div><strong>users</strong><span>18 · 3 teams</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section id="overview">
+    <div class="wrap">
+      <div class="section-tag">§ 01 · Overview</div>
+      <h2 class="head">Designing for the workflow <em>between</em> teams — not the teams.</h2>
+      <p class="lede">
+        Support could see the customer's problem. Ops knew the platform's state. Engineering held the
+        fix. <em>None of them saw each other.</em> The product wasn't a ticketing tool — it was a shared
+        workspace where a case could move without losing context.
+      </p>
+
+      <div class="frame">
+        <div class="frame-label">Board summary</div>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Context</div>
+            <p style="margin: 0; color: var(--ink-2); font-size: 0.95rem; line-height: 1.65;">18 people across three teams handling ~120 cases per week. Customer impact of a mis-handoff was measured in trust, not just SLA.</p>
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">My role</div>
+            <p style="margin: 0; color: var(--ink-2); font-size: 0.95rem; line-height: 1.65;">Lead designer + service design facilitator. Owned discovery workshops, role personas, service blueprint, prototype, and rollout.</p>
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Approach</div>
+            <p style="margin: 0; color: var(--ink-2); font-size: 0.95rem; line-height: 1.65;">Ecosystem map → role personas → service safari → service blueprint → co-design workshops → prototype → dogfood → ship.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section id="process">
+    <div class="wrap">
+      <div class="section-tag">§ 02 · Research process</div>
+      <h2 class="head">Eight steps on the board.</h2>
+      <p class="lede">
+        The <em>whole team</em> ran this process, not just design. That's the whole point of service
+        design — the artifact is a shared conversation, not a designer's deliverable.
+      </p>
+
+      <div class="process-board">
+        <div class="process-steps">
+          <div class="p-step active">
+            <div class="p-step-num">1</div>
+            <b>Ecosystem map</b>
+            <span>8 actors + shadow systems</span>
+            <div class="anno-hand">✎ shadow work found</div>
+          </div>
+          <div class="p-connector"></div>
+          <div class="p-step active">
+            <div class="p-step-num">2</div>
+            <b>Role interviews</b>
+            <span>3 users × 3 teams</span>
+          </div>
+          <div class="p-connector"></div>
+          <div class="p-step active">
+            <div class="p-step-num">3</div>
+            <b>Service safari</b>
+            <span>Follow 1 case for a full day</span>
+            <div class="anno-hand">↺ eye-opener</div>
+          </div>
+          <div class="p-connector"></div>
+          <div class="p-step active">
+            <div class="p-step-num">4</div>
+            <b>Blueprint</b>
+            <span>4 lanes × 4 stages</span>
+          </div>
+          <div class="p-connector"></div>
+          <div class="p-step">
+            <div class="p-step-num">5</div>
+            <b>Co-design</b>
+            <span>2 workshops · 18 users</span>
+          </div>
+          <div class="p-connector"></div>
+          <div class="p-step">
+            <div class="p-step-num">6</div>
+            <b>Prototype</b>
+            <span>Figma · role-based views</span>
+          </div>
+          <div class="p-connector"></div>
+          <div class="p-step">
+            <div class="p-step-num">7</div>
+            <b>Dogfood</b>
+            <span>4 weeks · 3 teams · beta</span>
+            <div class="anno-hand">→ adoption easy</div>
+          </div>
+          <div class="p-connector"></div>
+          <div class="p-step">
+            <div class="p-step-num">8</div>
+            <b>Ship</b>
+            <span>GA + retire old tools</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anno" style="margin-top: 1rem;">
+        ✏️ &nbsp; steps 3 &amp; 5 shifted my whole mental model of the product
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-tag">§ 03 · The problem</div>
+      <h2 class="head">A customer, three tools, four Slack channels.</h2>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2rem 0;">
+        <div class="sticky">
+          <b>Voice of support · Elin</b>
+          "By the time it gets to me, the customer has already told the story twice. I'm the one who has to say it back to them a third time."
+        </div>
+        <div class="sticky pink">
+          <b>Voice of ops · Mikael</b>
+          "I get pinged on Slack for things that live in the runbook I already wrote. Feels like nobody reads them."
+        </div>
+        <div class="sticky blue">
+          <b>Voice of eng · Jonas</b>
+          "I'm mid-debug and my phone is buzzing. Just leave me one place to see it and I'll pick it up when I'm free."
+        </div>
+      </div>
+
+      <div class="frame">
+        <div class="frame-label">Board metrics · before</div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+          <div><b style="font-family: 'Fraunces', serif; font-size: 2rem; color: var(--coral); display: block;">3</b><span style="color: var(--muted);">tools per case</span></div>
+          <div><b style="font-family: 'Fraunces', serif; font-size: 2rem; color: var(--coral); display: block;">4</b><span style="color: var(--muted);">Slack channels per P1</span></div>
+          <div><b style="font-family: 'Fraunces', serif; font-size: 2rem; color: var(--coral); display: block;">42m</b><span style="color: var(--muted);">median handoff time</span></div>
+          <div><b style="font-family: 'Fraunces', serif; font-size: 2rem; color: var(--coral); display: block;">0</b><span style="color: var(--muted);">cases visible to all 3 teams live</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ECOSYSTEM ============ -->
+  <section id="ecosystem">
+    <div class="wrap">
+      <div class="section-tag reveal">§ 04 · Ecosystem map</div>
+      <h2 class="head reveal">Who touches this workflow, and how?</h2>
+      <p class="lede">
+        Two-hour workshop with representatives from each team. Together we mapped every actor, system,
+        and artifact touching a customer case — including the <em>shadow</em> ones nobody wanted to
+        acknowledge (a WhatsApp group between two ops leads, a spreadsheet only support used).
+      </p>
+
+      <div class="frame">
+        <div class="frame-label">Actors on the board · 8 total</div>
+
+        <div class="ecosystem-grid">
+          <div class="eco-node customer">
+            <div class="eco-role">External</div>
+            <b>Customer</b>
+            <p>Enterprise operator raising a case via portal, email, or phone.</p>
+            <span class="eco-annotation">← starts everything</span>
+          </div>
+          <div class="eco-node support">
+            <div class="eco-role">Front-stage</div>
+            <b>Support agent</b>
+            <p>First responder. Triages, translates customer language into internal.</p>
+          </div>
+          <div class="eco-node ops">
+            <div class="eco-role">Back-stage</div>
+            <b>Ops coordinator</b>
+            <p>Owns platform health. Knows what "SE-North cluster" means.</p>
+          </div>
+          <div class="eco-node eng">
+            <div class="eco-role">Back-stage</div>
+            <b>Engineer on-call</b>
+            <p>Root-cause fixes and rollbacks. Values async, low-noise handoffs.</p>
+          </div>
+          <div class="eco-node support">
+            <div class="eco-role">Front-stage</div>
+            <b>Support lead</b>
+            <p>SLA guardian. Needs cross-case visibility for weekly reviews.</p>
+          </div>
+          <div class="eco-node customer">
+            <div class="eco-role">Front-stage</div>
+            <b>Account manager</b>
+            <p>Owns the customer relationship. Wants to be informed, not surprised.</p>
+            <span class="eco-annotation">← invisible in original brief</span>
+          </div>
+          <div class="eco-node eng">
+            <div class="eco-role">Back-stage</div>
+            <b>Product manager</b>
+            <p>Turns incidents into backlog items. Attends postmortems.</p>
+          </div>
+          <div class="eco-node shadow">
+            <div class="eco-role">Shadow ✕</div>
+            <b>Existing tools</b>
+            <p>Zendesk, Jira, ops CLI, Slack, WhatsApp, 3 spreadsheets. All in scope for consolidation.</p>
+            <span class="eco-annotation">← the whole point</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anno" style="margin: 1.5rem 0 0;">
+        ✏️ &nbsp; three actors (support lead, AM, PM) were invisible until this map<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; adding them early prevented change-requests later
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ROLES ============ -->
+  <section id="roles">
+    <div class="wrap">
+      <div class="section-tag reveal">§ 05 · Role personas</div>
+      <h2 class="head reveal">Internal tools deserve real user research too.</h2>
+      <p class="lede">
+        Internal products often skip persona work because <em>"we know our users"</em>. That's wrong —
+        that assumption is what causes internal tools to be hated. I ran contextual inquiries with three
+        role holders per team and distilled a lightweight role persona per function.
+      </p>
+
+      <div class="roles">
+        <div class="role support reveal d1 hover-lift">
+          <div class="role-head">
+            <div class="role-avatar">EB</div>
+            <div><b>Elin B.</b><span>Support · 32</span></div>
+          </div>
+          <div class="role-item"><strong>Goal</strong><p>Close cases without escalating.</p></div>
+          <div class="role-item"><strong>Frustration</strong><p>Ops doesn't respond in Slack fast enough — she loses SLA.</p></div>
+          <div class="role-item"><strong>Signal</strong><p>Wants ops presence + case status visible in one glance.</p></div>
+          <div class="role-quote">"Just tell me if ops has seen it."</div>
+        </div>
+        <div class="role ops reveal d2 hover-lift">
+          <div class="role-head">
+            <div class="role-avatar">MO</div>
+            <div><b>Mikael O.</b><span>Ops · 38</span></div>
+          </div>
+          <div class="role-item"><strong>Goal</strong><p>Protect platform health while unblocking support.</p></div>
+          <div class="role-item"><strong>Frustration</strong><p>Support pings him for questions the runbook already answers.</p></div>
+          <div class="role-item"><strong>Signal</strong><p>Wants a runbook link inline so support self-serves easy cases.</p></div>
+          <div class="role-quote">"Read the runbook. Please."</div>
+        </div>
+        <div class="role eng reveal d3 hover-lift">
+          <div class="role-head">
+            <div class="role-avatar">JT</div>
+            <div><b>Jonas T.</b><span>Eng on-call · 29</span></div>
+          </div>
+          <div class="role-item"><strong>Goal</strong><p>Fix the underlying issue without becoming a chat bot.</p></div>
+          <div class="role-item"><strong>Frustration</strong><p>Being tagged in Slack when he's mid-debug.</p></div>
+          <div class="role-item"><strong>Signal</strong><p>Wants async updates, no @-mentions unless it's a P1.</p></div>
+          <div class="role-quote">"Give me the case, not the chat."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLUEPRINT ============ -->
+  <section id="blueprint">
+    <div class="wrap">
+      <div class="section-tag reveal">§ 06 · Service blueprint</div>
+      <h2 class="head reveal">Front-stage, back-stage, systems, pain.</h2>
+      <p class="lede">
+        Personas told me <em>who</em>. The blueprint told me <em>what the service did across time</em>.
+        Each column is a case lifecycle stage; each row is a lane. Adding a fifth "pain" row let us see
+        exactly where the current service was hurting people — and that row became the product spec.
+      </p>
+
+      <div class="blueprint">
+        <div class="bp-row stage">
+          <div class="lane">Stage →</div>
+          <div>Report</div>
+          <div>Triage</div>
+          <div>Handoff</div>
+          <div>Resolve</div>
+        </div>
+        <div class="bp-row">
+          <div class="lane">Customer</div>
+          <div class="bp-cell"><b>Reports</b>Sends email or opens portal case.</div>
+          <div class="bp-cell"><b>Clarifies</b>Answers 1–3 questions from support.</div>
+          <div class="bp-cell"><b>Waits</b>Loses context between teams.</div>
+          <div class="bp-cell"><b>Resolved</b>Receives resolution + explanation.</div>
+        </div>
+        <div class="bp-row">
+          <div class="lane">Front-stage</div>
+          <div class="bp-cell"><b>Support ack</b>Assigns case to themselves.</div>
+          <div class="bp-cell"><b>Classify + tag</b>Runbook lookup if easy.</div>
+          <div class="bp-cell"><b>Route</b>Ping ops / eng in Slack.</div>
+          <div class="bp-cell"><b>Summarize</b>Explains fix to customer.</div>
+        </div>
+        <div class="bp-row">
+          <div class="lane">Back-stage</div>
+          <div class="bp-cell"><b>—</b>No back-stage activity yet.</div>
+          <div class="bp-cell"><b>Escalate</b>If runbook fails.</div>
+          <div class="bp-cell"><b>Ops confirms</b>Then engages eng if needed.</div>
+          <div class="bp-cell"><b>Fix + verify</b>Eng deploys · ops verifies · PM logs.</div>
+        </div>
+        <div class="bp-row">
+          <div class="lane">Systems</div>
+          <div class="bp-cell"><b>Zendesk</b>Ticket opens.</div>
+          <div class="bp-cell"><b>Runbook wiki</b>Manual lookup.</div>
+          <div class="bp-cell"><b>Slack + ping</b>Manual re-explanation.</div>
+          <div class="bp-cell"><b>Jira</b>Backlog + postmortem doc.</div>
+        </div>
+        <div class="bp-row pain-row">
+          <div class="lane">Pain</div>
+          <div class="bp-cell">
+            <b>Low</b>
+            <span class="anno-hand-inline">clean start</span>
+          </div>
+          <div class="bp-cell">
+            <b>Medium</b>
+            <span class="anno-hand-inline">runbook hard to find</span>
+          </div>
+          <div class="bp-cell">
+            <b>HIGH ⚠</b>
+            <span class="anno-hand-inline">everything breaks here ↑</span>
+          </div>
+          <div class="bp-cell">
+            <b>Low</b>
+            <span class="anno-hand-inline">rewarding when it lands</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anno" style="margin-top: 1.5rem;">
+        ✏️ &nbsp; the "Handoff" column was the whole product spec →<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; kill Slack retelling, own the case as one artifact
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENS ============ -->
+  <section id="screens">
+    <div class="wrap">
+      <div class="section-tag reveal">§ 07 · Final UI</div>
+      <h2 class="head reveal">One case, three viewpoints.</h2>
+      <p class="lede">
+        Each role sees the same case, filtered by what they need to act on. Support sees customer
+        language; ops sees platform state; engineering sees error signatures and rollback options.
+        Same thread underneath.
+      </p>
+
+      <div class="screens">
+        <div class="screen-card reveal d1 hover-lift">
+          <div class="screen-stamp">Support</div>
+          <h4>Customer view</h4>
+          <p>Customer language + runbook first.</p>
+          <div class="rui">
+            <div class="rui-head">
+              <span class="rui-crumb">Case #4821 · 09:14</span>
+              <span class="rui-p1">P2</span>
+            </div>
+            <div class="r-cust">
+              <div class="r-avatar blue">BN</div>
+              <div>
+                <div class="cname">Bank of North</div>
+                <div class="ctag">Enterprise · SEB group</div>
+              </div>
+              <span class="tier">TIER 1</span>
+            </div>
+            <div class="r-bubble">
+              <span class="who">Reported</span>
+              "Password reset is stuck in a loop — customers can't sign in."
+            </div>
+            <div class="r-runbook">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 4h12a4 4 0 014 4v12H8a4 4 0 01-4-4V4z M4 4v12" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+              <b>RB-023</b><span>Reset flow</span>
+            </div>
+            <span class="r-waiting"><span class="spin"></span>Waiting on Ops · Mikael</span>
+            <div class="r-cta">Ping ops (async) →</div>
+          </div>
+        </div>
+
+        <div class="screen-card reveal d2 hover-lift">
+          <div class="screen-stamp">Ops</div>
+          <h4>Platform view</h4>
+          <p>Cluster + service state replace customer wording.</p>
+          <div class="rui">
+            <div class="rui-head">
+              <span class="rui-crumb">Case #4821 · Platform</span>
+              <span class="rui-p1" style="background: #fef3c7; color: #92400e;">DEGRADED</span>
+            </div>
+            <div class="cluster-panel">
+              <div class="cluster-head">
+                <span>SE-NORTH · CLUSTER</span>
+                <b>3 tenants affected</b>
+              </div>
+              <div class="health-line">
+                <svg viewBox="0 0 200 40" preserveAspectRatio="none" style="height: 40px;">
+                  <path d="M0,20 L20,18 L40,22 L60,17 L80,20 L100,15 L120,18 L140,32 L160,35 L180,30 L200,28"
+                        fill="none" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round"/>
+                  <path d="M0,20 L20,18 L40,22 L60,17 L80,20 L100,15 L120,18 L140,32 L160,35 L180,30 L200,28 L200,40 L0,40 Z"
+                        fill="url(#healthGrad)"/>
+                  <defs>
+                    <linearGradient id="healthGrad" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0" stop-color="#ef4444" stop-opacity="0.2"/>
+                      <stop offset="1" stop-color="#ef4444" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <circle cx="140" cy="32" r="3" fill="#ef4444"/>
+                </svg>
+              </div>
+              <div class="cluster-legend">
+                <span><span class="d g"></span>Uptime <b>94.2%</b></span>
+                <span><span class="d r"></span>Spike <b>09:12</b></span>
+              </div>
+            </div>
+            <div class="svc-row">
+              <span><b>Reset service</b> <span class="code">502 · retry</span></span>
+              <span style="color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;">v4.2.1</span>
+            </div>
+            <div class="r-runbook">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#10b981" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <b>RB-023 applied</b><span>09:12 UTC</span>
+            </div>
+            <div class="r-cta warn">Escalate to eng →</div>
+          </div>
+        </div>
+
+        <div class="screen-card reveal d3 hover-lift">
+          <div class="screen-stamp">Eng</div>
+          <h4>Engineering view</h4>
+          <p>Signature, deploy diff, one-click rollback.</p>
+          <div class="rui">
+            <div class="rui-head">
+              <span class="rui-crumb">Case #4821 · Eng</span>
+              <span class="rui-p1">P2</span>
+            </div>
+            <div class="term">
+              <div><span class="prompt">$</span> <span class="k">stacktrace</span> --case 4821</div>
+              <div><span class="sig">ResetService.OAuthLoop</span> @ v4.2.1</div>
+              <div style="color: var(--muted-2); margin-top: 2px;">at /reset/flow.ts:142:8</div>
+              <div style="color: var(--muted-2);">at /oauth/callback.ts:87:12</div>
+              <div><span class="prompt">$</span> <span class="k">diff</span> v4.2.1..v4.1.9</div>
+              <div><span class="ok">+ 3 files reverted</span></div>
+            </div>
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 5px;">Deploy history</div>
+              <div class="deploy-line">
+                <i class="v1"></i><i class="v2"></i><i class="v3"></i><i class="rollback"></i><i class="v4"></i><i class="v5"></i><i class="bad" title="v4.2.1"></i>
+              </div>
+              <div class="deploy-caption">
+                <span>7 days</span>
+                <b>▲ v4.2.1 · 07:04 today</b>
+              </div>
+            </div>
+            <div class="r-cta warn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 019-9 9.7 9.7 0 016.4 2.5L21 8M21 3v5h-5M3 12a9 9 0 009 9 9.7 9.7 0 006.4-2.5L21 16M21 21v-5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Roll back → v4.1.9
+            </div>
+          </div>
+        </div>
+
+        <div class="screen-card reveal d4 hover-lift">
+          <div class="screen-stamp">Postmortem</div>
+          <h4>Closed thread</h4>
+          <p>Auto-composed from the case history.</p>
+          <div class="rui">
+            <div class="rui-head">
+              <span class="rui-crumb">Case #4821 · Closed</span>
+              <span class="rui-p1" style="background: #d1fae5; color: #065f46;">RESOLVED</span>
+            </div>
+            <div class="resolve-card">
+              <div class="emo">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <div class="t">Rolled back → v4.1.9</div>
+                <div class="s">37M · SLA MET · 3 TENANTS UNBLOCKED</div>
+              </div>
+            </div>
+            <div class="timeline-mini">
+              <h6>Case timeline</h6>
+              <div class="tl-row"><span class="time">09:04</span><span class="dot bad"></span><span class="text"><b>Reported</b> by Bank of North</span></div>
+              <div class="tl-row"><span class="time">09:12</span><span class="dot on"></span><span class="text"><b>Ops</b> confirmed cluster spike</span></div>
+              <div class="tl-row"><span class="time">09:28</span><span class="dot on"></span><span class="text"><b>Eng</b> identified OAuth loop</span></div>
+              <div class="tl-row"><span class="time">09:41</span><span class="dot ok"></span><span class="text"><b>Rollback</b> verified in prod</span></div>
+            </div>
+            <div class="metric-inline">
+              <b>Root cause</b>
+              <span style="color: var(--muted); font-family: 'Fraunces', serif; font-style: italic; margin-left: 0;">OAuth loop in reset flow</span>
+              <span>▶ PM · sprint 42</span>
+            </div>
+            <div class="r-cta mint">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12v8h16v-8M16 6l-4-4-4 4M12 2v13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Share summary
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUTCOME ============ -->
+  <section id="outcome">
+    <div class="wrap">
+      <div class="section-tag reveal">§ 08 · Outcome</div>
+      <h2 class="head reveal">Handoffs stopped being <em>political.</em></h2>
+
+      <div class="outcomes">
+        <div class="stamp reveal d1 hover-lift">
+          <span class="anno-hand-tag">✓ shipped</span>
+          <b>−<span class="count-up" data-count="45">0</span>%</b>
+          <strong>Handoff time</strong>
+          <span>42m → 23m in 60 days</span>
+        </div>
+        <div class="stamp reveal d2 hover-lift">
+          <span class="anno-hand-tag">3× baseline</span>
+          <b>+<span class="count-up" data-count="60">0</span>%</b>
+          <strong>Cross-team visibility</strong>
+          <span>Cases active in all 3 teams tripled Q2</span>
+        </div>
+        <div class="stamp reveal d3 hover-lift">
+          <span class="anno-hand-tag">bonus</span>
+          <b>−<span class="count-up" data-count="33">0</span>%</b>
+          <strong>Regression QA</strong>
+          <span>Postmortems fed better test coverage</span>
+        </div>
+        <div class="stamp reveal d4 hover-lift">
+          <span class="anno-hand-tag">pattern set</span>
+          <b>1<span style="font-size: 0.4em;">st</span></b>
+          <strong>Design system</strong>
+          <span>Tokenized. Every product after used it.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPLIANCE ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-tag">§ 09 · Compliance by design</div>
+      <h2 class="head">Internal tools handle <em>real</em> customer data.</h2>
+      <p class="lede">
+        The support platform sees customer PII, incident details, and platform state — sometimes all
+        in the same thread. Compliance had to be a design surface, not a legal review at the end.
+      </p>
+
+      <div class="frame">
+        <div class="frame-label">Compliance decisions on the board</div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+          <div class="sticky mint">
+            <b>✓ WCAG 2.2 AA · Support</b>
+            Contrast ≥ 4.5:1 across all three role views. Full keyboard nav. Every case action reachable
+            without a mouse. Screen-reader tested — the queue announces state changes as live regions.
+          </div>
+          <div class="sticky">
+            <b>✓ GDPR · Role-based visibility</b>
+            Support sees customer language + case status. Ops sees platform state. Engineering sees
+            signatures + rollback. Nobody sees data they don't need. Access changes logged to the case thread.
+          </div>
+          <div class="sticky pink">
+            <b>✓ Audit trail · Immutable</b>
+            Every case thread is append-only. Edits leave a visible ghost of the previous value.
+            Postmortems are auto-composed from the same history — no separate doc to fabricate later.
+          </div>
+          <div class="sticky blue">
+            <b>✓ Right to erasure · Article 17</b>
+            When a customer requests erasure, cases are anonymized (customer identifier → hash),
+            but incident metadata is retained for postmortems + regulatory reporting. Documented in the
+            product's data map.
+          </div>
+        </div>
+
+        <div class="anno" style="margin-top: 1.5rem;">
+          ✏️ &nbsp; compliance decisions live in the artifact itself —<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; not in a separate policy nobody reads
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REFLECTION ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-tag">§ 09 · Reflection</div>
+      <h2 class="head">Internal tools are still services.</h2>
+
+      <div class="reflect">
+        <div class="reflect-note">
+          <strong>What service design brought</strong>
+          <p>The blueprint made <em>invisible work visible</em>. Nobody had to argue about whether handoffs were painful — the pain row of the blueprint showed every one of them was a manual retelling.</p>
+          <p>The co-design workshops turned three teams that had been at odds into three teams that <em>owned</em> the same design. Adoption was almost frictionless because the users had built it with me.</p>
+        </div>
+        <div class="reflect-note">
+          <strong>What I'd change next time</strong>
+          <p>Blueprint <em>before</em> wireframes, every time. Cheaper alignment, and it kills feature debates that shouldn't exist.</p>
+          <p>Next time I'd run a lightweight <em>service safari</em> — following one case across the three tools for a full day — <em>before</em> the workshops. My own map would have been sharper going in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-board">
+    <div class="wrap">
+      <h2>Look at another <em>board</em>.</h2>
+      <p>four studies · four visual languages · one designer</p>
+      <div class="cta-row">
+        <a href="case-study-lekab.html">01 · LEKAB</a>
+        <a href="case-study-messaging.html">02 · Messaging</a>
+        <a href="case-study-onboarding.html" class="primary">03 · Onboarding CRO →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">© Ahsan Javaid · case_04 · Malmö · SE · board archived · May 2023</div>
+
+  <script src="portfolio.js" defer></script>
+
+</body>
+</html>

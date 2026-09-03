@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Messaging Platform — a blank-canvas B2B build | Ahsan Javaid</title>
+  <meta name="description" content="UX/UI case study: designing an SMS and RCS campaign builder from scratch at LEKAB using Jobs-to-be-Done and information architecture." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case-study.css" />
+  <style>
+    /* Page-specific: campaign builder desktop mockup */
+    .desktop.builder .desktop-screen { grid-template-columns: 160px 1fr 180px; }
+    .canvas {
+      background: linear-gradient(180deg, var(--bg), var(--paper));
+      padding: 1rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      border-right: 1px solid var(--line);
+    }
+    .canvas-node {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.55rem 0.7rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem;
+      color: var(--ink);
+    }
+    .canvas-node b { font-family: "Fraunces", serif; font-weight: 500; font-size: 0.78rem; }
+    .canvas-node.trigger { border-color: var(--accent-soft); background: var(--accent-tint); color: var(--accent); }
+    .canvas-node.branch { border-style: dashed; }
+    .canvas-conn {
+      height: 12px;
+      border-left: 1.5px solid var(--line-strong);
+      margin-left: 1rem;
+    }
+    .inspector {
+      background: var(--bg-tint);
+      padding: 1rem 0.9rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      font-size: 0.68rem;
+    }
+    .inspector strong { font-size: 0.62rem; color: var(--muted-2); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+    .inspector .field { padding: 0.4rem 0.55rem; font-size: 0.62rem; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">Ahsan Javaid <span>· Case Study</span></a>
+      <nav class="nav-side">
+        <a href="#overview">Overview</a>
+        <a href="#problem">Problem</a>
+        <a href="#jtbd">JTBD</a>
+        <a href="#ia">IA</a>
+        <a href="#system">System</a>
+        <a href="#screens">Screens</a>
+        <a href="#outcome">Outcome</a>
+      </nav>
+      <a class="back-link" href="index.html">← Portfolio</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker">Case Study 02 · Greenfield B2B</div>
+      <h1 class="display">Building an SMS &amp; RCS campaign builder from a <em>blank canvas.</em></h1>
+      <p class="deck">
+        LEKAB's enterprise operators were running message campaigns from a stack of spreadsheets, legacy
+        CLIs, and Slack pings. The brief was to design a new business messaging platform end-to-end —
+        no legacy to inherit, no reference product to copy. This is a study in how Jobs-to-be-Done and
+        rigorous information architecture replaced "let's just build screens".
+      </p>
+
+      <div class="meta-strip">
+        <div class="meta-cell"><strong>Role</strong><span>Lead Product Designer</span></div>
+        <div class="meta-cell"><strong>Client</strong><span>LEKAB Communication AB</span></div>
+        <div class="meta-cell"><strong>Timeline</strong><span>Jun – Dec 2024</span></div>
+        <div class="meta-cell"><strong>Method</strong><span>JTBD · Card sort · Component-first</span></div>
+        <div class="meta-cell"><strong>Platform</strong><span>Web · Desktop-primary</span></div>
+        <div class="meta-cell"><strong>Users</strong><span>Ops · Marketing · Finance</span></div>
+      </div>
+
+      <div class="hero-stage warm">
+        <div class="stage-grid">
+          <!-- Phone: campaign delivery notification -->
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+              <div class="app-body">
+                <div class="app-crumb">Campaign · Live</div>
+                <div class="app-title">Black Friday burst</div>
+                <div class="field"><b>Sent</b><span class="val">128,402 / 130,000</span></div>
+                <div class="field focus"><b>Delivered</b><span class="val">126,918 (98.8%)</span></div>
+                <div class="field"><b>Failed</b><span class="val">1,484</span></div>
+                <div class="field"><b>Attributed revenue</b><span class="val">SEK 2.4M</span></div>
+                <div class="btn-primary-mini">Open dashboard</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desktop: campaign builder -->
+          <div class="desktop builder">
+            <div class="desktop-bar"><i></i><i></i><i></i></div>
+            <div class="desktop-screen">
+              <div class="side">
+                <div class="side-logo">LEKAB · BMP</div>
+                <div class="side-item">○ Dashboard</div>
+                <div class="side-item on">● Campaigns</div>
+                <div class="side-item">○ Audiences</div>
+                <div class="side-item">○ Templates</div>
+                <div class="side-item">○ Analytics</div>
+                <div class="side-item">○ Billing</div>
+              </div>
+              <div class="canvas">
+                <div class="canvas-node trigger">▶ <b>Trigger</b> · Scheduled</div>
+                <div class="canvas-conn"></div>
+                <div class="canvas-node">✉ <b>Send SMS</b> · Template A</div>
+                <div class="canvas-conn"></div>
+                <div class="canvas-node branch">⏱ <b>Wait</b> · 24h</div>
+                <div class="canvas-conn"></div>
+                <div class="canvas-node">🎯 <b>Branch</b> · Delivered?</div>
+                <div class="canvas-conn"></div>
+                <div class="canvas-node">✉ <b>RCS follow-up</b></div>
+              </div>
+              <div class="inspector">
+                <strong>Node inspector</strong>
+                <div class="field"><b>Template</b>bf-launch-v3</div>
+                <div class="field"><b>Sender</b>LEKAB</div>
+                <div class="field"><b>Rate</b>2,000 / min</div>
+                <div class="field"><b>Audience</b>SE opt-in · 130k</div>
+                <div class="field"><b>Attribution</b>UTM + tracking pixel</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section class="block" id="overview">
+    <div class="wrap">
+      <div class="section-label">Overview</div>
+      <h2 class="head">Turning tribal knowledge into a scalable product.</h2>
+      <p class="lede">
+        Ops teams had built a working system — but it lived in their heads and their inboxes. The
+        product had to expose that logic without dumbing it down. That meant treating the design as an
+        interface to a domain, not just a set of screens.
+      </p>
+
+      <div class="overview">
+        <div class="over-cell">
+          <strong>Context</strong>
+          <p>Enterprise operators sending 100k+ SMS bursts, drip flows, and transactional alerts across 40+ markets. Each ops person had their own spreadsheet.</p>
+        </div>
+        <div class="over-cell">
+          <strong>My Role</strong>
+          <p>Lead designer partnering with a PM and a squad of 6 engineers. Owned discovery, IA, component design, spec, and QA.</p>
+        </div>
+        <div class="over-cell">
+          <strong>Approach</strong>
+          <p>Jobs-to-be-Done to frame outcomes over features. Card sort with users to shape navigation. Component-first design in Figma before any screens existed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM ============ -->
+  <section class="block alt" id="problem">
+    <div class="wrap">
+      <div class="section-label">The problem</div>
+      <h2 class="head">A domain in nine heads and forty spreadsheets.</h2>
+
+      <p class="problem-quote">
+        "Every ops person built their campaign differently — <span>and any of them being off sick was a launch risk."</span>
+      </p>
+
+      <div class="stat-grid">
+        <div class="stat-tile"><b>9</b><p>Ops team members, each with their own campaign methodology and templates.</p></div>
+        <div class="stat-tile"><b>40+</b><p>Live spreadsheets tracking audiences, sends, and attribution across markets.</p></div>
+        <div class="stat-tile"><b>~4 h</b><p>Median time to configure and send a single new campaign end-to-end.</p></div>
+        <div class="stat-tile"><b>Zero</b><p>Shared vocabulary for a "campaign", "audience", or "template" — every conversation redefined the terms.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESEARCH: JTBD ============ -->
+  <section class="block" id="jtbd">
+    <div class="wrap">
+      <div class="section-label">Research method · Jobs-to-be-Done</div>
+      <h2 class="head">Framing the product as outcomes, not features.</h2>
+      <p class="lede">
+        Instead of writing a feature list, I ran contextual inquiries with ops, marketing, and finance
+        stakeholders — then distilled what they were <em>hiring the tool to do</em>. Six job statements
+        anchored the entire product spec. When engineers debated an implementation choice, we came back
+        to these.
+      </p>
+
+      <div class="jtbd-grid">
+        <div class="jtbd">
+          <strong>JTBD 01 · Launch</strong>
+          <p>When I'm <b>preparing a Black Friday burst</b>, I want to <b>schedule and rate-limit sends</b> so I can <b>hit peak revenue windows without triggering carrier throttling.</b></p>
+        </div>
+        <div class="jtbd">
+          <strong>JTBD 02 · Segment</strong>
+          <p>When I'm <b>targeting opt-in customers by market</b>, I want to <b>build reusable audiences from live data</b> so I can <b>stop re-exporting CSVs for every campaign.</b></p>
+        </div>
+        <div class="jtbd">
+          <strong>JTBD 03 · Compose</strong>
+          <p>When I'm <b>writing a message</b>, I want to <b>preview SMS and RCS side-by-side with real merge fields</b> so I can <b>catch broken personalization before send.</b></p>
+        </div>
+        <div class="jtbd">
+          <strong>JTBD 04 · Route</strong>
+          <p>When a <b>message fails to deliver</b>, I want to <b>fall back to a cheaper channel automatically</b> so I can <b>reach the customer without ballooning cost.</b></p>
+        </div>
+        <div class="jtbd">
+          <strong>JTBD 05 · Prove</strong>
+          <p>When finance <b>asks what a campaign earned</b>, I want to <b>attribute revenue by audience segment</b> so I can <b>defend the marketing budget.</b></p>
+        </div>
+        <div class="jtbd">
+          <strong>JTBD 06 · Trust</strong>
+          <p>When a <b>customer replies STOP</b>, I want to <b>see the opt-out honored across every future campaign</b> so I can <b>stay compliant with market regulators.</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IA ============ -->
+  <section class="block alt" id="ia">
+    <div class="wrap">
+      <div class="section-label">Information architecture · Card sort</div>
+      <h2 class="head">Users told us where things live.</h2>
+      <p class="lede">
+        I ran a hybrid open/closed card sort with 12 ops and marketing users across 3 markets. What
+        <em>felt like</em> the right nav structure to me and the PM was wrong twice. Users grouped by
+        the <em>lifecycle of a campaign</em>, not by object type. The final IA reflects their model.
+      </p>
+
+      <div class="ia-tree" aria-label="Information architecture tree">
+<div class="root">LEKAB Business Messaging Platform</div>
+<div class="l1">├── <b>Dashboard</b> — live campaign health, delivery, spend</div>
+<div class="l1">├── <b>Campaigns</b> — the primary object</div>
+<div class="l2">│   ├── Draft</div>
+<div class="l2">│   ├── Scheduled</div>
+<div class="l2">│   ├── Live</div>
+<div class="l2">│   └── Archive</div>
+<div class="l3">│       └── Each campaign owns: audience, template, schedule, routing, attribution</div>
+<div class="l1">├── <b>Audiences</b> — reusable, live, filterable</div>
+<div class="l2">│   ├── Segments (rule-based)</div>
+<div class="l2">│   └── Lists (uploaded / synced)</div>
+<div class="l1">├── <b>Templates</b> — SMS + RCS in one library</div>
+<div class="l1">├── <b>Analytics</b> — delivery, engagement, attributed revenue</div>
+<div class="l1">└── <b>Settings</b> — sender IDs, compliance, opt-outs, billing</div>
+      </div>
+
+      <p class="lede" style="margin-top: 2rem;">
+        Three insights from the card sort shaped the nav:
+      </p>
+
+      <div class="insights">
+        <div class="insight">
+          <div class="insight-num">01</div>
+          <div>
+            <h4>Campaign is the noun that matters.</h4>
+            <p>Users didn't think in "templates" or "audiences" first. They thought in campaigns and drilled into the components. The nav had to reflect that primacy.</p>
+          </div>
+        </div>
+        <div class="insight">
+          <div class="insight-num">02</div>
+          <div>
+            <h4>Opt-outs deserved settings, not campaigns.</h4>
+            <p>Compliance was a global concern, not a per-campaign one. Users needed to trust that STOP replies were honored everywhere by default.</p>
+          </div>
+        </div>
+        <div class="insight">
+          <div class="insight-num">03</div>
+          <div>
+            <h4>Analytics is a mode, not a page.</h4>
+            <p>Every object had numbers on it. Analytics as a top-level tab held the cross-cutting reports; contextual metrics lived inline.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DESIGN SYSTEM ============ -->
+  <section class="block" id="system">
+    <div class="wrap">
+      <div class="section-label">Design system</div>
+      <h2 class="head">Component-first, screens second.</h2>
+      <p class="lede">
+        Because the product was greenfield, I built the component library <em>before</em> the screens.
+        Every atom lived in Figma variables tied to code tokens. The first working prototype was assembled
+        from library components in an afternoon — proving the system before we shipped a pixel.
+      </p>
+
+      <div class="system-grid">
+        <div class="sys-card">
+          <strong>Color palette</strong>
+          <div class="swatches">
+            <div class="swatch"><div class="chip" style="background: #2b5aa8;"></div><div class="meta"><b>Primary</b><span>#2B5AA8</span></div></div>
+            <div class="swatch"><div class="chip" style="background: #b47a2a;"></div><div class="meta"><b>Warn</b><span>#B47A2A</span></div></div>
+            <div class="swatch"><div class="chip" style="background: #2f7a5a;"></div><div class="meta"><b>Success</b><span>#2F7A5A</span></div></div>
+            <div class="swatch"><div class="chip" style="background: #a3363a;"></div><div class="meta"><b>Danger</b><span>#A3363A</span></div></div>
+            <div class="swatch"><div class="chip" style="background: #101827;"></div><div class="meta"><b>Ink</b><span>#101827</span></div></div>
+          </div>
+
+          <div style="height: 1.6rem;"></div>
+          <strong>Components</strong>
+          <div class="comp-grid">
+            <div class="comp"><div class="demo-btn">Send now</div></div>
+            <div class="comp"><div class="demo-input">bf-launch-v3</div></div>
+            <div class="comp"><div class="demo-chip">SMS · Draft</div></div>
+            <div class="comp"><div class="demo-badge">LIVE</div></div>
+          </div>
+        </div>
+
+        <div class="sys-card">
+          <strong>Type ramp — Fraunces + Inter</strong>
+          <div class="type-ramp">
+            <div class="type-row"><div class="type-tag">Display</div><div class="type-sample display">128,402 sent</div></div>
+            <div class="type-row"><div class="type-tag">H1</div><div class="type-sample h1">Black Friday burst</div></div>
+            <div class="type-row"><div class="type-tag">H2</div><div class="type-sample h2">Audience segment</div></div>
+            <div class="type-row"><div class="type-tag">Body</div><div class="type-sample body">Data-heavy labels stay readable at long widths.</div></div>
+            <div class="type-row"><div class="type-tag">Mono</div><div class="type-sample caption">MERGE_FIELD · TEMPLATE_ID</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENS ============ -->
+  <section class="block alt" id="screens">
+    <div class="wrap">
+      <div class="section-label">Final UI</div>
+      <h2 class="head">Four modes of the same object.</h2>
+      <p class="lede">
+        A single campaign lives across compose, schedule, monitor, and analyze. Each mode is a different
+        screen but they share the same header, breadcrumbs, and inline metrics — so context never resets.
+      </p>
+
+      <div class="screens-grid">
+        <!-- Compose -->
+        <div>
+          <div class="screen-stage warm">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Compose</div>
+                  <div class="app-title">Black Friday burst</div>
+                  <div class="progress"><i class="on"></i><i></i><i></i><i></i></div>
+                  <div class="field focus"><b>Body</b><span class="val">Hi {first_name}, ...</span></div>
+                  <div class="field"><b>Merge fields</b><span class="val">first_name · segment · offer</span></div>
+                  <div class="field"><b>Channel</b><span class="val">SMS → RCS fallback</span></div>
+                  <div class="btn-primary-mini">Preview live</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Compose — write once, preview both</strong>
+            <span>SMS and RCS render side-by-side with real merge data from the target audience.</span>
+          </div>
+        </div>
+
+        <!-- Schedule -->
+        <div>
+          <div class="screen-stage cool">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Schedule</div>
+                  <div class="app-title">Rate &amp; timing</div>
+                  <div class="progress"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+                  <div class="field"><b>Start</b><span class="val">Fri 24 Nov · 08:00 SE</span></div>
+                  <div class="field focus"><b>Rate</b><span class="val">2,000 / min</span></div>
+                  <div class="field"><b>Quiet hours</b><span class="val">22:00 – 08:00</span></div>
+                  <div class="field"><b>Retry</b><span class="val">3× on failure</span></div>
+                  <div class="btn-primary-mini">Save schedule</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Schedule — throttling made obvious</strong>
+            <span>Carrier limits, quiet-hours, and retry policy in one glance. No hidden defaults.</span>
+          </div>
+        </div>
+
+        <!-- Monitor -->
+        <div>
+          <div class="screen-stage soft">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Live · Monitor</div>
+                  <div class="app-title">In flight</div>
+                  <div class="field"><b>Sent</b><span class="val">42,910 / 130,000</span></div>
+                  <div class="field focus"><b>Delivered</b><span class="val">42,340 (98.7%)</span></div>
+                  <div class="field"><b>Failed</b><span class="val">570</span></div>
+                  <div class="field"><b>Fallbacks</b><span class="val">210 → RCS</span></div>
+                  <div class="btn-primary-mini">Pause send</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Monitor — safety in a big red button</strong>
+            <span>Live delivery view with a one-tap pause. Ops needs to intervene, not investigate.</span>
+          </div>
+        </div>
+
+        <!-- Analyze -->
+        <div>
+          <div class="screen-stage mint">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Analytics</div>
+                  <div class="app-title">Attribution</div>
+                  <div class="field"><b>Revenue</b><span class="val">SEK 2.4M</span></div>
+                  <div class="field focus"><b>ROI</b><span class="val">12.8×</span></div>
+                  <div class="field"><b>Top segment</b><span class="val">SE opt-in · 30–45</span></div>
+                  <div class="field"><b>Cost / delivered</b><span class="val">SEK 0.18</span></div>
+                  <div class="btn-primary-mini">Export for finance</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Analyze — numbers finance can defend</strong>
+            <span>Revenue attribution built into the object, not bolted on after. Exports match the ledger.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUTCOME ============ -->
+  <section class="block" id="outcome">
+    <div class="wrap">
+      <div class="section-label">Outcome</div>
+      <h2 class="head">Nine playbooks became one product.</h2>
+
+      <div class="outcome-grid">
+        <div class="out-tile">
+          <b>~15 min</b>
+          <strong>Time to launch</strong>
+          <span>Median campaign build time dropped from ~4 hours to under 15 minutes.</span>
+        </div>
+        <div class="out-tile">
+          <b>+40%</b>
+          <strong>Feature TTM</strong>
+          <span>Component-first system meant new features composed from existing atoms.</span>
+        </div>
+        <div class="out-tile">
+          <b>98.8%</b>
+          <strong>Delivery accuracy</strong>
+          <span>Ops confidence let them run tighter rate limits without carrier bounces.</span>
+        </div>
+        <div class="out-tile">
+          <b>0</b>
+          <strong>Spreadsheets</strong>
+          <span>The old 40+ working spreadsheets were retired six months post-launch.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REFLECTION ============ -->
+  <section class="block alt">
+    <div class="wrap">
+      <div class="section-label">Reflection</div>
+      <h2 class="head">Designing for a domain, not a screen.</h2>
+
+      <div class="reflect-grid">
+        <div class="reflect-cell">
+          <strong>What JTBD did for us</strong>
+          <p>The six job statements became the acceptance criteria for every sprint. When engineers proposed a shortcut, we asked "which job does this serve?" and the answer usually resolved the debate.</p>
+          <p>The biggest win was <em>shared language</em>. PM, design, and eng finally used the same nouns.</p>
+        </div>
+        <div class="reflect-cell">
+          <strong>What I'd change next time</strong>
+          <p>I'd run the card sort <em>earlier</em> — before wireframes. We wasted two weeks on a nav structure I assumed was obvious, and the sort proved it wasn't.</p>
+          <p>And I'd invest in an in-product empty state library from day one. Empty states in a greenfield tool are the single biggest onboarding surface, and we treated them as an afterthought.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="footer-cta">
+    <div class="wrap-narrow">
+      <div class="kicker">Next</div>
+      <h2>Read another case study.</h2>
+      <p>Three more studies — each demonstrating a different UX process.</p>
+      <div class="cta-row">
+        <a class="cta ghost" href="case-study-lekab.html">01 · LEKAB signup</a>
+        <a class="cta ghost" href="case-study-onboarding.html">03 · Onboarding CRO</a>
+        <a class="cta primary" href="case-study-support.html">04 · Support platform →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">© Ahsan Javaid · Case study 02 · Malmö, Sweden</div>
+
+</body>
+</html>

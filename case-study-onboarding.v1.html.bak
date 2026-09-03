@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding CRO — a 22% lift engineered by measurement | Ahsan Javaid</title>
+  <meta name="description" content="UX/UI case study: a quantitative, hypothesis-driven overhaul of a Nordic SaaS onboarding funnel using heatmaps, session replay, and A/B testing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case-study.css" />
+  <style>
+    /* Page-specific: funnel chart + heatmap overlay */
+    .funnel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .funnel-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 90px;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed var(--line);
+    }
+    .funnel-row:last-child { border-bottom: none; }
+    .funnel-row strong { font-size: 0.9rem; color: var(--ink); font-weight: 600; }
+    .funnel-row span.pct { text-align: right; font-family: "Fraunces", serif; font-weight: 500; font-size: 1rem; color: var(--accent); }
+    .funnel-bar {
+      height: 14px;
+      background: var(--bg-tint);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .funnel-bar i {
+      display: block; height: 100%;
+      background: linear-gradient(90deg, var(--accent), #6b8ec9);
+      border-radius: 8px;
+    }
+    .funnel-row.drop span.pct { color: var(--danger); }
+    .funnel-row.drop .funnel-bar i { background: linear-gradient(90deg, #a3363a, #d4676a); }
+
+    /* Heatmap phone overlay */
+    .heatmap-wrap { position: relative; }
+    .heatmap-wrap::after {
+      content: "";
+      position: absolute; inset: 40px 20px 20px 20px;
+      background:
+        radial-gradient(circle at 30% 78%, rgba(239, 68, 68, 0.55), transparent 22%),
+        radial-gradient(circle at 70% 62%, rgba(245, 158, 11, 0.4), transparent 20%),
+        radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.25), transparent 18%);
+      border-radius: 30px;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">Ahsan Javaid <span>· Case Study</span></a>
+      <nav class="nav-side">
+        <a href="#overview">Overview</a>
+        <a href="#funnel">Funnel</a>
+        <a href="#heatmap">Heatmap</a>
+        <a href="#hypothesis">Hypotheses</a>
+        <a href="#variants">Variants</a>
+        <a href="#outcome">Outcome</a>
+      </nav>
+      <a class="back-link" href="index.html">← Portfolio</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker">Case Study 03 · Quant-driven CRO</div>
+      <h1 class="display">A 22% conversion lift, <em>engineered</em> by measurement.</h1>
+      <p class="deck">
+        A Nordic B2C SaaS client had a beautifully designed signup flow that quietly haemorrhaged users.
+        No new visuals were needed. What was needed was a measurement-first UX process: funnel analysis,
+        heatmap and session replay evidence, a written hypothesis for every change, and A/B testing that
+        proved lift instead of assuming it.
+      </p>
+
+      <div class="meta-strip">
+        <div class="meta-cell"><strong>Role</strong><span>UX Lead · CRO owner</span></div>
+        <div class="meta-cell"><strong>Client</strong><span>Nordic B2C SaaS (NDA)</span></div>
+        <div class="meta-cell"><strong>Timeline</strong><span>Sep – Dec 2021</span></div>
+        <div class="meta-cell"><strong>Method</strong><span>Funnel · Hotjar · A/B</span></div>
+        <div class="meta-cell"><strong>Platform</strong><span>Web · Mobile-first</span></div>
+        <div class="meta-cell"><strong>Sample</strong><span>~180k sessions / month</span></div>
+      </div>
+
+      <div class="hero-stage mint">
+        <div class="stage-grid">
+          <!-- Phone with heatmap overlay -->
+          <div class="heatmap-wrap">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Signup</div>
+                  <div class="app-title">Create your account</div>
+                  <div class="field"><b>Email</b><span class="val">you@company.com</span></div>
+                  <div class="field"><b>Company name</b><span class="val"></span></div>
+                  <div class="field"><b>Team size</b><span class="val">Select</span></div>
+                  <div class="field"><b>Role</b><span class="val">Select</span></div>
+                  <div class="field"><b>Country</b><span class="val">Select</span></div>
+                  <div class="field"><b>Phone (optional)</b><span class="val"></span></div>
+                  <div class="btn-primary-mini">Continue</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desktop: analytics dashboard -->
+          <div class="desktop">
+            <div class="desktop-bar"><i></i><i></i><i></i></div>
+            <div class="desktop-screen">
+              <div class="side">
+                <div class="side-logo">CRO</div>
+                <div class="side-item on">● Funnels</div>
+                <div class="side-item">○ Experiments</div>
+                <div class="side-item">○ Heatmaps</div>
+                <div class="side-item">○ Recordings</div>
+                <div class="side-item">○ Segments</div>
+              </div>
+              <div class="main">
+                <div>
+                  <div class="main-title">Signup funnel — 30d</div>
+                  <div class="main-sub">Control vs. treatment · SE + DK + FI</div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+                  <div style="border: 1px solid var(--line); border-radius: 8px; padding: 0.6rem; background: var(--bg);">
+                    <b style="font-family: 'Fraunces', serif; font-size: 1.1rem; color: var(--ok); display: block;">+22%</b>
+                    <span style="font-size: 0.6rem; color: var(--muted);">CVR lift</span>
+                  </div>
+                  <div style="border: 1px solid var(--line); border-radius: 8px; padding: 0.6rem; background: var(--bg);">
+                    <b style="font-family: 'Fraunces', serif; font-size: 1.1rem; color: var(--accent); display: block;">−18%</b>
+                    <span style="font-size: 0.6rem; color: var(--muted);">Form time</span>
+                  </div>
+                  <div style="border: 1px solid var(--line); border-radius: 8px; padding: 0.6rem; background: var(--bg);">
+                    <b style="font-family: 'Fraunces', serif; font-size: 1.1rem; color: var(--accent); display: block;">99.4%</b>
+                    <span style="font-size: 0.6rem; color: var(--muted);">Significance</span>
+                  </div>
+                </div>
+                <div style="flex: 1; border: 1px solid var(--line); border-radius: 8px; background: linear-gradient(180deg, var(--paper), var(--bg)); padding: 0.6rem;">
+                  <svg viewBox="0 0 320 100" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+                    <path d="M0,80 L40,72 L80,60 L120,50 L160,38 L200,30 L240,22 L280,16 L320,10" fill="none" stroke="#2f7a5a" stroke-width="1.6"/>
+                    <path d="M0,86 L40,82 L80,78 L120,76 L160,74 L200,72 L240,70 L280,68 L320,66" fill="none" stroke="#8593a8" stroke-width="1.2" stroke-dasharray="3 3"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section class="block" id="overview">
+    <div class="wrap">
+      <div class="section-label">Overview</div>
+      <h2 class="head">Beautiful ≠ effective.</h2>
+      <p class="lede">
+        The client had already invested in a polished visual redesign. Conversion had barely moved. The
+        challenge was to prove — rigorously — where users were bailing, why, and what would fix it.
+        Every design decision had to survive a t-test.
+      </p>
+
+      <div class="overview">
+        <div class="over-cell">
+          <strong>Context</strong>
+          <p>~180k monthly sessions, ~4% signup CVR, high bounce on step 2 of a 4-step flow. Product team was ready to rebuild — I argued for measurement first.</p>
+        </div>
+        <div class="over-cell">
+          <strong>My Role</strong>
+          <p>UX lead, embedded with marketing analytics. Owned research design, hypothesis writing, prototype variants, and readouts.</p>
+        </div>
+        <div class="over-cell">
+          <strong>Approach</strong>
+          <p>Google Analytics funnel → Hotjar heatmaps and session replay → written hypotheses → A/B tests → statistical validation before rollout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FUNNEL ============ -->
+  <section class="block alt" id="funnel">
+    <div class="wrap">
+      <div class="section-label">Step 1 · Funnel analysis</div>
+      <h2 class="head">Find the leak before you touch the pixels.</h2>
+      <p class="lede">
+        I pulled 90 days of GA data into a step-by-step funnel. The visual redesign had lifted top-of-funnel
+        traffic, but the biggest drop was still on step 2 — where the form asked for company name, team size,
+        role, country, and phone all at once. This became the target for the whole intervention.
+      </p>
+
+      <div class="funnel">
+        <div class="funnel-row"><strong>Landing page view</strong><div class="funnel-bar"><i style="width: 100%;"></i></div><span class="pct">100%</span></div>
+        <div class="funnel-row"><strong>Signup CTA click</strong><div class="funnel-bar"><i style="width: 34%;"></i></div><span class="pct">34%</span></div>
+        <div class="funnel-row"><strong>Step 1 — email submitted</strong><div class="funnel-bar"><i style="width: 22%;"></i></div><span class="pct">22%</span></div>
+        <div class="funnel-row drop"><strong>Step 2 — company info</strong><div class="funnel-bar"><i style="width: 8%;"></i></div><span class="pct">8%</span></div>
+        <div class="funnel-row"><strong>Step 3 — email verify</strong><div class="funnel-bar"><i style="width: 6.4%;"></i></div><span class="pct">6.4%</span></div>
+        <div class="funnel-row"><strong>Step 4 — first action</strong><div class="funnel-bar"><i style="width: 4.1%;"></i></div><span class="pct">4.1%</span></div>
+      </div>
+
+      <p class="lede" style="margin-top: 2rem;">
+        The story was unambiguous: <em>step 2 was killing conversions</em>. 14 out of every 22 users
+        who submitted their email quit before finishing the second form. That's a 64% relative drop-off
+        on a single screen.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ HEATMAP ============ -->
+  <section class="block" id="heatmap">
+    <div class="wrap">
+      <div class="section-label">Step 2 · Behavioral evidence</div>
+      <h2 class="head">Heatmaps and session replay told us <em>why</em>.</h2>
+      <p class="lede">
+        Funnel data shows <em>where</em> users drop off. Hotjar heatmaps and 40+ session replays showed
+        <em>why</em>. I watched real people — sighing at a required phone field, tabbing back to change
+        an answer, and closing the tab when a country dropdown didn't recognize their input.
+      </p>
+
+      <div class="insights">
+        <div class="insight">
+          <div class="insight-num">01</div>
+          <div>
+            <h4>The phone field was labeled optional — and nobody read that.</h4>
+            <p>Heatmap showed 70% of users scrolled past the phone field. Replay showed them <em>bouncing</em> when they realized what it was. Perception ≠ label.</p>
+          </div>
+        </div>
+        <div class="insight">
+          <div class="insight-num">02</div>
+          <div>
+            <h4>Country dropdowns broke for anyone outside the Nordics.</h4>
+            <p>The list defaulted alphabetically starting with Sweden. Users from other markets scrolled forever, then quit. Session replay confirmed the pattern across 8 sessions.</p>
+          </div>
+        </div>
+        <div class="insight">
+          <div class="insight-num">03</div>
+          <div>
+            <h4>The submit button was below the fold on mobile.</h4>
+            <p>Heatmap showed clicks concentrated where users <em>expected</em> the button to be — not where it was. On phones under 6", the CTA lived off-screen for the first 400ms.</p>
+          </div>
+        </div>
+        <div class="insight">
+          <div class="insight-num">04</div>
+          <div>
+            <h4>Users didn't know why the form mattered.</h4>
+            <p>Zero micro-copy explained "why we ask". Session replay showed hovering on labels, expecting tooltips that weren't there.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HYPOTHESES ============ -->
+  <section class="block alt" id="hypothesis">
+    <div class="wrap">
+      <div class="section-label">Step 3 · Hypothesis-driven design</div>
+      <h2 class="head">Every change was a written bet.</h2>
+      <p class="lede">
+        Before touching Figma, I wrote a hypothesis for every proposed change. Format:
+        <em>"If we [change], for [audience], then [metric] will move by [range] because [reason]"</em>.
+        Anything I couldn't write a hypothesis for got cut from scope.
+      </p>
+
+      <div class="hyp-table">
+        <div class="hyp-row head">
+          <strong>#</strong>
+          <strong>Hypothesis</strong>
+          <strong>Change</strong>
+          <strong>Predicted lift</strong>
+          <strong>Result</strong>
+        </div>
+        <div class="hyp-row">
+          <strong>H1</strong>
+          <p>If we <em>remove</em> the optional phone field entirely, step-2 completion will rise because users read "phone" as commitment, not option.</p>
+          <p>Field removed</p>
+          <p>+8–12%</p>
+          <p><span class="win">✓ +11%</span></p>
+        </div>
+        <div class="hyp-row">
+          <strong>H2</strong>
+          <p>If we <em>autodetect country</em> via IP and put it at the top of the list, non-Nordic users will complete the form.</p>
+          <p>IP-based default</p>
+          <p>+3–5%</p>
+          <p><span class="win">✓ +4.2%</span></p>
+        </div>
+        <div class="hyp-row">
+          <strong>H3</strong>
+          <p>If we <em>add "why we ask"</em> helper text under each field, users will trust the form and complete it.</p>
+          <p>Micro-copy</p>
+          <p>+2–4%</p>
+          <p><span class="win">✓ +3.1%</span></p>
+        </div>
+        <div class="hyp-row">
+          <strong>H4</strong>
+          <p>If we <em>sticky-position</em> the submit CTA on mobile, click-through will rise on small screens.</p>
+          <p>Sticky footer CTA</p>
+          <p>+5–8%</p>
+          <p><span class="win">✓ +6.4%</span></p>
+        </div>
+        <div class="hyp-row">
+          <strong>H5</strong>
+          <p>If we <em>replace "team size" with a slider</em>, users will engage with it more than a dropdown.</p>
+          <p>Slider input</p>
+          <p>+1–3%</p>
+          <p><span class="lose">✗ −0.8%</span></p>
+        </div>
+        <div class="hyp-row">
+          <strong>H6</strong>
+          <p>If we <em>show social proof</em> ("14,000+ Nordic teams") above step 2, drop-off will decrease.</p>
+          <p>Social proof band</p>
+          <p>+1–2%</p>
+          <p><span class="flat">→ +0.3%</span></p>
+        </div>
+      </div>
+
+      <p class="lede" style="margin-top: 2rem;">
+        Two hypotheses failed — H5 (slider) and H6 (social proof). That's the whole point of running
+        experiments instead of shipping opinions. We reverted both and kept the wins.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ VARIANTS ============ -->
+  <section class="block" id="variants">
+    <div class="wrap">
+      <div class="section-label">Step 4 · A/B testing</div>
+      <h2 class="head">Control vs. treatment, side by side.</h2>
+      <p class="lede">
+        Each hypothesis ran as its own experiment against control, then the winners were bundled into a
+        single treatment variant for a validation test. 50/50 traffic split, minimum sample size
+        pre-calculated for 95% confidence, ran until significance.
+      </p>
+
+      <div class="variant-grid">
+        <div class="variant">
+          <div class="variant-head">
+            <span class="variant-tag">Control · A</span>
+            <span class="variant-result loss">Baseline</span>
+          </div>
+          <div class="screen-stage soft" style="min-height: 320px;">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Step 2 of 4</div>
+                  <div class="app-title">Tell us about your team</div>
+                  <div class="field"><b>Company name</b><span class="val"></span></div>
+                  <div class="field"><b>Team size</b><span class="val">Select</span></div>
+                  <div class="field"><b>Role</b><span class="val">Select</span></div>
+                  <div class="field"><b>Country</b><span class="val">Sweden</span></div>
+                  <div class="field"><b>Phone (optional)</b><span class="val"></span></div>
+                  <div class="btn-primary-mini">Continue</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="variant winner">
+          <div class="variant-head">
+            <span class="variant-tag">Treatment · B · Winner</span>
+            <span class="variant-result">+22% CVR</span>
+          </div>
+          <div class="screen-stage mint" style="min-height: 320px;">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Step 2 of 3</div>
+                  <div class="app-title">Tell us about your team</div>
+                  <div class="progress"><i class="on"></i><i class="on"></i><i></i></div>
+                  <div class="field focus"><b>Company name</b><span class="val" style="color: var(--muted); font-size: 0.5rem;">so we can personalise your workspace</span></div>
+                  <div class="field"><b>Team size</b><span class="val">1–10 · 11–50 · 50+</span></div>
+                  <div class="field"><b>Country</b><span class="val">Denmark · auto-detected</span></div>
+                  <div class="btn-primary-mini">Continue →</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="lede" style="margin-top: 2rem;">
+        Same brand. Same visual language. Six research-driven changes: fewer fields, auto-detected
+        country, per-field helper text, sticky CTA, segmented team-size buttons instead of a dropdown,
+        and role moved to a post-signup step where it belonged.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ OUTCOME ============ -->
+  <section class="block alt" id="outcome">
+    <div class="wrap">
+      <div class="section-label">Outcome</div>
+      <h2 class="head">Numbers that survived a t-test.</h2>
+
+      <div class="outcome-grid">
+        <div class="out-tile">
+          <b>+22%</b>
+          <strong>Signup CVR</strong>
+          <span>Validation test ran 21 days. p = 0.006. n = 42,180 per arm.</span>
+        </div>
+        <div class="out-tile">
+          <b>−18%</b>
+          <strong>Form time</strong>
+          <span>Median time-to-submit on step 2, measured via GA event timing.</span>
+        </div>
+        <div class="out-tile">
+          <b>+14%</b>
+          <strong>D30 retention</strong>
+          <span>Softer top-of-funnel didn't attract worse users — retention held.</span>
+        </div>
+        <div class="out-tile">
+          <b>2 of 6</b>
+          <strong>Hypotheses killed</strong>
+          <span>Slider and social proof lost. Killing them was the process working.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REFLECTION ============ -->
+  <section class="block">
+    <div class="wrap">
+      <div class="section-label">Reflection</div>
+      <h2 class="head">Design as a series of falsifiable bets.</h2>
+
+      <div class="reflect-grid">
+        <div class="reflect-cell">
+          <strong>What quant-driven design taught me</strong>
+          <p>Writing a hypothesis <em>before</em> designing forces you to be honest about the mechanism you think you're changing. Half the ideas that "obviously" would work didn't survive the writing exercise.</p>
+          <p>The two failed experiments (H5, H6) were the most valuable — they saved months of arguing about intuition on the next project.</p>
+        </div>
+        <div class="reflect-cell">
+          <strong>Where I'd push further</strong>
+          <p>The next step would be a <em>multi-armed bandit</em> instead of fixed 50/50 splits, so traffic reallocates to winning variants during the test. Faster learning, less lost revenue during the losing arm.</p>
+          <p>And I'd instrument qualitative feedback inline (a two-question exit poll on abandon) so quant and qual could triangulate the <em>same session</em>, not just the same population.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="footer-cta">
+    <div class="wrap-narrow">
+      <div class="kicker">Next</div>
+      <h2>Read another case study.</h2>
+      <p>Three more studies — each demonstrating a different UX process.</p>
+      <div class="cta-row">
+        <a class="cta ghost" href="case-study-lekab.html">01 · LEKAB signup</a>
+        <a class="cta ghost" href="case-study-messaging.html">02 · Messaging platform</a>
+        <a class="cta primary" href="case-study-support.html">04 · Support platform →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">© Ahsan Javaid · Case study 03 · Malmö, Sweden</div>
+
+</body>
+</html>

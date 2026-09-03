@@ -3,1049 +3,1271 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ahsan Javaid | Product Designer</title>
+  <title>Ahsan Javaid — Senior Product Designer · Enterprise SaaS · Nordic</title>
+  <meta name="description" content="Senior Product Designer based in Malmö, Sweden. Enterprise SaaS, B2B/B2C platforms, and design systems for high-stakes workflows." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="enhancements.css" />
   <style>
     :root {
-      --bg: #f5f7fb;
-      --ink: #142035;
-      --muted: #52617d;
-      --line: #d8e0ef;
-      --card: #ffffff;
-      --accent: #0a7f7b;
-      --accent-2: #0b57d0;
-      --hero: linear-gradient(145deg, #0f1f38 0%, #12325a 45%, #175a7a 100%);
-      --shadow: 0 24px 64px rgba(11, 30, 68, 0.16);
-      --radius: 18px;
+      --bg: #f6f7f9;
+      --bg-tint: #eef1f6;
+      --paper: #ffffff;
+      --ink: #101827;
+      --ink-2: #2b3648;
+      --muted: #5c6a80;
+      --muted-2: #8593a8;
+      --line: #e3e7ef;
+      --line-strong: #cfd6e2;
+      --accent: #2b5aa8;
+      --accent-soft: #dbe6f7;
+      --accent-tint: #eef3fb;
+      --ok: #2f7a5a;
+
+      --radius-sm: 10px;
+      --radius: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+
+      --shadow-soft: 0 1px 2px rgba(16, 24, 39, 0.04), 0 12px 40px rgba(16, 24, 39, 0.06);
+      --shadow-hero: 0 30px 80px rgba(16, 24, 39, 0.10);
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: "Manrope", sans-serif;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
       color: var(--ink);
-      background:
-        radial-gradient(circle at 12% 8%, #deedf9 0, transparent 26%),
-        radial-gradient(circle at 86% 2%, #e4f4f0 0, transparent 22%),
-        var(--bg);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      width: min(1100px, 92%);
-      margin: 0 auto;
-    }
+    .wrap { width: min(1180px, 92%); margin: 0 auto; }
+    .wrap-narrow { width: min(820px, 92%); margin: 0 auto; }
+    a { color: inherit; }
 
+    /* ===== Topbar ===== */
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(10px);
-      background: rgba(245, 247, 251, 0.85);
-      border-bottom: 1px solid rgba(216, 224, 239, 0.8);
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(246, 247, 249, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
     }
-
     .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 62px;
     }
-
     .brand {
-      font-family: "Clash Display", sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.6px;
-    }
-
-    .nav {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav a {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      font-size: 1.05rem;
       text-decoration: none;
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 700;
+    }
+    .brand span { color: var(--muted); font-weight: 400; }
+    .nav-side { display: none; gap: 1.5rem; }
+    .nav-side a { color: var(--muted); text-decoration: none; font-size: 0.86rem; font-weight: 500; }
+    .nav-side a:hover { color: var(--ink); }
+    .top-cta {
+      background: var(--accent); color: #fff;
+      padding: 0.55rem 1rem; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 600;
+      text-decoration: none;
     }
 
+    /* ===== Hero ===== */
     .hero {
-      margin-top: 1.1rem;
-      border-radius: calc(var(--radius) + 6px);
-      background: var(--hero);
-      color: #eff5ff;
-      box-shadow: var(--shadow);
+      padding: 6rem 0 4rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      color: var(--accent);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+    .kicker::before {
+      content: ""; width: 28px; height: 1px; background: var(--accent);
+    }
+    h1.display {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.6rem;
+      max-width: 18ch;
+      color: var(--ink);
+    }
+    h1.display em {
+      font-style: italic; color: var(--accent);
+      font-weight: 400;
+    }
+    .deck {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin: 0 0 3rem;
+      line-height: 1.6;
+    }
+    .hero-actions {
+      display: flex; gap: 0.8rem; flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+    .btn {
+      padding: 0.85rem 1.4rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.92rem; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { color: var(--ink); border-color: var(--line-strong); background: var(--paper); }
+
+    /* Meta strip */
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem 2.4rem;
+      padding: 1.6rem 0 0;
+      border-top: 1px solid var(--line);
+    }
+    .meta-cell strong {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted-2);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .meta-cell span {
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ===== Sections ===== */
+    section.block {
+      padding: 6rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    section.block.alt { background: var(--paper); }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      color: var(--muted-2);
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+    .section-label::before {
+      content: ""; width: 22px; height: 1px; background: var(--muted-2);
+    }
+    h2.head {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      margin: 0 0 1.2rem;
+      max-width: 22ch;
+      color: var(--ink);
+    }
+    .lede {
+      font-size: 1.1rem;
+      color: var(--ink-2);
+      max-width: 62ch;
+      margin: 0 0 2.5rem;
+      line-height: 1.6;
+    }
+
+    /* ===== About ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .about-body p {
+      margin: 0 0 1rem;
+      font-size: 1rem;
+      color: var(--ink-2);
+      line-height: 1.7;
+    }
+    .about-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .tag {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.82rem;
+      color: var(--ink-2);
+      font-weight: 500;
+    }
+
+    /* ===== Impact ===== */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .impact-tile {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.8rem 1.6rem;
+    }
+    .impact-tile b {
+      display: block;
+      font-family: "Fraunces", serif;
+      font-size: 2.6rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+    .impact-tile p { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.55; }
+
+    /* ===== Experience ===== */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .exp-item:first-of-type { border-top: 1px solid var(--line-strong); }
+    .exp-side strong {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted-2);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .exp-side span {
+      display: block;
+      color: var(--ink-2);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .exp-side em {
+      font-style: normal;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .exp-body h3 {
+      margin: 0 0 0.3rem;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.35rem;
+      letter-spacing: -0.01em;
+    }
+    .exp-body .exp-role {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0 0 1rem;
+    }
+    .exp-body ul {
+      margin: 0; padding: 0; list-style: none;
+    }
+    .exp-body li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.55rem;
+      color: var(--ink-2);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .exp-body li::before {
+      content: "";
+      position: absolute; left: 0; top: 0.65rem;
+      width: 8px; height: 1px; background: var(--accent);
+    }
+
+    /* ===== Skills ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .skill-col strong {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted-2);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .skill-col ul { margin: 0; padding: 0; list-style: none; }
+    .skill-col li {
+      padding: 0.55rem 0;
+      color: var(--ink-2);
+      font-size: 0.95rem;
+      border-bottom: 1px dashed var(--line);
+    }
+    .skill-col li:last-child { border-bottom: none; }
+    .skill-col li b { color: var(--ink); font-weight: 600; }
+
+    /* ===== Featured case study ===== */
+    .feature-card {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .feature-visual {
+      background: linear-gradient(160deg, var(--bg-tint) 0%, #dfe6f2 100%);
+      padding: 3rem 2rem 2.5rem;
+      display: flex; align-items: end; justify-content: center;
+      min-height: 320px;
+      overflow: hidden;
+    }
+    .feature-copy {
+      padding: 2.4rem 2rem;
+      display: flex; flex-direction: column;
+      gap: 1rem;
+    }
+    .feature-copy h3 {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+    }
+    .feature-copy h3 em { color: var(--accent); font-style: italic; font-weight: 400; }
+    .feature-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+    .feature-meta {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .feature-chip {
+      background: var(--accent-tint);
+      color: var(--accent);
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .feature-link {
+      margin-top: 1rem;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      align-self: flex-start;
+    }
+    .feature-link:hover { text-decoration: underline; }
+
+    /* CSS phone for feature visual */
+    .phone {
+      width: 240px;
+      aspect-ratio: 9 / 19.5;
+      background: #0f1a2b;
+      border-radius: 38px;
+      padding: 10px;
+      box-shadow: 0 30px 60px rgba(16, 24, 39, 0.18), 0 8px 20px rgba(16, 24, 39, 0.08);
+      position: relative;
+    }
+    .phone::before {
+      content: "";
+      position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+      width: 84px; height: 20px; background: #0a1220; border-radius: 12px; z-index: 2;
+    }
+    .phone-screen {
+      width: 100%; height: 100%;
+      background: var(--paper);
+      border-radius: 30px;
       overflow: hidden;
       position: relative;
-      animation: appear 700ms ease-out;
+      display: flex; flex-direction: column;
+    }
+    .status-bar {
+      height: 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px 0 22px;
+      font-size: 0.7rem; font-weight: 600; color: var(--ink);
+    }
+    .app-body {
+      padding: 0.5rem 1rem 1rem;
+      display: flex; flex-direction: column; gap: 0.6rem; flex: 1;
+    }
+    .app-crumb { font-size: 0.58rem; color: var(--muted-2); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+    .app-title { font-family: "Fraunces", serif; font-size: 1rem; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; }
+    .progress { display: flex; gap: 4px; margin: 0.2rem 0 0.4rem; }
+    .progress i { flex: 1; height: 3px; border-radius: 2px; background: var(--line); display: block; }
+    .progress i.on { background: var(--accent); }
+    .field {
+      background: var(--bg-tint);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.5rem 0.65rem;
+      font-size: 0.62rem;
+    }
+    .field b { display: block; font-size: 0.52rem; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.2rem; }
+    .field.focus { border-color: var(--accent); background: var(--accent-tint); }
+    .btn-primary-mini {
+      margin-top: auto;
+      background: var(--accent); color: #fff;
+      border-radius: 10px; text-align: center;
+      padding: 0.65rem; font-size: 0.7rem; font-weight: 600;
     }
 
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .hero::before {
-      width: 380px;
-      height: 380px;
-      right: -120px;
-      top: -160px;
-      background: rgba(66, 212, 199, 0.22);
-    }
-
-    .hero::after {
-      width: 300px;
-      height: 300px;
-      left: -110px;
-      bottom: -170px;
-      background: rgba(84, 135, 255, 0.2);
-    }
-
-    .hero-grid {
-      position: relative;
-      z-index: 1;
+    /* ===== Selected work grid ===== */
+    .work-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.6rem;
-      padding: 2.2rem;
+      margin-top: 2.5rem;
     }
-
-    h1, h2, h3 {
-      margin: 0;
-      font-family: "Clash Display", sans-serif;
-      letter-spacing: 0.2px;
-    }
-
-    h1 {
-      font-size: 1.6rem;
-      line-height: 1.06;
-    }
-
-    .hero-sub {
-      margin-top: 0.65rem;
-      max-width: 750px;
-      font-size: 1.04rem;
-      color: #d2dff6;
-    }
-
-    .meta {
-      margin-top: 1.1rem;
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .pill {
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      background: rgba(255, 255, 255, 0.1);
-      color: #f4f8ff;
-      border-radius: 999px;
-      padding: 0.38rem 0.72rem;
-      font-size: 0.83rem;
-      font-weight: 600;
-    }
-
-    .hero-card {
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      background: rgba(255, 255, 255, 0.09);
-      border-radius: 14px;
-      padding: 1rem;
-    }
-
-    .hero-card p {
-      margin: 0;
-      color: #ecf3ff;
-      font-size: 0.92rem;
-    }
-
-    .hero-links {
-      margin-top: 0.8rem;
-      display: flex;
-      gap: 0.7rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      text-decoration: none;
-      font-weight: 700;
-      border-radius: 11px;
-      padding: 0.62rem 0.95rem;
-      font-size: 0.88rem;
-      border: 1px solid transparent;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    .btn-main {
-      background: #ffffff;
-      color: #0f2f57;
-    }
-
-    .btn-ghost {
-      color: #ebf3ff;
-      border-color: rgba(255, 255, 255, 0.35);
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .section {
-      margin-top: 1.1rem;
+    .work-card {
+      background: var(--paper);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: var(--card);
-      padding: 1.2rem;
-      animation: slide-up 700ms ease both;
+      padding: 1.6rem 1.6rem 1.4rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
-
-    .section h2 {
-      font-size: 1.35rem;
-      color: #1a315a;
-      margin-bottom: 0.7rem;
+    .work-card:hover {
+      border-color: var(--accent-soft);
+      transform: translateY(-2px);
     }
-
-    .split {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.8rem;
-      margin-top: 0.8rem;
-    }
-
-    .metric {
-      border: 1px solid #d4dfec;
-      border-radius: 12px;
-      padding: 0.8rem;
-      background: linear-gradient(170deg, #f8fcff 0%, #f4f9f7 100%);
-    }
-
-    .metric strong {
-      display: block;
-      font-family: "Clash Display", sans-serif;
-      color: #073a79;
-      font-size: 1.25rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .metric span {
-      color: #41597f;
-      font-size: 0.86rem;
-    }
-
-    .timeline-item {
-      border-top: 1px dashed #d5e0ef;
-      padding-top: 0.95rem;
-      margin-top: 0.95rem;
-    }
-
-    .timeline-item:first-child {
-      border-top: none;
-      margin-top: 0;
-      padding-top: 0;
-    }
-
-    .role {
-      font-size: 1.05rem;
-      color: #122d53;
-    }
-
-    .meta-line {
-      color: #4f6384;
-      margin: 0.3rem 0 0.5rem;
-      font-size: 0.92rem;
+    .work-card .work-tag {
+      color: var(--muted-2);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       font-weight: 600;
     }
-
-    ul {
-      margin: 0.25rem 0 0 1.15rem;
-      padding: 0;
-    }
-
-    li {
-      margin-bottom: 0.45rem;
-      color: #2f405e;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-
-    .tag {
-      background: #f1f6fd;
-      border: 1px solid #d6e3f7;
-      border-radius: 9px;
-      padding: 0.3rem 0.52rem;
-      font-size: 0.83rem;
-      font-weight: 600;
-      color: #274b7c;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.85rem;
-    }
-
-    .gallery figure,
-    .case-gallery figure {
+    .work-card h3 {
       margin: 0;
-      border: 1px solid #d7e3f1;
-      border-radius: 14px;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+    .work-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+    .work-card .work-status {
+      margin-top: auto;
+      font-size: 0.82rem;
+      color: var(--muted-2);
+      font-weight: 500;
+    }
+    .work-card.available .work-status { color: var(--accent); }
+
+    /* ===== Contact ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .contact-cell strong {
+      display: block; font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted-2);
+      font-weight: 600; margin-bottom: 0.6rem;
+    }
+    .contact-cell a, .contact-cell span {
+      display: block;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .contact-cell a:hover { color: var(--accent); }
+
+    /* ===== Footer ===== */
+    .foot {
+      padding: 2rem 0;
+      color: var(--muted); font-size: 0.82rem;
+      background: var(--bg);
+      border-top: 1px solid var(--line);
+    }
+    .foot-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+    /* ===== Beauty featured phone (LEKAB micro-preview) ===== */
+    .feature-visual .phone {
+      width: 260px;
+      background: linear-gradient(160deg, #101a2f, #050a17);
+      border-radius: 42px;
+      padding: 9px;
+      box-shadow:
+        0 40px 90px rgba(11, 21, 45, 0.28),
+        0 12px 30px rgba(11, 21, 45, 0.14),
+        inset 0 0 0 1.5px rgba(255,255,255,0.05);
+    }
+    .feature-visual .phone::before {
+      width: 84px; height: 22px; background: #030710;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .feature-visual .phone-screen {
+      background: linear-gradient(180deg, #fbfcff, #f4f7fc);
+      border-radius: 33px;
+    }
+    .feature-visual .status-bar {
+      height: 42px;
+      padding: 0 22px 0 18px;
+      font-weight: 700;
+      font-size: 0.72rem;
+      color: #0f1a2b;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .feature-visual .rside { display: inline-flex; align-items: center; gap: 5px; }
+    .feature-visual .app-body {
+      padding: 0.7rem 1rem 0.9rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .feature-visual .mini-logo {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: #0b3a7e;
+      letter-spacing: -0.01em;
+    }
+    .feature-visual .mini-logo::before {
+      content: "";
+      width: 18px; height: 18px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #0b57d0 0%, #2b8ce6 50%, #10cbb1 100%);
+      box-shadow: 0 3px 8px rgba(11, 87, 208, 0.25);
+    }
+    .feature-visual .mini-greet {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: #0f1a2b;
+      margin-top: 0.15rem;
+    }
+    .feature-visual .mini-greet em {
+      font-style: italic;
+      color: #0b57d0;
+      font-weight: 400;
+    }
+    .feature-visual .mini-sub {
+      font-size: 0.6rem;
+      color: #5c6a80;
+      line-height: 1.35;
+    }
+    .feature-visual .mini-progress {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.56rem;
+      color: #5c6a80;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .feature-visual .mini-progress .track {
+      flex: 1;
+      height: 3px;
+      background: #e3e7ef;
+      border-radius: 2px;
+      position: relative;
       overflow: hidden;
+    }
+    .feature-visual .mini-progress .track i {
+      position: absolute;
+      inset: 0 40% 0 0;
+      background: linear-gradient(90deg, #0b57d0, #10cbb1);
+      border-radius: 2px;
+    }
+    .feature-visual .m-in {
+      display: grid;
+      grid-template-columns: 18px 1fr auto;
+      gap: 7px;
+      align-items: center;
+      background: #ffffff;
+      border: 1.2px solid #e0e6f0;
+      border-radius: 10px;
+      padding: 0.45rem 0.55rem;
+    }
+    .feature-visual .m-in.on {
+      border-color: #0b57d0;
+      box-shadow: 0 0 0 3px rgba(11, 87, 208, 0.08);
       background: #fbfdff;
     }
-
-    .gallery img,
-    .case-gallery img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .gallery figcaption,
-    .case-gallery figcaption {
-      padding: 0.65rem 0.75rem;
-      color: #4f6384;
-      font-size: 0.84rem;
-    }
-
-    .project-text {
-      margin-top: 0.95rem;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.8rem;
-    }
-
-    .project-text article {
-      border: 1px solid #d7e3f1;
-      border-radius: 12px;
-      background: #f8fbff;
-      padding: 0.85rem;
-    }
-
-    .project-text h3 {
-      margin-bottom: 0.35rem;
-      font-size: 1rem;
-      color: #18386c;
-    }
-
-    .project-text p {
-      margin: 0;
-      color: #405b85;
-      font-size: 0.9rem;
-      line-height: 1.55;
-    }
-
-    .note-box {
-      margin-top: 0.95rem;
-      border-left: 4px solid #0b57d0;
-      background: #eff5ff;
-      padding: 0.8rem 0.9rem;
-      border-radius: 10px;
-      color: #2d4d7c;
-      font-size: 0.9rem;
-    }
-
-    .note-box a {
-      color: #0b57d0;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .case-study-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-      margin-top: 0.85rem;
-    }
-
-    .case-hero {
-      border: 1px solid #d7e3f1;
-      border-radius: 18px;
-      background: linear-gradient(145deg, #10223d 0%, #143a67 55%, #0f766e 100%);
-      color: #eef5ff;
-      padding: 1.15rem;
-      box-shadow: 0 18px 40px rgba(16, 38, 78, 0.14);
-      margin-top: 0.85rem;
-    }
-
-    .case-hero-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .case-hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      color: #9fe9dc;
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.7px;
+    .feature-visual .m-in .icn { color: #8593a8; display: flex; }
+    .feature-visual .m-in .val { display: flex; flex-direction: column; gap: 1px; overflow: hidden; }
+    .feature-visual .m-in .val b {
+      font-size: 0.5rem;
+      color: #8593a8;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 0.55rem;
-    }
-
-    .case-hero h3 {
-      font-size: clamp(1.55rem, 4vw, 2.35rem);
-      line-height: 1.08;
-      margin-bottom: 0.55rem;
-      color: #ffffff;
-    }
-
-    .case-hero p {
-      margin: 0;
-      color: #d7e8ff;
-      font-size: 0.96rem;
-      line-height: 1.65;
-      max-width: 78ch;
-    }
-
-    .case-hero-side {
-      display: grid;
-      gap: 0.7rem;
-      align-content: start;
-    }
-
-    .case-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .case-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
-      padding: 0.38rem 0.65rem;
-      border-radius: 999px;
-      font-size: 0.84rem;
       font-weight: 700;
     }
-
-    .case-badge strong {
-      font-family: "Clash Display", sans-serif;
-      font-size: 1rem;
-      color: #9fe9dc;
+    .feature-visual .m-in .val span {
+      font-size: 0.7rem;
+      color: #0f1a2b;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-
-    .case-hero-stat {
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      padding: 0.8rem;
+    .feature-visual .m-in .ok {
+      color: #059669; display: flex;
     }
-
-    .case-hero-stat strong {
-      display: block;
-      color: #ffffff;
-      font-family: "Clash Display", sans-serif;
-      font-size: 1.2rem;
-      margin-bottom: 0.15rem;
+    .feature-visual .m-strength {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px;
+      padding: 0 0.55rem;
     }
-
-    .case-hero-stat span {
-      color: #d7e8ff;
-      font-size: 0.86rem;
-      line-height: 1.45;
+    .feature-visual .m-strength i { height: 3px; border-radius: 2px; background: #e3e7ef; }
+    .feature-visual .m-strength i.w { background: #ef4444; }
+    .feature-visual .m-strength i.m { background: #f59e0b; }
+    .feature-visual .m-strength i.g { background: #10cbb1; }
+    .feature-visual .m-lbl {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.55rem; color: #10cbb1; font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 0 0.55rem;
     }
-
-    .case-card {
-      border: 1px solid #d7e3f1;
-      border-radius: 14px;
-      background: linear-gradient(180deg, #fbfdff 0%, #f7fbff 100%);
-      padding: 1rem;
-      box-shadow: 0 10px 28px rgba(16, 38, 78, 0.05);
-    }
-
-    .case-card h3 {
-      font-size: 1.05rem;
-      color: #16386b;
-      margin-bottom: 0.65rem;
-    }
-
-    .case-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      color: #0b57d0;
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      margin-bottom: 0.55rem;
-    }
-
-    .case-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(145deg, #0b57d0, #0a7f7b);
+    .feature-visual .m-lbl span:last-child { color: #8593a8; }
+    .feature-visual .m-cta {
+      background: linear-gradient(135deg, #0b57d0 0%, #1372e0 50%, #10a1d0 100%);
       color: #fff;
-      font-size: 0.92rem;
-      box-shadow: 0 8px 18px rgba(11, 87, 208, 0.18);
-    }
-
-    .case-header {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.25rem;
-      margin-bottom: 0.85rem;
-    }
-
-    .case-summary {
-      color: #486184;
-      font-size: 0.92rem;
-      line-height: 1.6;
-      max-width: 62ch;
-    }
-
-    .case-quickfacts {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.55rem;
-      margin-top: 0.75rem;
-    }
-
-    .case-quickfact {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.6rem;
-      align-items: start;
-      background: #ffffff;
-      border: 1px solid #d8e4f3;
-      border-radius: 12px;
-      padding: 0.72rem 0.8rem;
-    }
-
-    .case-quickfact strong {
-      color: #0b57d0;
-      font-family: "Clash Display", sans-serif;
-      font-size: 1rem;
-      min-width: 3.5rem;
-    }
-
-    .case-quickfact span {
-      color: #324766;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .case-editorial-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.85rem;
-      margin-top: 0.85rem;
-    }
-
-    .case-overview {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.6rem;
-      margin-top: 0.7rem;
-    }
-
-    .case-panel {
-      background: #ffffff;
-      border: 1px solid #d8e4f3;
-      border-radius: 12px;
-      padding: 0.78rem 0.85rem;
-    }
-
-    .case-panel strong {
-      display: block;
-      color: #0b57d0;
-      margin-bottom: 0.3rem;
-      font-size: 0.88rem;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-
-    .case-panel p {
-      margin: 0;
-      color: #334969;
-      font-size: 0.92rem;
-      line-height: 1.55;
-    }
-
-    .case-metrics {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.6rem;
-      margin-top: 0.9rem;
-    }
-
-    .mini-metric {
-      border: 1px solid #d8e4f3;
-      border-radius: 12px;
-      padding: 0.72rem;
-      background: #ffffff;
-    }
-
-    .mini-metric strong {
-      display: block;
-      color: #073a79;
-      font-family: "Clash Display", sans-serif;
-      font-size: 1.05rem;
-      margin-bottom: 0.15rem;
-    }
-
-    .mini-metric span {
-      color: #4a6282;
-      font-size: 0.84rem;
-      line-height: 1.45;
-    }
-
-    .timeline-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.7rem;
-      margin-top: 0.8rem;
-    }
-
-    .timeline-step {
-      border: 1px solid #d8e4f3;
-      background: #f8fbff;
-      border-radius: 12px;
-      padding: 0.78rem;
-    }
-
-    .timeline-step strong {
-      display: block;
-      color: #0b57d0;
-      margin-bottom: 0.3rem;
-      font-size: 0.88rem;
-      letter-spacing: 0.25px;
-      text-transform: uppercase;
-    }
-
-    .timeline-step p {
-      margin: 0;
-      color: #324766;
-      font-size: 0.9rem;
-      line-height: 1.55;
-    }
-
-    .case-gallery {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.85rem;
-      margin-top: 0.85rem;
-    }
-
-    .footer {
-      margin: 1.4rem 0 1.8rem;
+      border-radius: 10px;
+      padding: 0.62rem;
       text-align: center;
-      color: #50617f;
-      font-size: 0.86rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      box-shadow: 0 6px 16px rgba(11, 87, 208, 0.28), inset 0 1px 0 rgba(255,255,255,0.25);
+      position: relative;
+      overflow: hidden;
+      margin-top: 0.15rem;
+    }
+    .feature-visual .m-cta::after {
+      content: "";
+      position: absolute; top: 0; left: -30%;
+      width: 30%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      transform: skewX(-20deg);
+      animation: sheen-mini 3.5s ease-in-out infinite;
+    }
+    @keyframes sheen-mini {
+      0%, 60%, 100% { left: -30%; }
+      80% { left: 130%; }
+    }
+    .feature-visual .socials-mini {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
+    }
+    .feature-visual .soc-mini {
+      background: #ffffff;
+      border: 1.2px solid #e0e6f0;
+      border-radius: 9px;
+      padding: 0.4rem 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature-visual .m-divider {
+      display: flex; align-items: center; gap: 7px;
+      color: #b0bacb;
+      font-size: 0.52rem;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 0.1rem 0;
+    }
+    .feature-visual .m-divider::before,
+    .feature-visual .m-divider::after {
+      content: ""; flex: 1; height: 1px; background: #e3e7ef;
+    }
+    .feature-visual .m-trust {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: #ecfdf5;
+      color: #059669;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 0.52rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      width: fit-content;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .feature-visual .m-cta::after { animation: none; display: none; }
     }
 
-    @keyframes appear {
-      from { transform: translateY(12px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    /* Warmer stage gradient behind the featured phone */
+    .feature-visual {
+      background:
+        radial-gradient(circle at 25% 20%, rgba(11, 87, 208, 0.14), transparent 45%),
+        radial-gradient(circle at 75% 80%, rgba(16, 203, 177, 0.14), transparent 45%),
+        linear-gradient(160deg, #e2ecfb 0%, #d0e2f5 100%);
     }
 
-    @keyframes slide-up {
-      from { transform: translateY(10px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    /* ===== Responsive ===== */
+    @media (min-width: 720px) {
+      .nav-side { display: flex; }
+      .meta-strip { grid-template-columns: repeat(3, 1fr); }
+      .impact-grid { grid-template-columns: repeat(4, 1fr); }
+      .work-grid { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+      .contact-grid { grid-template-columns: repeat(3, 1fr); }
     }
-
-    @media (min-width: 860px) {
-      .hero-grid { grid-template-columns: 1.2fr 0.8fr; }
-      .split { grid-template-columns: 1.2fr 0.8fr; }
-      .gallery { grid-template-columns: 1fr 1fr; }
-      .project-text { grid-template-columns: 1fr 1fr; }
-      .case-study-grid { grid-template-columns: 1fr 1fr; }
-      .case-hero-grid { grid-template-columns: 1.3fr 0.7fr; align-items: start; }
-      .case-quickfacts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .case-header { grid-template-columns: 1fr auto; align-items: start; }
-      .case-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-      .case-editorial-grid { grid-template-columns: 1.05fr 0.95fr; }
-      .case-gallery { grid-template-columns: 1fr 1fr; }
+    @media (min-width: 960px) {
+      .meta-strip { grid-template-columns: repeat(6, 1fr); }
+      .about-grid { grid-template-columns: 1.4fr 1fr; gap: 4rem; }
+      .exp-item { grid-template-columns: 260px 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+      .feature-card { grid-template-columns: 1fr 1fr; }
+      .feature-visual { min-height: 420px; }
+      .feature-copy { padding: 3rem; justify-content: center; }
     }
-
-    @media (max-width: 640px) {
-      .stats { grid-template-columns: 1fr; }
-      .topbar-inner { padding: 0.4rem 0; }
-      .nav { gap: 0.7rem; }
-      .hero-grid { padding: 1.35rem; }
-      .section { padding: 1rem; }
+    @media (max-width: 720px) {
+      .feature-visual { padding: 2.5rem 1.5rem 2rem; min-height: unset; }
+      .feature-copy { padding: 2rem 1.5rem; }
+      .feature-visual .phone { width: 220px; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .impact-tile { padding: 1.4rem 1.2rem; }
+      .impact-tile b { font-size: 2rem; }
+      .contact-grid { gap: 1.5rem; }
+      .hero { padding: 4rem 0 3rem; }
+      .hero-actions { gap: 0.6rem; }
+      .btn { padding: 0.75rem 1.15rem; font-size: 0.9rem; }
+      .meta-strip { gap: 1rem 1.6rem; padding: 1.2rem 0 0; }
+      .compliance-panel { gap: 1rem; }
+      .comp-tile { padding: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 3rem 0 2rem; }
+      section.block { padding: 3.5rem 0; }
+      .exp-item { padding: 1.6rem 0; gap: 0.7rem; }
+      .top-cta { padding: 0.45rem 0.8rem; font-size: 0.76rem; }
+      .brand { font-size: 0.95rem; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .work-grid { gap: 1.2rem; }
+      .work-card { padding: 1.3rem; }
+      .feature-visual { padding: 2rem 1rem 1.6rem; }
+      .feature-copy { padding: 1.6rem 1.3rem; }
+      .feature-visual .phone { width: 200px; padding: 8px; border-radius: 34px; }
+      .feature-visual .phone-screen { border-radius: 27px; }
+      .feature-visual .app-body { padding: 0.55rem 0.75rem 0.75rem; gap: 0.4rem; }
+      .feature-visual .mini-greet { font-size: 0.92rem; }
+      .feature-visual .mini-sub { font-size: 0.55rem; }
+      .feature-visual .socials-mini { gap: 4px; }
+      h1.display { font-size: 2.2rem; }
     }
   </style>
 </head>
 <body>
+
   <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand">AHSAN JAVAID</div>
-      <nav class="nav">
-        <a href="#summary">Summary</a>
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top">Ahsan Javaid <span>· Product Designer</span></a>
+      <nav class="nav-side">
+        <a href="#about">About</a>
         <a href="#impact">Impact</a>
         <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Snapshots</a>
-        <a href="#case-study">Case Study</a>
+        <a href="#work">Work</a>
+        <a href="#compliance">Compliance</a>
+        <a href="#contact">Contact</a>
       </nav>
+      <a class="top-cta" href="mailto:ahsang2003@yahoo.com">Get in touch</a>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero" id="hero">
-      <div class="hero-grid">
-        <div>
-          <h1>Senior Product Designer | Transforming Complex B2B/B2C SaaS & AI Workflows into High-Adoption Platforms</h1>
-          <p class="hero-sub">Senior UX/UI and Product Designer with 8 years of experience in enterprise SaaS, B2B/B2C platforms, and data-heavy workflows. I transform backend complexity into intuitive products that improve adoption, speed delivery, and reduce support load.</p>
-          <div class="meta">
-            <span class="pill">Malmo, Sweden</span>
-            <span class="pill">EU Citizen (Danish)</span>
-            <span class="pill">SE / DK / Hybrid / Remote</span>
-            <span class="pill">MSc Information Technology, Aalborg University</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <p><strong>Contact</strong></p>
-          <p>Email: ahsang2003@yahoo.com</p>
-          <p>Phone (SE): +46 73 553 7366</p>
-          <p>Phone (DK): +45 22 25 80 16</p>
-          <p>LinkedIn: linkedin.com/in/ahsanjavaidch</p>
-          <div class="hero-links">
-            <a class="btn btn-main" href="mailto:ahsang2003@yahoo.com">Email Me</a>
-            <a class="btn btn-ghost" href="https://www.linkedin.com/in/ahsanjavaidch" target="_blank" rel="noreferrer">LinkedIn</a>
-          </div>
-        </div>
-      </div>
-    </section>
+  <main id="main">
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="kicker reveal">Malmö, Sweden · <span class="pulse-dot" aria-hidden="true"></span>Open to senior roles</div>
+        <h1 class="display reveal d1">
+        Turning <em>complex enterprise</em> systems into products people actually finish using.
+      </h1>
+      <p class="deck reveal d2">
+        Senior Product Designer with 8+ years across fintech, enterprise SaaS, AI workflows, and B2B
+        platforms. I take data-heavy, high-stakes tools and make them feel calm, structured, and worth
+        adopting — through research, systems thinking, and tokenized design that ships without drift.
+      </p>
 
-    <section class="section" id="summary">
-      <h2>Professional Summary</h2>
-      <div class="split">
-        <div>
-          <p>As a systems-level designer, I bridge product vision and technical delivery through DesignOps, component architecture, and code-aligned design tokens. My focus is to reduce ambiguity for engineers and create reliable, scalable experiences for users.</p>
-          <p>I work across discovery, interaction design, accessibility, prototyping, and production QA, with a strong record of aligning technical constraints to measurable business outcomes.</p>
+      <div class="hero-actions reveal d3">
+        <a class="btn btn-primary" href="#work">See all case studies →</a>
+        <a class="btn btn-ghost" href="#contact">Contact</a>
+      </div>
+
+      <div class="reveal d4" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: -2rem 0 3rem;" aria-label="Quick links to each case study">
+        <a href="case-study-lekab.html" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.85rem; background: var(--accent-tint); color: var(--accent); border-radius: 999px; font-size: 0.82rem; font-weight: 600; text-decoration: none; border: 1px solid var(--accent-soft);">01 · LEKAB signup</a>
+        <a href="case-study-messaging.html" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.85rem; background: var(--accent-tint); color: var(--accent); border-radius: 999px; font-size: 0.82rem; font-weight: 600; text-decoration: none; border: 1px solid var(--accent-soft);">02 · Messaging platform</a>
+        <a href="case-study-onboarding.html" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.85rem; background: var(--accent-tint); color: var(--accent); border-radius: 999px; font-size: 0.82rem; font-weight: 600; text-decoration: none; border: 1px solid var(--accent-soft);">03 · Onboarding CRO</a>
+        <a href="case-study-support.html" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.85rem; background: var(--accent-tint); color: var(--accent); border-radius: 999px; font-size: 0.82rem; font-weight: 600; text-decoration: none; border: 1px solid var(--accent-soft);">04 · Support platform</a>
+      </div>
+
+      <div class="meta-strip">
+        <div class="meta-cell"><strong>Location</strong><span>Malmö, SE</span></div>
+        <div class="meta-cell"><strong>Citizenship</strong><span>EU · Danish</span></div>
+        <div class="meta-cell"><strong>Mobility</strong><span>SE / DK / Hybrid</span></div>
+        <div class="meta-cell"><strong>Experience</strong><span>8+ years</span></div>
+        <div class="meta-cell"><strong>Focus</strong><span>Enterprise SaaS</span></div>
+        <div class="meta-cell"><strong>Education</strong><span>MSc, Aalborg</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="section-label">About</div>
+      <h2 class="head">A systems-level designer who bridges vision and delivery.</h2>
+
+      <div class="about-grid">
+        <div class="about-body">
+          <p>
+            I specialize in stepping into high-ambiguity technical environments — complex backend logic,
+            intimidating data streams, layered compliance — and turning them into intuitive, high-adoption
+            interfaces. That means product strategy, user research, interaction design, and DesignOps
+            that actually reaches production.
+          </p>
+          <p>
+            I work in Figma with advanced variables, code-aligned design tokens, and structural specs
+            that guide engineering squads without room for interpretation. My track record: faster
+            time-to-market, lower support overhead, fewer visual bugs, and interfaces that stakeholders
+            can defend to their leadership.
+          </p>
+          <p>
+            Most recently at LEKAB (Stockholm) I led end-to-end design for their self-service portal and
+            built a business messaging platform from scratch — improving usability by 35% and cutting
+            support calls by 30% along the way.
+          </p>
         </div>
         <div>
-          <div class="tags">
+          <div class="about-tags">
             <span class="tag">Enterprise SaaS</span>
-            <span class="tag">B2B/B2C UX</span>
+            <span class="tag">B2B / B2C</span>
             <span class="tag">Design Systems</span>
             <span class="tag">Design Tokens</span>
             <span class="tag">UX Research</span>
-            <span class="tag">Prototyping</span>
+            <span class="tag">Interaction Design</span>
             <span class="tag">WCAG / ARIA</span>
-            <span class="tag">Agile Delivery</span>
+            <span class="tag">Figma Variables</span>
+            <span class="tag">Prototyping</span>
+            <span class="tag">Agile / Jira</span>
+            <span class="tag">DesignOps</span>
+            <span class="tag">Usability Testing</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="impact">
-      <h2>Core Value and Measurable Impact</h2>
-      <div class="stats">
-        <div class="metric"><strong>35%</strong><span>Usability improvement in complex legacy platform redesigns</span></div>
-        <div class="metric"><strong>40%</strong><span>Faster feature time-to-market via scalable Figma component libraries</span></div>
-        <div class="metric"><strong>50%</strong><span>Reduction in post-implementation visual bugs through token alignment</span></div>
-        <div class="metric"><strong>22%</strong><span>Conversion lift through UX friction analysis and iterative optimization</span></div>
+  <!-- ============ IMPACT ============ -->
+  <section class="block alt" id="impact">
+    <div class="wrap">
+      <div class="section-label reveal">Measurable impact</div>
+      <h2 class="head reveal">Design work that shows up in the business metrics.</h2>
+      <p class="lede reveal">
+        Selected KPIs from LEKAB and independent client engagements. Every number is tied to a specific
+        redesign, system rollout, or measurement window.
+      </p>
+
+      <div class="impact-grid">
+        <div class="impact-tile reveal d1 hover-lift">
+          <b>+<span class="count-up" data-count="35">0</span>%</b>
+          <p>Usability improvement in legacy platform redesigns.</p>
+        </div>
+        <div class="impact-tile reveal d2 hover-lift">
+          <b>+<span class="count-up" data-count="40">0</span>%</b>
+          <p>Faster feature time-to-market via scalable component libraries.</p>
+        </div>
+        <div class="impact-tile reveal d3 hover-lift">
+          <b>−<span class="count-up" data-count="50">0</span>%</b>
+          <p>Fewer post-implementation visual bugs after token alignment.</p>
+        </div>
+        <div class="impact-tile reveal d4 hover-lift">
+          <b>+<span class="count-up" data-count="22">0</span>%</b>
+          <p>Conversion lift from friction analysis and iterative optimization.</p>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="experience">
-      <h2>Selected Experience</h2>
+  <!-- ============ FEATURED CASE STUDY ============ -->
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="section-label">Featured case study</div>
+      <h2 class="head">Four case studies, four visual languages.</h2>
+      <p class="lede">
+        Each study is presented in a different design language — Nordic editorial, bento dashboard,
+        research journal, and FigJam blueprint — to demonstrate range while keeping the same rigor.
+        Start with the featured one below.
+      </p>
 
-      <article class="timeline-item">
-        <h3 class="role">UX/UI Design and Quality Engineer</h3>
-        <div class="meta-line">LEKAB Communication System AB | Stockholm, Sweden | 2022 - 2025</div>
-        <ul>
-          <li>Architected a unified self-service experience that moved manual IT-gated tasks into intuitive customer workflows, reducing support overhead by 30%.</li>
-          <li>Scaled a cross-platform design system as engineering's single source of truth, increasing front-end delivery velocity by 20%.</li>
-          <li>Built manual testing frameworks and edge-case documentation under strict privacy constraints, reducing regression testing effort by 33%.</li>
-          <li>Led QA and usability checks in staging and sandbox builds, aligning design intent with implementation quality before release.</li>
-        </ul>
-      </article>
+      <div class="feature-card">
+        <div class="feature-visual">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="status-bar">
+                <span>9:41</span>
+                <span class="rside">
+                  <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 6a10 10 0 0112 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><path d="M3 7.5a7 7 0 018 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9" r="1" fill="#0f1a2b"/></svg>
+                  <svg width="16" height="10" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="18" height="10" rx="2.5" stroke="#0f1a2b" stroke-width="1.2"/><rect x="2.5" y="2.5" width="15" height="7" rx="1" fill="#0f1a2b"/><rect x="20" y="4" width="1.5" height="4" rx="0.5" fill="#0f1a2b"/></svg>
+                </span>
+              </div>
+              <div class="app-body">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div class="mini-logo">LEKAB</div>
+                  <span class="m-trust"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z" stroke="currentColor" stroke-width="2.4"/></svg> SECURE</span>
+                </div>
+                <div>
+                  <div class="mini-greet">Create <em>your</em> account.</div>
+                  <div class="mini-sub">Takes less than a minute · no admin needed.</div>
+                </div>
+                <div class="mini-progress"><span>Step 1 of 2</span><div class="track"><i></i></div></div>
 
-      <article class="timeline-item">
-        <h3 class="role">UX/UI Designer and Graphic Artist</h3>
-        <div class="meta-line">Nordic and Asia | Independent Contractor Marketplace | 2022 - 2025</div>
-        <ul>
-          <li>Delivered end-to-end UX/UI solutions for web and mobile products, combining research, branding, and interaction design.</li>
-          <li>Improved onboarding and personalization through user interviews, testing, and analytics-driven iteration.</li>
-          <li>Created responsive, accessible interfaces and scalable component systems aligned to iOS and Material patterns.</li>
-        </ul>
-      </article>
+                <div class="m-in">
+                  <span class="icn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <div class="val"><b>Work email</b><span>ahsan@lekab.se</span></div>
+                  <span class="ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <div class="m-in on">
+                  <span class="icn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="4" y="11" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                  <div class="val"><b>Password</b><span>••••••••••</span></div>
+                </div>
+                <div class="m-strength"><i class="w"></i><i class="m"></i><i class="g"></i><i class="g"></i></div>
+                <div class="m-lbl"><span>Strong password</span><span>14 chars</span></div>
 
-      <article class="timeline-item">
-        <h3 class="role">Design Assistant</h3>
-        <div class="meta-line">LOLO | Copenhagen, Denmark | 2016 - 2018</div>
-        <ul>
-          <li>Maintained centralized design documentation and supported stakeholder coordination across schedules and deliverables.</li>
-          <li>Aligned design processes with timeline and compliance requirements to improve delivery consistency.</li>
-        </ul>
-      </article>
+                <div class="m-cta">Continue →</div>
 
-      <article class="timeline-item">
-        <h3 class="role">Graphic and Web Designer</h3>
-        <div class="meta-line">MS Tech | Copenhagen, Denmark | 2015 - 2017</div>
-        <ul>
-          <li>Designed digital assets, prototypes, and branding visuals tailored to client business objectives.</li>
-        </ul>
-      </article>
-    </section>
+                <div class="m-divider">or continue with</div>
 
-    <section class="section split" id="skills">
+                <div class="socials-mini">
+                  <div class="soc-mini"><svg width="15" height="15" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 015.5 12c0-.73.13-1.44.34-2.1V7.06H2.18A11 11 0 001 12c0 1.77.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg></div>
+                  <div class="soc-mini"><svg width="14" height="15" viewBox="0 0 24 24" fill="#0f1a2b"><path d="M17.05 12.06a4.32 4.32 0 012.06-3.62 4.42 4.42 0 00-3.48-1.88c-1.46-.15-2.87.87-3.62.87-.77 0-1.9-.85-3.13-.83a4.65 4.65 0 00-3.9 2.4c-1.68 2.9-.43 7.19 1.19 9.54.81 1.15 1.76 2.44 3 2.4 1.21-.05 1.67-.78 3.13-.78 1.46 0 1.88.78 3.14.75 1.3-.02 2.12-1.16 2.92-2.32a10.24 10.24 0 001.32-2.72 4.19 4.19 0 01-2.55-3.81M14.4 4.9a4.24 4.24 0 001-3.06 4.4 4.4 0 00-2.83 1.47 4 4 0 00-1 2.94 3.65 3.65 0 002.83-1.35"/></svg></div>
+                  <div class="soc-mini"><svg width="14" height="14" viewBox="0 0 24 24"><rect fill="#f25022" x="1" y="1" width="10" height="10"/><rect fill="#7fba00" x="13" y="1" width="10" height="10"/><rect fill="#00a4ef" x="1" y="13" width="10" height="10"/><rect fill="#ffb900" x="13" y="13" width="10" height="10"/></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-copy">
+          <div class="feature-meta">
+            <span class="feature-chip">Enterprise SaaS</span>
+            <span class="feature-chip">Signup UX</span>
+            <span class="feature-chip">Design System</span>
+          </div>
+          <h3>LEKAB — turning a security-heavy signup into a <em>guided</em>, progressive flow.</h3>
+          <p>
+            Enterprise users were being asked for personal data, work data, role, department, and country
+            context in a single upfront form. Many abandoned. Others falsified fields to get through.
+            The redesign split it into two phases — commitment before completeness — and moved the numbers
+            on usability, support load, and data accuracy.
+          </p>
+          <a class="feature-link" href="case-study-lekab.html">Read the full case study →</a>
+        </div>
+      </div>
+
+      <div class="work-grid">
+        <a class="work-card available reveal d1 hover-lift" href="case-study-lekab.html">
+          <span class="work-tag">Case study · 01 · Nordic clean</span>
+          <h3>LEKAB Self-Service Portal</h3>
+          <p>Progressive signup, tokenized design system, and admin-loop removal for a Nordic communications platform. Persona-driven qualitative research.</p>
+          <span class="work-status">Read case study →</span>
+        </a>
+        <a class="work-card available reveal d2 hover-lift" href="case-study-messaging.html">
+          <span class="work-tag">Case study · 02 · Bento dashboard</span>
+          <h3>Business Messaging Platform</h3>
+          <p>Built from scratch at LEKAB — SMS and RCS campaign builder for enterprise operators. Jobs-to-be-Done + card-sort IA replaced feature-list design.</p>
+          <span class="work-status">Read case study →</span>
+        </a>
+        <a class="work-card available reveal d3 hover-lift" href="case-study-onboarding.html">
+          <span class="work-tag">Case study · 03 · Editorial journal</span>
+          <h3>Onboarding CRO — Nordic client</h3>
+          <p>Written as a research paper. Funnel analysis, Hotjar heatmaps, and A/B testing. Every change was a written hypothesis — two failed, four shipped, +22% CVR.</p>
+          <span class="work-status">Read case study →</span>
+        </a>
+        <a class="work-card available reveal d4 hover-lift" href="case-study-support.html">
+          <span class="work-tag">Case study · 04 · FigJam blueprint</span>
+          <h3>Cross-Team Support Platform</h3>
+          <p>Presented as a working board. Stakeholder ecosystem, service blueprint, role personas, and co-design workshops for an internal LEKAB tool.</p>
+          <span class="work-status">Read case study →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section class="block alt" id="experience">
+    <div class="wrap">
+      <div class="section-label">Selected experience</div>
+      <h2 class="head">Eight years across Nordic enterprise and global consulting.</h2>
+
       <div>
-        <h2>Skills and Methods</h2>
-        <ul>
-          <li><strong>Product Strategy and Leadership:</strong> user-centered design, information architecture, roadmap and sprint collaboration.</li>
-          <li><strong>Research and Validation:</strong> interviews, usability testing, heatmaps/session recordings, and iterative prototyping.</li>
-          <li><strong>DesignOps and Handoff:</strong> Figma variables, design tokens, component libraries, and implementation QA.</li>
-          <li><strong>Tooling:</strong> Figma, Adobe XD, Illustrator, Photoshop, Jira, Miro, SharePoint, Teams, Google Meet.</li>
-        </ul>
-      </div>
-      <div>
-        <h2>Education and Languages</h2>
-        <ul>
-          <li>MCS Information Technology, Aalborg University (2015 - 2017)</li>
-          <li>IT-com, ICT Certification, Aalborg University (2014 - 2015)</li>
-          <li>Bachelor's Top-Up, Digital Concept Development, Business Academy Copenhagen (2010 - 2012)</li>
-          <li>Multimedia Design and Communication, Lyngby Business Academy (2005 - 2007)</li>
-          <li>Languages: English (Fluent), Danish (Good understanding), Swedish (Actively advancing)</li>
-        </ul>
-      </div>
-    </section>
 
-    <section class="section" id="case-study">
-      <h2>Case Study: LEKAB Communication Systems AB</h2>
-      <p>This section follows the same flow shown in the PDF and turns it into a cleaner portfolio story.</p>
+        <article class="exp-item">
+          <div class="exp-side">
+            <strong>2022 — 2025</strong>
+            <span>LEKAB Communication AB</span>
+            <em>Stockholm, Sweden</em>
+          </div>
+          <div class="exp-body">
+            <h3>UX/UI Design and Quality Engineer</h3>
+            <p class="exp-role">Enterprise self-service portal, business messaging platform, design system</p>
+            <ul>
+              <li>Architected a unified self-service experience that moved manual IT-gated tasks into intuitive customer workflows, reducing support overhead by 30%.</li>
+              <li>Scaled a cross-platform design system as engineering's single source of truth, increasing front-end delivery velocity by 20%.</li>
+              <li>Built manual testing frameworks and edge-case documentation under strict privacy constraints, cutting regression testing effort by 33%.</li>
+              <li>Led usability review and staging QA on daily builds, aligning design intent with implementation quality before release.</li>
+            </ul>
+          </div>
+        </article>
 
-      <div class="case-hero">
-        <div class="case-hero-grid">
+        <article class="exp-item">
+          <div class="exp-side">
+            <strong>2018 — 2022</strong>
+            <span>UX/UI &amp; Design Consultant</span>
+            <em>Nordic &amp; global · Hybrid</em>
+          </div>
+          <div class="exp-body">
+            <h3>Independent Product Design Consultant</h3>
+            <p class="exp-role">Web and mobile SaaS · Nordic and Asian markets</p>
+            <ul>
+              <li>Delivered end-to-end UX/UI for web and mobile SaaS products, combining research, branding, and interaction design across distributed teams.</li>
+              <li>Overhauled onboarding experiences using user research and funnel analysis to reduce registration drop-off and improve long-term retention.</li>
+              <li>Established scalable, code-aligned Figma design systems with clear dev-ready handoff, integrating AI-assisted workflows to accelerate sprint velocity.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="exp-item">
+          <div class="exp-side">
+            <strong>2016 — 2018</strong>
+            <span>LOLO</span>
+            <em>Copenhagen, Denmark</em>
+          </div>
+          <div class="exp-body">
+            <h3>Design Assistant</h3>
+            <p class="exp-role">Visual design and brand execution across marketing and digital layouts</p>
+            <ul>
+              <li>Maintained centralized design documentation and stakeholder coordination across schedules and deliverables.</li>
+              <li>Aligned processes with timeline and compliance requirements to improve delivery consistency.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="exp-item">
+          <div class="exp-side">
+            <strong>2015 — 2017</strong>
+            <span>MS Tech</span>
+            <em>Copenhagen, Denmark</em>
+          </div>
+          <div class="exp-body">
+            <h3>Graphic and Web Designer</h3>
+            <p class="exp-role">Responsive websites, digital assets, and client brand systems</p>
+            <ul>
+              <li>Designed digital assets, prototypes, and branding visuals tailored to client business objectives.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="section-label">Skills &amp; methods</div>
+      <h2 class="head">The toolkit behind the outcomes.</h2>
+
+      <div class="skills-grid">
+        <div class="skill-col">
+          <strong>Design &amp; systems</strong>
+          <ul>
+            <li><b>Figma</b> — Advanced Variables, Dev Mode, tokens</li>
+            <li><b>Design systems</b> — components, patterns, docs</li>
+            <li><b>Prototyping</b> — clickable, micro-interactions</li>
+            <li><b>Information architecture</b></li>
+            <li><b>Interaction design</b></li>
+            <li><b>Accessibility</b> — WCAG · ARIA</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <strong>Research &amp; validation</strong>
+          <ul>
+            <li><b>User interviews</b> &amp; contextual inquiry</li>
+            <li><b>Usability testing</b> — moderated / unmoderated</li>
+            <li><b>Heatmaps &amp; session recordings</b></li>
+            <li><b>Product analytics</b> — funnels, CRO</li>
+            <li><b>Competitive analysis</b></li>
+            <li><b>Journey &amp; workflow mapping</b></li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <strong>Delivery &amp; leadership</strong>
+          <ul>
+            <li><b>Agile / Scrum</b> — squad embedded</li>
+            <li><b>Jira</b> — backlog triage, defect UX</li>
+            <li><b>Developer handoff</b> — specs &amp; tokens</li>
+            <li><b>Design QA</b> — sandbox &amp; staging</li>
+            <li><b>Stakeholder workshops</b></li>
+            <li><b>DesignOps</b> — process &amp; tooling</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPLIANCE ============ -->
+  <section class="block alt" id="compliance" style="color: var(--ink);">
+    <div class="wrap">
+      <div class="section-label reveal">Compliance by design</div>
+      <h2 class="head reveal">Accessibility, GDPR, and consent — decisions I make in Figma, not in review.</h2>
+      <p class="lede reveal">
+        Compliance rarely gets a portfolio section. It should. Every product I ship goes through the same
+        three checks — <em>can everyone use it</em>, <em>have we asked for the minimum data</em>, and
+        <em>would the customer be surprised by what happens next</em>. These aren't legal boxes; they're
+        design decisions.
+      </p>
+
+      <div class="compliance-panel">
+
+        <div class="comp-tile reveal d1" style="background: #ffffff; border-color: #e3e7ef; color: #2f7a5a;">
+          <div class="comp-tile-head">
+            <span class="comp-badge wcag">WCAG 2.2 AA</span>
+            <strong style="font-family: 'Fraunces', serif; font-size: 1.05rem; color: #101827; font-weight: 500;">Accessibility</strong>
+          </div>
+          <p style="margin: 0; color: #2b3648; font-size: 0.92rem; line-height: 1.6;">
+            Contrast tested at design time. All flows work keyboard-only. Focus indicators visible on
+            every interactive element. <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.85em;">aria-*</code> labels
+            reviewed with screen readers. This portfolio ships with skip links, focus rings, and honors
+            <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.85em;">prefers-reduced-motion</code>.
+          </p>
+        </div>
+
+        <div class="comp-tile reveal d2" style="background: #ffffff; border-color: #e3e7ef; color: #2b5aa8;">
+          <div class="comp-tile-head">
+            <span class="comp-badge gdpr">GDPR by design</span>
+            <strong style="font-family: 'Fraunces', serif; font-size: 1.05rem; color: #101827; font-weight: 500;">Data minimization</strong>
+          </div>
+          <p style="margin: 0; color: #2b3648; font-size: 0.92rem; line-height: 1.6;">
+            Ask for the minimum. Explain each field. Move enrichment to a moment of trust. Progressive
+            disclosure isn't just a UX pattern — it's Article 5(1)(c) in visual form. LEKAB's signup
+            removed 60% of the upfront data ask without losing a byte of downstream value.
+          </p>
+        </div>
+
+        <div class="comp-tile reveal d3" style="background: #ffffff; border-color: #e3e7ef; color: #8b3a3a;">
+          <div class="comp-tile-head">
+            <span class="comp-badge dpa">Consent</span>
+            <strong style="font-family: 'Fraunces', serif; font-size: 1.05rem; color: #101827; font-weight: 500;">Meaningful consent</strong>
+          </div>
+          <p style="margin: 0; color: #2b3648; font-size: 0.92rem; line-height: 1.6;">
+            No dark patterns. No pre-checked boxes. STOP replies honored globally, not per campaign.
+            Analytics on the CRO project ran without PII in Hotjar and with cohort-only reporting so
+            individuals were never re-identifiable — even for the design team.
+          </p>
+        </div>
+
+        <div class="comp-tile reveal d4" style="background: #ffffff; border-color: #e3e7ef; color: #b47a2a;">
+          <div class="comp-tile-head">
+            <span class="comp-badge a11y">Trust surface</span>
+            <strong style="font-family: 'Fraunces', serif; font-size: 1.05rem; color: #101827; font-weight: 500;">Predictable behavior</strong>
+          </div>
+          <p style="margin: 0; color: #2b3648; font-size: 0.92rem; line-height: 1.6;">
+            Recording notice at the top of every call. Chat history off by default. Copy/share blocked
+            when meeting mode requires it. On internal tools, role-based visibility so agents never see
+            data they don't need. Compliance shows up as calm UI, not modal walls.
+          </p>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 3rem; padding: 1.6rem; background: #ffffff; border: 1px solid #e3e7ef; border-radius: 14px;" class="reveal">
+        <div style="display: grid; grid-template-columns: 1fr; gap: 1.2rem;">
           <div>
-            <div class="case-hero-kicker"><span class="case-icon">✦</span> Featured Case Study</div>
-            <h3>Designing for secure, high-stakes communication workflows.</h3>
-            <p>LEKAB is a communication and workflow automation platform used across healthcare, finance, logistics, public sector, retail, and manufacturing. The work centered on reducing friction, increasing trust, and making complex flows feel calm and structured.</p>
+            <strong style="display: block; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8593a8; font-weight: 600; margin-bottom: 0.5rem;">This portfolio</strong>
+            <p style="margin: 0; color: #2b3648; font-size: 0.92rem; line-height: 1.6;">
+              No cookies. No tracking scripts. No third-party analytics. No dark patterns. All fonts self-hostable.
+              Content loads without JavaScript — motion is progressive enhancement only. Total transferred size under 400&nbsp;KB.
+            </p>
           </div>
-          <div class="case-hero-side">
-            <div class="case-badges">
-              <span class="case-badge"><strong>8</strong> years experience</span>
-              <span class="case-badge"><strong>12</strong> step flow</span>
-              <span class="case-badge"><strong>1</strong> platform redesign</span>
-            </div>
-            <div class="case-hero-stat">
-              <strong>LEKAB AB</strong>
-              <span>End-to-end UX ownership across research, architecture, design, validation, and handoff for sandbox and production portals.</span>
-            </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="tag">🍪 No cookies</span>
+            <span class="tag">📊 No trackers</span>
+            <span class="tag">🔐 No 3rd-party scripts</span>
+            <span class="tag">♿ Keyboard-navigable</span>
+            <span class="tag">🎬 Reduced-motion aware</span>
+            <span class="tag">🌗 Prefers-color-scheme ready</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="block alt" id="contact">
+    <div class="wrap">
+      <div class="section-label">Contact</div>
+      <h2 class="head">Let's talk about your product.</h2>
+      <p class="lede">
+        Open to senior and lead product design roles across Sweden, Denmark, and hybrid or remote in the
+        EU. Danish citizen — no visa sponsorship required.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-cell">
+          <strong>Email</strong>
+          <a href="mailto:ahsang2003@yahoo.com">ahsang2003@yahoo.com</a>
+        </div>
+        <div class="contact-cell">
+          <strong>Phone</strong>
+          <a href="tel:+46735537366">+46 73 553 7366 · SE</a>
+          <a href="tel:+4522258016">+45 22 25 80 16 · DK</a>
+        </div>
+        <div class="contact-cell">
+          <strong>Online</strong>
+          <a href="https://www.linkedin.com/in/ahsanjavaidch" target="_blank" rel="noreferrer">linkedin.com/in/ahsanjavaidch</a>
+          <a href="case-study-lekab.html">Case study — LEKAB</a>
         </div>
       </div>
 
-      <div class="case-study-grid">
-        <article class="case-card">
-          <div class="case-header">
-            <div>
-              <div class="case-kicker"><span class="case-icon">01</span> Problem</div>
-              <h3>Users were blocked by manual access and unclear data requirements.</h3>
-            </div>
-          </div>
-          <p class="case-summary">Users had to contact an admin for an ID and access code, and many abandoned the flow when too much information was requested upfront. Missing or incorrect data created risk, support overhead, and poor trust.</p>
-          <div class="case-quickfacts">
-            <div class="case-quickfact"><strong>Who</strong><span>Enterprise users, admins, and support teams.</span></div>
-            <div class="case-quickfact"><strong>Pain</strong><span>Abandonment, missing data, and operational friction.</span></div>
-            <div class="case-quickfact"><strong>Need</strong><span>A clearer, safer, and more progressive onboarding experience.</span></div>
-          </div>
-          <div class="case-metrics">
-            <div class="mini-metric"><strong>Risk</strong><span>Incorrect data affected security and personalization.</span></div>
-            <div class="mini-metric"><strong>Support</strong><span>Admin workload increased because of manual steps.</span></div>
-            <div class="mini-metric"><strong>Trust</strong><span>The upfront flow felt heavy and unclear.</span></div>
-            <div class="mini-metric"><strong>Drop-off</strong><span>Many users abandoned the process early.</span></div>
-          </div>
-        </article>
-
-        <article class="case-card">
-          <div class="case-header">
-            <div>
-              <div class="case-kicker"><span class="case-icon">02</span> Objective</div>
-              <h3>Make signup feel guided, safe, and easy to complete.</h3>
-            </div>
-          </div>
-          <p class="case-summary">The goal was to implement a user-friendly signup flow that reduces abandonment while collecting accurate information gradually. The experience had to explain why details matter without compromising security.</p>
-          <div class="case-quickfacts">
-            <div class="case-quickfact"><strong>Goal</strong><span>Reduce abandonment while improving data quality.</span></div>
-            <div class="case-quickfact"><strong>Tone</strong><span>Clear, reassuring, and high trust.</span></div>
-            <div class="case-quickfact"><strong>Constraint</strong><span>Security and compliance remained non-negotiable.</span></div>
-          </div>
-          <div class="case-metrics">
-            <div class="mini-metric"><strong>Explain</strong><span>Why each field is required.</span></div>
-            <div class="mini-metric"><strong>Progressive</strong><span>Ask for data step by step.</span></div>
-            <div class="mini-metric"><strong>Minimize</strong><span>Admin involvement and confusion.</span></div>
-            <div class="mini-metric"><strong>Increase</strong><span>Accuracy and completeness of records.</span></div>
-          </div>
-        </article>
+      <div style="margin-top: 3rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+        <a class="btn btn-primary" href="mailto:ahsang2003@yahoo.com">Email me →</a>
+        <a class="btn btn-ghost" href="CV-M-AhsanJavaid.pdf" download>Download CV (PDF)</a>
       </div>
-
-      <div class="case-editorial-grid">
-        <article class="case-card">
-          <div class="case-header">
-            <div>
-              <div class="case-kicker"><span class="case-icon">03</span> Approach</div>
-              <h3>Map the workflow, remove friction, and validate early.</h3>
-            </div>
-          </div>
-          <p class="case-summary">User research identified the key friction points, so the flow was redesigned as a phased signup with minimal upfront input. Wireframes and prototypes were developed collaboratively with engineers and product managers with a strong focus on accessibility, responsiveness, and visual consistency.</p>
-          <div class="case-overview">
-            <div class="case-panel">
-              <strong>Discovery and Research</strong>
-              <p>Led user research to identify bottlenecks, risky steps, and places where users lost confidence.</p>
-            </div>
-            <div class="case-panel">
-              <strong>Workflow Architecture</strong>
-              <p>Mapped the end-to-end logic and reorganized information hierarchy to keep each step focused.</p>
-            </div>
-            <div class="case-panel">
-              <strong>Prototype and Test</strong>
-              <p>Built high-fidelity prototypes and validated them with usability checks before handoff.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="case-card">
-          <div class="case-header">
-            <div>
-              <div class="case-kicker"><span class="case-icon">04</span> Solution</div>
-              <h3>A phased signup flow with clearer explanations and less stress.</h3>
-            </div>
-          </div>
-          <p class="case-summary">The solution introduced a phased signup flow to reduce friction, with clear explanations for why specific information is required. Notifications and admin processes were streamlined to improve efficiency, and the flow was validated through usability testing to ensure smooth completion and accurate data collection.</p>
-          <div class="case-overview">
-            <div class="case-panel">
-              <strong>What Changed</strong>
-              <p>Users could provide data at the right moment instead of being overwhelmed at the start.</p>
-            </div>
-            <div class="case-panel">
-              <strong>System Impact</strong>
-              <p>Admin processes were simplified, and the platform felt more mature and dependable.</p>
-            </div>
-            <div class="case-panel">
-              <strong>Design Outcome</strong>
-              <p>The experience became more readable, responsive, and consistent across screens.</p>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <article class="case-card" style="margin-top: 1rem;">
-        <div class="case-header">
-          <div>
-            <div class="case-kicker"><span class="case-icon">05</span> Impact</div>
-            <h3>Measured outcomes and business value.</h3>
-          </div>
-        </div>
-        <div class="case-overview">
-          <div class="case-panel">
-            <strong>Impact Summary</strong>
-            <p>The updated flow reduced signup abandonment, improved the accuracy and completeness of user information, increased user trust and satisfaction, and lowered the administrative workload required for account creation.</p>
-          </div>
-          <div class="case-panel">
-            <strong>Business Value</strong>
-            <p>The redesign reduced friction in a high-stakes environment while strengthening the platform’s credibility and operational efficiency.</p>
-          </div>
-          <div class="case-panel">
-            <strong>Editorial Takeaway</strong>
-            <p>This version mirrors the structure of the PDF, but it reads more cleanly on the web and is easier for a portfolio reviewer to scan.</p>
-          </div>
-        </div>
-      </article>
-
-      <div class="case-editorial-grid">
-        <article class="case-card">
-          <div class="case-header">
-            <div>
-              <div class="case-kicker"><span class="case-icon">06</span> 12-Step Flow</div>
-              <h3>End-to-end design process</h3>
-            </div>
-          </div>
-          <div class="timeline-grid">
-            <div class="timeline-step"><strong>01 Discovery and research</strong><p>User interviews, workflow observations, and bottleneck analysis.</p></div>
-            <div class="timeline-step"><strong>02 Synthesis and insights</strong><p>Patterns, risks, and opportunities grouped into themes.</p></div>
-            <div class="timeline-step"><strong>03 Problem definition</strong><p>Clear problem statements aligned with business goals and constraints.</p></div>
-            <div class="timeline-step"><strong>04 Workflow and structure</strong><p>Redundant steps removed and decision points clarified.</p></div>
-            <div class="timeline-step"><strong>05 Information architecture</strong><p>Content hierarchy simplified and labels clarified.</p></div>
-            <div class="timeline-step"><strong>06 Wireframing</strong><p>Low-fidelity layouts tested screen hierarchy and flow.</p></div>
-            <div class="timeline-step"><strong>07 Interactive prototyping</strong><p>Clickable prototypes explored realistic user journeys.</p></div>
-            <div class="timeline-step"><strong>08 UI design</strong><p>Accessible, responsive interfaces were refined with strong visual consistency.</p></div>
-            <div class="timeline-step"><strong>09 Design system alignment</strong><p>Reusable components and patterns kept the product scalable.</p></div>
-            <div class="timeline-step"><strong>10 Validation and testing</strong><p>Direct user sessions checked trust, clarity, and behavior.</p></div>
-            <div class="timeline-step"><strong>11 Iteration</strong><p>Feedback was applied to reduce friction and visual noise.</p></div>
-            <div class="timeline-step"><strong>12 Handoff and delivery</strong><p>Final designs, prototypes, and implementation notes were prepared for engineers.</p></div>
-          </div>
-        </article>
-
-        <article class="case-card">
-          <div class="case-header">
-            <div>
-              <div class="case-kicker"><span class="case-icon">07</span> Screen Sequence</div>
-              <h3>Signup, login, and reset flows shown as a visual story.</h3>
-            </div>
-          </div>
-          <div class="case-overview">
-            <div class="case-panel">
-              <strong>Login</strong>
-              <p>Start with a clean welcome screen, username and password, remember-me, and forgot-password support.</p>
-            </div>
-            <div class="case-panel">
-              <strong>Create Account</strong>
-              <p>Use a phased account creation flow with email input, additional details, and sign-up confirmation.</p>
-            </div>
-            <div class="case-panel">
-              <strong>Password Reset</strong>
-              <p>Flow through email capture, code verification, password creation, and return to login.</p>
-            </div>
-          </div>
-          <div class="case-gallery">
-            <figure>
-              <img src="case study.jpeg" alt="LEKAB case study screenshot showing the problem, objective, research, and design strategy sections." />
-              <figcaption>Exact screenshot from the case-study flow, preserved as a visual reference.</figcaption>
-            </figure>
-            <figure>
-              <img src="figma-task-snapshot.png" alt="Figma canvas snapshot showing the broader layout reference for the LEKAB design work." />
-              <figcaption>Figma snapshot used as the layout reference for the final web presentation.</figcaption>
-            </figure>
-          </div>
-          <div class="case-metrics">
-            <div class="mini-metric"><strong>Clear</strong><span>Screen states are easy to understand at a glance.</span></div>
-            <div class="mini-metric"><strong>Connected</strong><span>Each step follows naturally into the next.</span></div>
-            <div class="mini-metric"><strong>Trusted</strong><span>The experience feels safer and more predictable.</span></div>
-            <div class="mini-metric"><strong>Beautified</strong><span>The flow is now presented as a polished portfolio story.</span></div>
-          </div>
-        </article>
-      </div>
-
-      <div class="note-box">
-        The page now follows the same flow shown in the PDF and presents the LEKAB work as a cleaner, more portfolio-like story.
-      </div>
-    </section>
-
-    <p class="footer">Built from your CV content in CV-M-long-AhsanJavaid.pdf. Last updated: August 2026.</p>
+    </div>
+  </section>
   </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <span>© Ahsan Javaid · Malmö, Sweden</span>
+      <span>Designed and built by hand · Fraunces &amp; Inter</span>
+    </div>
+  </footer>
+
+  <script src="portfolio.js" defer></script>
+
 </body>
 </html>

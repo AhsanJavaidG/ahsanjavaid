@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEKAB — A calmer signup for high-stakes communication | Ahsan Javaid</title>
+  <meta name="description" content="UX/UI case study: redesigning the LEKAB self-service portal signup for accuracy, trust, and reduced abandonment." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case-study.css" />
+  <link rel="stylesheet" href="enhancements.css" />
+  <style>
+    /* ========================================================================
+       LEKAB case study · Beauty-mockup design system
+       Rich in-phone UI components used only by the "Final UI" section.
+       ======================================================================== */
+
+    /* Enlarge the phone frame for these premium screens */
+    .screens-grid .phone {
+      width: 300px;
+      aspect-ratio: 9 / 19.5;
+      background: linear-gradient(160deg, #101a2f, #050a17);
+      border-radius: 44px;
+      padding: 10px;
+      box-shadow:
+        0 40px 90px rgba(11, 21, 45, 0.28),
+        0 12px 30px rgba(11, 21, 45, 0.14),
+        inset 0 0 0 1.5px rgba(255,255,255,0.05);
+    }
+    .screens-grid .phone::before {
+      content: "";
+      position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 96px; height: 24px; background: #030710; border-radius: 14px;
+      z-index: 2;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .screens-grid .phone-screen {
+      border-radius: 34px;
+      background: linear-gradient(180deg, #fbfcff 0%, #f4f7fc 100%);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .screens-grid .status-bar {
+      height: 46px;
+      padding: 0 26px 0 22px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #0f1a2b;
+    }
+    .screens-grid .status-bar .rside {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.68rem;
+    }
+    .rside svg { display: block; }
+
+    /* Body layout */
+    .mock {
+      padding: 0.8rem 1.2rem 1.2rem;
+      flex: 1;
+      display: flex; flex-direction: column;
+      gap: 0.85rem;
+    }
+    .mock .top-brand {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .mock .logo {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: 0.92rem;
+      letter-spacing: -0.01em;
+      color: #0b3a7e;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .mock .logo::before {
+      content: "";
+      width: 22px; height: 22px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #0b57d0 0%, #2b8ce6 50%, #10cbb1 100%);
+      box-shadow: 0 4px 12px rgba(11, 87, 208, 0.28);
+    }
+    .mock .lang-chip {
+      font-size: 0.6rem;
+      color: #4a5a76;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(11, 87, 208, 0.06);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* Greeting */
+    .mock .greeting {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: #0f1a2b;
+    }
+    .mock .greeting em { font-style: italic; color: #0b57d0; font-weight: 400; }
+    .mock .subtitle {
+      font-size: 0.72rem;
+      color: #5c6a80;
+      line-height: 1.45;
+      margin: -0.3rem 0 0.2rem;
+    }
+
+    /* Step progress */
+    .mock .stepbar {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.58rem;
+      color: #5c6a80;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .stepbar .track { flex: 1; height: 3px; border-radius: 2px; background: #e3e7ef; position: relative; overflow: hidden; }
+    .stepbar .track i { position: absolute; inset: 0; background: linear-gradient(90deg, #0b57d0, #10cbb1); border-radius: 2px; }
+
+    /* Field */
+    .mock .in {
+      background: #ffffff;
+      border: 1.4px solid #e0e6f0;
+      border-radius: 12px;
+      padding: 0.6rem 0.7rem;
+      display: grid;
+      grid-template-columns: 22px 1fr auto;
+      gap: 8px;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+    .mock .in.active {
+      border-color: #0b57d0;
+      box-shadow: 0 0 0 3px rgba(11, 87, 208, 0.10);
+      background: #fbfdff;
+    }
+    .mock .in .icn { color: #8593a8; display: flex; align-items: center; }
+    .mock .in .val { display: flex; flex-direction: column; gap: 1px; overflow: hidden; }
+    .mock .in .val b { font-size: 0.52rem; color: #8593a8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+    .mock .in .val span { font-size: 0.75rem; color: #0f1a2b; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .mock .in .val span.empty { color: #b0bacb; font-weight: 400; }
+    .mock .in .end { color: #5c6a80; font-size: 0.65rem; }
+    .mock .in .end.ok { color: #2f7a5a; }
+
+    /* Password strength meter */
+    .mock .strength {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px;
+      margin-top: 4px;
+    }
+    .strength i { height: 3px; border-radius: 2px; background: #e3e7ef; }
+    .strength i.w { background: #e11d48; }
+    .strength i.m { background: #f59e0b; }
+    .strength i.g { background: #10cbb1; }
+    .mock .strength-label {
+      font-size: 0.58rem;
+      color: #10cbb1;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-top: 3px;
+      display: flex; justify-content: space-between;
+    }
+
+    /* Buttons */
+    .mock .cta {
+      background: linear-gradient(135deg, #0b57d0 0%, #1372e0 50%, #10a1d0 100%);
+      color: #fff;
+      border-radius: 12px;
+      padding: 0.75rem;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      box-shadow:
+        0 8px 20px rgba(11, 87, 208, 0.28),
+        inset 0 1px 0 rgba(255,255,255,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .mock .cta::after {
+      content: "";
+      position: absolute; top: 0; left: -30%;
+      width: 30%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      transform: skewX(-20deg);
+      animation: sheen 3.5s ease-in-out infinite;
+    }
+    @keyframes sheen {
+      0%, 60%, 100% { left: -30%; }
+      80% { left: 130%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .mock .cta::after { animation: none; display: none; }
+    }
+    .mock .ghost {
+      text-align: center;
+      color: #0b57d0;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.4rem 0;
+    }
+    .mock .divider {
+      display: flex; align-items: center; gap: 8px;
+      color: #b0bacb;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 0.2rem 0;
+    }
+    .divider::before, .divider::after {
+      content: ""; flex: 1; height: 1px; background: #e3e7ef;
+    }
+
+    /* Social login row */
+    .socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .soc {
+      background: #ffffff;
+      border: 1.4px solid #e0e6f0;
+      border-radius: 12px;
+      padding: 0.55rem 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .soc svg { display: block; }
+
+    /* Trust chip */
+    .trust {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #ecfdf5;
+      color: #059669;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      width: fit-content;
+    }
+    .trust svg { color: #059669; }
+
+    /* OTP boxes */
+    .otp { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+    .otp .box {
+      aspect-ratio: 1 / 1.2;
+      background: #ffffff;
+      border: 1.4px solid #e0e6f0;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: #0f1a2b;
+    }
+    .otp .box.filled { background: linear-gradient(180deg, #eef3ff, #ffffff); border-color: #cadaf8; }
+    .otp .box.active {
+      border-color: #0b57d0;
+      box-shadow: 0 0 0 3px rgba(11, 87, 208, 0.12);
+      background: #ffffff;
+    }
+    .otp .box.active::after {
+      content: "";
+      width: 1.5px; height: 60%;
+      background: #0b57d0;
+      animation: blink 0.9s step-end infinite;
+      display: block;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Envelope hero (for verify screen) */
+    .envelope-hero {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 0.4rem 0 0.2rem;
+    }
+    .envelope-box {
+      width: 78px; height: 78px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #eef3ff, #dceafe);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 12px 24px rgba(11, 87, 208, 0.14), inset 0 0 0 1px rgba(11, 87, 208, 0.08);
+      position: relative;
+    }
+    .envelope-box::before {
+      content: "";
+      position: absolute; inset: -6px;
+      border-radius: 26px;
+      border: 1px solid rgba(11, 87, 208, 0.2);
+      opacity: 0;
+      animation: env-pulse 2.6s ease-out infinite;
+    }
+    @keyframes env-pulse {
+      0% { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.22); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .envelope-box::before { animation: none; display: none; }
+    }
+
+    /* Countdown resend chip */
+    .countdown {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #eef3ff;
+      color: #0b57d0;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      font-variant-numeric: tabular-nums;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    /* Avatar block (profile) */
+    .avatar-block {
+      display: flex; align-items: center; gap: 12px;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, #eef3ff, #f9fbff);
+      border-radius: 14px;
+      border: 1px solid #dbe6f7;
+    }
+    .avatar-lg {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #0b57d0, #10cbb1);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 6px 14px rgba(11, 87, 208, 0.25);
+    }
+    .avatar-block .name { font-size: 0.78rem; font-weight: 600; color: #0f1a2b; line-height: 1.2; }
+    .avatar-block .email { font-size: 0.62rem; color: #5c6a80; margin-top: 2px; }
+    .avatar-block .badge {
+      margin-left: auto;
+      background: #ecfdf5;
+      color: #059669;
+      font-size: 0.55rem;
+      padding: 3px 7px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    /* Pill selectors */
+    .pill-row { display: flex; flex-wrap: wrap; gap: 5px; }
+    .pill {
+      background: #ffffff;
+      border: 1.4px solid #e3e7ef;
+      color: #52617d;
+      font-size: 0.66rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .pill.on {
+      background: linear-gradient(135deg, #0b57d0, #1372e0);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 10px rgba(11, 87, 208, 0.25);
+    }
+    .pill .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; }
+
+    /* Section label inside mockup */
+    .field-label {
+      font-size: 0.55rem;
+      color: #8593a8;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      margin-bottom: -2px;
+    }
+
+    /* Toggle switch */
+    .toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.5rem 0.55rem;
+      background: #ffffff;
+      border: 1.4px solid #e3e7ef;
+      border-radius: 10px;
+    }
+    .toggle-row .lbl { font-size: 0.68rem; color: #0f1a2b; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .toggle-row .lbl svg { color: #5c6a80; }
+    .toggle-row .lbl .hint { font-size: 0.55rem; color: #8593a8; font-weight: 500; margin-left: 4px; }
+    .switch {
+      width: 26px; height: 15px;
+      border-radius: 999px;
+      background: #cfd6e2;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 11px; height: 11px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+    .switch.on { background: linear-gradient(90deg, #0b57d0, #10cbb1); }
+    .switch.on::after { transform: translateX(11px); }
+
+    /* Success preview banner */
+    .success-preview {
+      background: linear-gradient(135deg, #ecfdf5, #dcfce7);
+      border: 1px solid #a7f3d0;
+      border-radius: 12px;
+      padding: 0.7rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .success-preview .emo {
+      width: 30px; height: 30px;
+      background: #10b981;
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .success-preview .t { font-size: 0.7rem; font-weight: 700; color: #065f46; }
+    .success-preview .s { font-size: 0.58rem; color: #059669; margin-top: 1px; }
+
+    /* Compact terms line */
+    .terms-line {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.58rem; color: #5c6a80; line-height: 1.4;
+    }
+    .terms-line .cbox {
+      width: 14px; height: 14px; border-radius: 4px;
+      background: linear-gradient(135deg, #0b57d0, #10cbb1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(11, 87, 208, 0.2);
+    }
+    .terms-line a { color: #0b57d0; font-weight: 600; text-decoration: none; }
+
+    /* Alter stage backgrounds for the new screens (softer, richer) */
+    .screens-grid .screen-stage {
+      min-height: 460px;
+      padding: 3rem 1.5rem 2rem;
+      border-radius: 28px;
+    }
+    .screens-grid .screen-stage.cool {
+      background:
+        radial-gradient(circle at 30% 20%, rgba(11, 87, 208, 0.12), transparent 45%),
+        linear-gradient(160deg, #e2ecfb 0%, #cadbef 100%);
+    }
+    .screens-grid .screen-stage.warm {
+      background:
+        radial-gradient(circle at 70% 20%, rgba(255, 155, 100, 0.18), transparent 45%),
+        linear-gradient(160deg, #f9ecd6 0%, #f1d8b3 100%);
+    }
+    .screens-grid .screen-stage.soft {
+      background:
+        radial-gradient(circle at 50% 20%, rgba(148, 163, 184, 0.18), transparent 45%),
+        linear-gradient(160deg, #edf0f5 0%, #dae0eb 100%);
+    }
+    .screens-grid .screen-stage.mint {
+      background:
+        radial-gradient(circle at 40% 20%, rgba(16, 203, 177, 0.18), transparent 45%),
+        linear-gradient(160deg, #d9efe5 0%, #b7dfcd 100%);
+    }
+
+    /* Mobile shrink for premium screens */
+    @media (max-width: 720px) {
+      .screens-grid .phone { width: 260px; }
+      .screens-grid .screen-stage { min-height: unset; padding: 2rem 1rem 1.5rem; border-radius: 24px; }
+    }
+    @media (max-width: 480px) {
+      .screens-grid .phone { width: 230px; padding: 8px; border-radius: 36px; }
+      .screens-grid .phone-screen { border-radius: 28px; }
+      .screens-grid .screen-stage { padding: 1.6rem 0.8rem 1.4rem; border-radius: 20px; }
+    }
+
+    /* ========================================================================
+       Hero visual · beauty mockups (phone + rich admin desktop)
+       ======================================================================== */
+
+    /* Extend beauty-phone styles to the hero phone */
+    .hero-stage .phone {
+      width: 280px;
+      aspect-ratio: 9 / 19.5;
+      background: linear-gradient(160deg, #101a2f, #050a17);
+      border-radius: 42px;
+      padding: 10px;
+      box-shadow:
+        0 40px 90px rgba(11, 21, 45, 0.28),
+        0 12px 30px rgba(11, 21, 45, 0.14),
+        inset 0 0 0 1.5px rgba(255,255,255,0.05);
+    }
+    .hero-stage .phone::before {
+      content: "";
+      position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 90px; height: 22px; background: #030710; border-radius: 13px;
+      z-index: 2;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .hero-stage .phone-screen {
+      border-radius: 33px;
+      background: linear-gradient(180deg, #fbfcff, #f4f7fc);
+    }
+    .hero-stage .status-bar {
+      height: 42px;
+      padding: 0 24px 0 20px;
+      font-weight: 700;
+      font-size: 0.72rem;
+      color: #0f1a2b;
+    }
+    .hero-stage .rside { display: inline-flex; align-items: center; gap: 5px; }
+
+    /* Rich admin desktop */
+    .hero-stage .desktop {
+      width: 100%;
+      max-width: 700px;
+      background: linear-gradient(160deg, #0f1a2b, #050a17);
+      border-radius: 14px 14px 0 0;
+      padding: 8px 8px 0;
+      box-shadow:
+        0 50px 90px rgba(11, 21, 45, 0.28),
+        0 12px 30px rgba(11, 21, 45, 0.14),
+        inset 0 0 0 1.5px rgba(255,255,255,0.04);
+      position: relative;
+    }
+    .hero-stage .desktop-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 10px 10px;
+    }
+    .hero-stage .desktop-bar i {
+      width: 11px; height: 11px; border-radius: 50%;
+      background: #2a3854;
+    }
+    .hero-stage .desktop-bar i:nth-child(1) { background: #ff5f57; }
+    .hero-stage .desktop-bar i:nth-child(2) { background: #febc2e; }
+    .hero-stage .desktop-bar i:nth-child(3) { background: #28c840; }
+    .hero-stage .desktop-bar .url {
+      margin-left: 10px;
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-family: "Inter", monospace;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.55);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .hero-stage .desktop-screen {
+      background: linear-gradient(180deg, #ffffff, #f6f8fc);
+      border-radius: 6px 6px 0 0;
+      aspect-ratio: 16 / 10.2;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 176px 1fr;
+    }
+
+    /* Sidebar (rich) */
+    .side-rich {
+      background: linear-gradient(180deg, #f9fafc, #f0f3f8);
+      padding: 14px 12px;
+      border-right: 1px solid #e6ebf3;
+      display: flex; flex-direction: column;
+      gap: 3px;
+    }
+    .side-rich .brand-row {
+      display: flex; align-items: center; gap: 7px;
+      padding-bottom: 12px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #e6ebf3;
+    }
+    .side-rich .logo-mark {
+      width: 22px; height: 22px; border-radius: 7px;
+      background: linear-gradient(135deg, #0b57d0 0%, #2b8ce6 50%, #10cbb1 100%);
+      box-shadow: 0 3px 10px rgba(11, 87, 208, 0.28);
+    }
+    .side-rich .brand-name {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      color: #0b3a7e;
+      letter-spacing: -0.01em;
+      font-size: 0.88rem;
+    }
+    .side-rich .brand-plan {
+      font-family: "Inter", monospace;
+      font-size: 0.5rem;
+      color: #10b981;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-left: auto;
+      padding: 2px 6px;
+      background: rgba(16, 185, 129, 0.1);
+      border-radius: 4px;
+    }
+    .side-rich .group-lbl {
+      font-family: "Inter", sans-serif;
+      font-size: 0.5rem;
+      color: #8593a8;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 8px 8px 4px;
+    }
+    .nav-i {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 8px;
+      border-radius: 7px;
+      font-size: 0.7rem;
+      color: #5c6a80;
+      font-weight: 500;
+      position: relative;
+    }
+    .nav-i.on {
+      background: #ffffff;
+      color: #0b57d0;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(11, 87, 208, 0.08), inset 0 0 0 1px #e0e6f0;
+    }
+    .nav-i.on::before {
+      content: ""; position: absolute; left: -12px; top: 4px; bottom: 4px;
+      width: 3px; background: linear-gradient(180deg, #0b57d0, #10cbb1);
+      border-radius: 0 3px 3px 0;
+    }
+    .nav-i .icn { color: currentColor; display: flex; }
+    .nav-i .badge {
+      margin-left: auto;
+      background: #fef3c7; color: #92400e;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: "Inter", monospace;
+      font-size: 0.5rem;
+      font-weight: 700;
+    }
+    .nav-i.on .badge { background: rgba(11, 87, 208, 0.1); color: #0b57d0; }
+
+    .side-user {
+      margin-top: auto;
+      display: flex; align-items: center; gap: 7px;
+      padding: 7px 8px;
+      background: rgba(11, 87, 208, 0.05);
+      border-radius: 8px;
+    }
+    .side-user .av {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: linear-gradient(145deg, #0b57d0, #10cbb1);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Fraunces", serif; font-weight: 600; font-size: 0.6rem;
+    }
+    .side-user b { font-size: 0.62rem; color: #0f1a2b; font-weight: 600; display: block; line-height: 1.1; }
+    .side-user span { font-size: 0.5rem; color: #8593a8; }
+
+    /* Main content (rich) */
+    .main-rich {
+      padding: 14px 18px 12px;
+      display: flex; flex-direction: column; gap: 10px;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .main-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eef1f6;
+    }
+    .breadcrumb {
+      font-size: 0.6rem;
+      color: #8593a8;
+      display: flex; align-items: center; gap: 5px;
+      font-family: "Inter", monospace;
+      letter-spacing: 0.03em;
+    }
+    .breadcrumb b { color: #0f1a2b; font-family: "Inter", sans-serif; font-weight: 600; }
+    .head-title-row {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .head-title-row h5 {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: #0f1a2b;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .head-title-row .sub {
+      font-size: 0.62rem;
+      color: #5c6a80;
+      margin-top: 2px;
+    }
+    .range-picker {
+      display: flex; gap: 3px;
+      background: #f4f7fc;
+      border-radius: 6px;
+      padding: 3px;
+      border: 1px solid #e0e6f0;
+    }
+    .range-picker span {
+      padding: 3px 8px;
+      font-family: "Inter", monospace;
+      font-size: 0.55rem;
+      color: #5c6a80;
+      font-weight: 600;
+      border-radius: 4px;
+    }
+    .range-picker span.on {
+      background: #ffffff;
+      color: #0b57d0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    /* KPI cards row */
+    .kpi-row-rich {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .kpi-card {
+      background: #ffffff;
+      border: 1px solid #e6ebf3;
+      border-radius: 8px;
+      padding: 8px 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card.accent {
+      background: linear-gradient(135deg, rgba(11, 87, 208, 0.06), rgba(16, 203, 177, 0.04));
+      border-color: rgba(11, 87, 208, 0.15);
+    }
+    .kpi-card::before {
+      content: "";
+      position: absolute; inset: 0 auto 0 0;
+      width: 3px;
+      background: linear-gradient(180deg, #0b57d0, #10cbb1);
+      opacity: 0.75;
+    }
+    .kpi-card.warn::before { background: linear-gradient(180deg, #f59e0b, #b45309); }
+    .kpi-card.ok::before { background: linear-gradient(180deg, #10b981, #059669); }
+    .kpi-card .lbl {
+      font-size: 0.52rem;
+      color: #8593a8;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-left: 4px;
+    }
+    .kpi-card .val {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.15rem;
+      color: #0f1a2b;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin: 4px 0 3px 4px;
+    }
+    .kpi-card.ok .val { color: #059669; }
+    .kpi-card.warn .val { color: #b45309; }
+    .kpi-card .val em {
+      font-style: normal;
+      font-size: 0.7rem;
+      color: #5c6a80;
+      font-family: "Inter", monospace;
+      font-weight: 500;
+    }
+    .kpi-card .delta {
+      display: inline-flex; align-items: center; gap: 3px;
+      font-family: "Inter", monospace;
+      font-size: 0.55rem;
+      font-weight: 700;
+      margin-left: 4px;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+    .kpi-card .delta.up {
+      color: #059669;
+      background: rgba(16, 185, 129, 0.1);
+    }
+    .kpi-card .delta.down {
+      color: #b91c1c;
+      background: rgba(239, 68, 68, 0.1);
+    }
+    .kpi-card .spark {
+      position: absolute; right: 6px; bottom: 6px;
+      width: 40px; height: 16px;
+      opacity: 0.7;
+    }
+
+    /* Main chart card */
+    .chart-card {
+      flex: 1;
+      background: #ffffff;
+      border: 1px solid #e6ebf3;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex; flex-direction: column;
+      gap: 6px;
+      min-height: 0;
+      position: relative;
+    }
+    .chart-head {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .chart-head b {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      color: #0f1a2b;
+    }
+    .chart-legend {
+      display: flex; gap: 8px;
+      font-family: "Inter", monospace;
+      font-size: 0.55rem;
+      color: #5c6a80;
+    }
+    .chart-legend .dt { display: inline-flex; align-items: center; gap: 4px; }
+    .chart-legend .dt .d { width: 6px; height: 6px; border-radius: 50%; }
+    .chart-legend .dt .d.b { background: #0b57d0; }
+    .chart-legend .dt .d.t { background: #10cbb1; opacity: 0.7; }
+    .chart-svg-wrap {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+    }
+    .chart-svg-wrap svg {
+      width: 100%; height: 100%; display: block;
+    }
+    .chart-tooltip {
+      position: absolute;
+      right: 12%; top: 8%;
+      background: #0f1a2b;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-family: "Inter", monospace;
+      font-size: 0.55rem;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .chart-tooltip::after {
+      content: "";
+      position: absolute;
+      bottom: -3px; left: 12px;
+      width: 6px; height: 6px;
+      background: #0f1a2b;
+      transform: rotate(45deg);
+    }
+    .chart-tooltip b { color: #10cbb1; }
+
+    @media (max-width: 700px) {
+      .hero-stage .desktop-screen { grid-template-columns: 130px 1fr; }
+      .kpi-row-rich { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+      .kpi-card .val { font-size: 0.9rem; }
+      .side-rich { padding: 8px; }
+      .main-rich { padding: 10px 12px 8px; gap: 7px; }
+      .hero-stage .phone { width: 240px; }
+    }
+    @media (max-width: 520px) {
+      .hero-stage .desktop-screen { grid-template-columns: 90px 1fr; }
+      .hero-stage .side-rich .brand-row { padding-bottom: 6px; margin-bottom: 4px; }
+      .hero-stage .side-rich .brand-name { font-size: 0.7rem; }
+      .hero-stage .side-rich .brand-plan { display: none; }
+      .hero-stage .nav-i { font-size: 0.6rem; padding: 4px 6px; }
+      .hero-stage .nav-i .badge { display: none; }
+      .hero-stage .side-user b { font-size: 0.55rem; }
+      .hero-stage .side-user span { display: none; }
+      .hero-stage .kpi-row-rich { grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
+      .hero-stage .kpi-card { padding: 5px 6px; }
+      .hero-stage .kpi-card .val { font-size: 0.72rem; }
+      .hero-stage .kpi-card .spark { display: none; }
+      .hero-stage .kpi-card .delta { font-size: 0.42rem; padding: 1px 3px; }
+      .hero-stage .head-title-row h5 { font-size: 0.85rem; }
+      .hero-stage .range-picker span { padding: 2px 4px; font-size: 0.48rem; }
+      .hero-stage .breadcrumb { font-size: 0.5rem; }
+      .hero-stage .phone { width: 220px; padding: 8px; border-radius: 36px; }
+      .hero-stage .phone-screen { border-radius: 28px; }
+      .hero-stage .phone::before { width: 76px; height: 18px; top: 10px; }
+      .hero-stage .desktop-bar .url { font-size: 0.55rem; padding: 3px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">Ahsan Javaid <span>· Case Study</span></a>
+      <nav class="nav-side">
+        <a href="#overview">Overview</a>
+        <a href="#problem">Problem</a>
+        <a href="#research">Research</a>
+        <a href="#system">System</a>
+        <a href="#flow">Flow</a>
+        <a href="#screens">Screens</a>
+        <a href="#outcome">Outcome</a>
+      </nav>
+      <a class="back-link" href="index.html">← Portfolio</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker reveal">Case Study 01 · Enterprise SaaS</div>
+      <h1 class="display reveal d1">A calmer signup for <em>high-stakes</em> communication.</h1>
+      <p class="deck reveal d2">
+        Redesigning the LEKAB self-service portal so enterprise users could onboard without abandonment,
+        without losing trust, and without overwhelming admins. A study in progressive disclosure inside a
+        security-first environment.
+      </p>
+
+      <div class="meta-strip">
+        <div class="meta-cell"><strong>Role</strong><span>UX/UI Designer, Lead</span></div>
+        <div class="meta-cell"><strong>Client</strong><span>LEKAB Communication AB</span></div>
+        <div class="meta-cell"><strong>Timeline</strong><span>Feb – Mar 2023</span></div>
+        <div class="meta-cell"><strong>Tools</strong><span>Figma, FigJam, Jira</span></div>
+        <div class="meta-cell"><strong>Platform</strong><span>Web · Responsive</span></div>
+        <div class="meta-cell"><strong>Industry</strong><span>Comms · Fintech · Public</span></div>
+      </div>
+
+      <!-- Hero visual: beauty mockups (phone + admin dashboard) -->
+      <div class="hero-stage">
+        <div class="stage-grid">
+
+          <!-- Phone: beautified signup Phase 1 -->
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="status-bar">
+                <span>9:41</span>
+                <span class="rside">
+                  <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 6a10 10 0 0112 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><path d="M3 7.5a7 7 0 018 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9" r="1" fill="#0f1a2b"/></svg>
+                  <svg width="16" height="10" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="18" height="10" rx="2.5" stroke="#0f1a2b" stroke-width="1.2"/><rect x="2.5" y="2.5" width="15" height="7" rx="1" fill="#0f1a2b"/><rect x="20" y="4" width="1.5" height="4" rx="0.5" fill="#0f1a2b"/></svg>
+                </span>
+              </div>
+              <div class="mock">
+                <div class="top-brand">
+                  <div class="logo">LEKAB</div>
+                  <span class="trust"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z" stroke="currentColor" stroke-width="2.4"/></svg> ISO 27001</span>
+                </div>
+
+                <div class="stepbar">
+                  <span>Step 1 of 2</span>
+                  <div class="track"><i style="width: 50%;"></i></div>
+                </div>
+
+                <div>
+                  <div class="greeting">Create <em>your</em> account.</div>
+                  <div class="subtitle">Takes less than a minute · optional social login.</div>
+                </div>
+
+                <div class="in">
+                  <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+                  <div class="val"><b>Work email</b><span>ahsan@lekab.se</span></div>
+                  <span class="end ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <div class="in">
+                  <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+                  <div class="val"><b>Full name</b><span>Ahsan Javaid</span></div>
+                </div>
+                <div class="in active">
+                  <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="4" y="11" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                  <div class="val" style="gap: 4px;">
+                    <b>Password</b>
+                    <span>••••••••••</span>
+                    <div class="strength" style="margin-top: 3px;"><i class="w"></i><i class="m"></i><i class="g"></i><i class="g"></i></div>
+                  </div>
+                </div>
+                <div class="strength-label" style="margin-top: -0.35rem; padding: 0 0.7rem;"><span>Strong password</span><span style="color: #8593a8;">14 chars</span></div>
+
+                <div class="cta">Continue →</div>
+
+                <div class="divider">or continue with</div>
+
+                <div class="socials">
+                  <div class="soc"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 015.5 12c0-.73.13-1.44.34-2.1V7.06H2.18A11 11 0 001 12c0 1.77.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg></div>
+                  <div class="soc"><svg width="16" height="18" viewBox="0 0 24 24" fill="#0f1a2b"><path d="M17.05 12.06a4.32 4.32 0 012.06-3.62 4.42 4.42 0 00-3.48-1.88c-1.46-.15-2.87.87-3.62.87-.77 0-1.9-.85-3.13-.83a4.65 4.65 0 00-3.9 2.4c-1.68 2.9-.43 7.19 1.19 9.54.81 1.15 1.76 2.44 3 2.4 1.21-.05 1.67-.78 3.13-.78 1.46 0 1.88.78 3.14.75 1.3-.02 2.12-1.16 2.92-2.32a10.24 10.24 0 001.32-2.72 4.19 4.19 0 01-2.55-3.81M14.4 4.9a4.24 4.24 0 001-3.06 4.4 4.4 0 00-2.83 1.47 4 4 0 00-1 2.94 3.65 3.65 0 002.83-1.35"/></svg></div>
+                  <div class="soc"><svg width="16" height="16" viewBox="0 0 24 24"><rect fill="#f25022" x="1" y="1" width="10" height="10"/><rect fill="#7fba00" x="13" y="1" width="10" height="10"/><rect fill="#00a4ef" x="1" y="13" width="10" height="10"/><rect fill="#ffb900" x="13" y="13" width="10" height="10"/></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desktop: rich admin dashboard -->
+          <div class="desktop">
+            <div class="desktop-bar">
+              <i></i><i></i><i></i>
+              <div class="url">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><rect x="4" y="11" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.8"/></svg>
+                app.lekab.se/admin/analytics
+              </div>
+            </div>
+            <div class="desktop-screen">
+
+              <!-- Rich sidebar -->
+              <aside class="side-rich">
+                <div class="brand-row">
+                  <div class="logo-mark"></div>
+                  <div class="brand-name">LEKAB</div>
+                  <span class="brand-plan">PRO</span>
+                </div>
+
+                <div class="group-lbl">Workspace</div>
+                <div class="nav-i on">
+                  <span class="icn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2h-4v-6H10v6H6a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+                  Overview
+                </div>
+                <div class="nav-i">
+                  <span class="icn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                  Accounts
+                  <span class="badge">12</span>
+                </div>
+                <div class="nav-i">
+                  <span class="icn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                  Messaging
+                </div>
+                <div class="nav-i">
+                  <span class="icn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M2 10h20" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                  Billing
+                </div>
+                <div class="nav-i">
+                  <span class="icn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Support
+                  <span class="badge">3</span>
+                </div>
+
+                <div class="side-user">
+                  <div class="av">AJ</div>
+                  <div>
+                    <b>Ahsan Javaid</b>
+                    <span>Admin</span>
+                  </div>
+                </div>
+              </aside>
+
+              <!-- Main content -->
+              <div class="main-rich">
+                <div class="main-header">
+                  <div>
+                    <div class="breadcrumb">Overview <span>›</span> <b>Signup accuracy</b></div>
+                    <div class="head-title-row">
+                      <h5>Signup accuracy</h5>
+                    </div>
+                    <div class="sub">Trailing 30 days · Enterprise cohort · n = 8,412</div>
+                  </div>
+                  <div class="range-picker">
+                    <span>24h</span>
+                    <span>7d</span>
+                    <span class="on">30d</span>
+                    <span>90d</span>
+                  </div>
+                </div>
+
+                <div class="kpi-row-rich">
+                  <div class="kpi-card ok">
+                    <div class="lbl">COMPLETION</div>
+                    <div class="val">+35<em>%</em></div>
+                    <span class="delta up">
+                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M12 5v14m-6-8l6-6 6 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      vs prev
+                    </span>
+                    <svg class="spark" viewBox="0 0 40 16" preserveAspectRatio="none">
+                      <path d="M0,12 L8,10 L16,8 L24,6 L32,3 L40,2" fill="none" stroke="#10b981" stroke-width="1.4" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <div class="kpi-card">
+                    <div class="lbl">SUPPORT LOAD</div>
+                    <div class="val" style="color: #0b57d0;">−30<em>%</em></div>
+                    <span class="delta up">
+                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M12 19V5m-6 8l6 6 6-6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      fewer tickets
+                    </span>
+                    <svg class="spark" viewBox="0 0 40 16" preserveAspectRatio="none">
+                      <path d="M0,4 L8,6 L16,7 L24,10 L32,12 L40,14" fill="none" stroke="#0b57d0" stroke-width="1.4" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <div class="kpi-card accent">
+                    <div class="lbl">DATA ACCURACY</div>
+                    <div class="val">+22<em>%</em></div>
+                    <span class="delta up">
+                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M12 5v14m-6-8l6-6 6 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      cleaner records
+                    </span>
+                    <svg class="spark" viewBox="0 0 40 16" preserveAspectRatio="none">
+                      <path d="M0,11 L8,9 L16,10 L24,7 L32,5 L40,3" fill="none" stroke="#10cbb1" stroke-width="1.4" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="chart-card">
+                  <div class="chart-head">
+                    <b>Signup completion trend</b>
+                    <div class="chart-legend">
+                      <span class="dt"><span class="d b"></span>Redesign</span>
+                      <span class="dt"><span class="d t"></span>Legacy</span>
+                    </div>
+                  </div>
+                  <div class="chart-svg-wrap">
+                    <svg viewBox="0 0 320 100" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="area-blue" x1="0" x2="0" y1="0" y2="1">
+                          <stop offset="0" stop-color="#0b57d0" stop-opacity="0.24"/>
+                          <stop offset="1" stop-color="#0b57d0" stop-opacity="0"/>
+                        </linearGradient>
+                        <linearGradient id="line-blue" x1="0" x2="1" y1="0" y2="0">
+                          <stop offset="0" stop-color="#0b57d0"/>
+                          <stop offset="1" stop-color="#10cbb1"/>
+                        </linearGradient>
+                      </defs>
+                      <!-- Grid -->
+                      <g stroke="#eef1f6" stroke-width="0.5">
+                        <line x1="0" y1="20" x2="320" y2="20"/>
+                        <line x1="0" y1="45" x2="320" y2="45"/>
+                        <line x1="0" y1="70" x2="320" y2="70"/>
+                      </g>
+                      <!-- Legacy trend (flat dashed) -->
+                      <path d="M0,72 L40,70 L80,71 L120,72 L160,70 L200,72 L240,71 L280,70 L320,72"
+                            fill="none" stroke="#10cbb1" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.55"/>
+                      <!-- Redesign trend area + line -->
+                      <path d="M0,68 C40,60 60,52 90,48 C120,42 150,36 180,30 C215,22 245,18 280,14 L320,10 L320,100 L0,100 Z"
+                            fill="url(#area-blue)"/>
+                      <path d="M0,68 C40,60 60,52 90,48 C120,42 150,36 180,30 C215,22 245,18 280,14 L320,10"
+                            fill="none" stroke="url(#line-blue)" stroke-width="1.8" stroke-linecap="round"/>
+                      <!-- Data point highlight -->
+                      <circle cx="280" cy="14" r="3" fill="#ffffff" stroke="#0b57d0" stroke-width="1.6"/>
+                      <circle cx="280" cy="14" r="6" fill="#0b57d0" opacity="0.15"/>
+                    </svg>
+                    <div class="chart-tooltip">
+                      Sep 28 · <b>91.2%</b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section class="block" id="overview">
+    <div class="wrap">
+      <div class="section-label">Overview</div>
+      <h2 class="head">Turning a security-heavy signup into a guided, progressive flow.</h2>
+      <p class="lede">
+        LEKAB is a communication and workflow automation platform used across healthcare, finance,
+        logistics, public sector, retail, and manufacturing — industries where the wrong phone number
+        or missing role can break a workflow. The onboarding experience had to stay compliant, but
+        stop punishing new users for it.
+      </p>
+
+      <div class="overview">
+        <div class="over-cell">
+          <strong>Context</strong>
+          <p>Enterprise users were being asked for personal data, work data, role, department, and country context in a single upfront form. Many abandoned. Others falsified fields to get through.</p>
+        </div>
+        <div class="over-cell">
+          <strong>My Role</strong>
+          <p>End-to-end ownership: discovery, journey mapping, IA, prototyping in Figma, validation with real users, and dev-ready handoff with tokens.</p>
+        </div>
+        <div class="over-cell">
+          <strong>Impact</strong>
+          <p>Signup completion rose materially, admin escalations dropped ~30%, and data quality improved enough that downstream billing errors fell alongside it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM ============ -->
+  <section class="block alt" id="problem">
+    <div class="wrap">
+      <div class="section-label">The problem</div>
+      <h2 class="head">Too much, too early, too unclear.</h2>
+
+      <p class="problem-quote">
+        “Users abandoned the flow when asked for too much upfront —
+        <span>and the data they did submit was often wrong.”</span>
+      </p>
+
+      <div class="stat-grid">
+        <div class="stat-tile"><b>~40%</b><p>Drop-off before the first field was completed on legacy signup.</p></div>
+        <div class="stat-tile"><b>1 in 3</b><p>Records contained falsified or blank secondary contact fields.</p></div>
+        <div class="stat-tile"><b>Manual</b><p>Every new account still required an admin to issue an ID and access code.</p></div>
+        <div class="stat-tile"><b>High</b><p>Support tickets tied to "can't finish signup" made up a visible share of weekly load.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESEARCH ============ -->
+  <section class="block" id="research">
+    <div class="wrap">
+      <div class="section-label">Research & insights</div>
+      <h2 class="head">Listening before we redesigned anything.</h2>
+      <p class="lede">
+        I ran user interviews with enterprise admins and end-users, mapped the current journey with the
+        support team, and pulled from established form-conversion research to pressure-test the direction.
+        Three insights shaped the whole redesign.
+      </p>
+
+      <div class="research-grid">
+
+        <!-- Persona -->
+        <div class="persona-card">
+          <div class="persona-head">
+            <div class="avatar">MK</div>
+            <div>
+              <h3>Maria K.</h3>
+              <span>Operations Lead · Nordic bank · 42</span>
+            </div>
+          </div>
+          <div class="persona-row">
+            <div><strong>Goals</strong><p>Onboard her team to a messaging platform without opening a ticket for every seat.</p></div>
+            <div><strong>Frustrations</strong><p>Being asked for private numbers before she trusts the tool. Waiting on IT for access codes.</p></div>
+            <div><strong>Behavior</strong><p>Skips optional fields. Bails if she has to leave the page to find a code.</p></div>
+          </div>
+          <blockquote class="persona-quote">
+            "I'll give you a work email. Ask me for my personal mobile before I've even seen the product, and I'm gone."
+          </blockquote>
+        </div>
+
+        <!-- Insights -->
+        <div class="insights">
+          <div class="insight">
+            <div class="insight-num">01</div>
+            <div>
+              <h4>Commitment scales with progress.</h4>
+              <p>Foot-in-the-door: users who complete a light first step will complete a heavier second step. Ask for less upfront and you get more later.</p>
+            </div>
+          </div>
+          <div class="insight">
+            <div class="insight-num">02</div>
+            <div>
+              <h4>Explain the "why", not just the "what".</h4>
+              <p>When each field explained why it was needed (security, personalization, routing), users stopped falsifying and started completing.</p>
+            </div>
+          </div>
+          <div class="insight">
+            <div class="insight-num">03</div>
+            <div>
+              <h4>Security should feel invisible, not blocking.</h4>
+              <p>reCAPTCHA + verified email did more for trust than a wall of legal copy — and unblocked admins from the loop entirely.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DESIGN SYSTEM ============ -->
+  <section class="block alt" id="system">
+    <div class="wrap">
+      <div class="section-label">Design system</div>
+      <h2 class="head">A quiet, tokenized system built to survive engineering.</h2>
+      <p class="lede">
+        Every color, every step of the type ramp, and every component was defined in Figma variables so
+        that engineers implemented what design decided — not their interpretation of a screenshot.
+      </p>
+
+      <div class="system-grid">
+
+        <div class="sys-card">
+          <strong>Color palette</strong>
+          <div class="swatches">
+            <div class="swatch"><div class="chip" style="background: #2b5aa8;"></div><div class="meta"><b>Primary</b><span>#2B5AA8</span></div></div>
+            <div class="swatch"><div class="chip" style="background: #dbe6f7;"></div><div class="meta"><b>Primary soft</b><span>#DBE6F7</span></div></div>
+            <div class="swatch"><div class="chip" style="background: #101827;"></div><div class="meta"><b>Ink</b><span>#101827</span></div></div>
+            <div class="swatch"><div class="chip" style="background: #5c6a80;"></div><div class="meta"><b>Muted</b><span>#5C6A80</span></div></div>
+            <div class="swatch"><div class="chip" style="background: #2f7a5a;"></div><div class="meta"><b>Success</b><span>#2F7A5A</span></div></div>
+          </div>
+
+          <div style="height: 1.6rem;"></div>
+          <strong>Components</strong>
+          <div class="comp-grid">
+            <div class="comp"><div class="demo-btn">Continue</div></div>
+            <div class="comp"><div class="demo-input">ahsan@lekab.se</div></div>
+            <div class="comp"><div class="demo-chip">Verified</div></div>
+            <div class="comp"><div class="demo-badge">ACTIVE</div></div>
+          </div>
+        </div>
+
+        <div class="sys-card">
+          <strong>Type ramp — Fraunces + Inter</strong>
+          <div class="type-ramp">
+            <div class="type-row"><div class="type-tag">Display</div><div class="type-sample display">A calmer signup.</div></div>
+            <div class="type-row"><div class="type-tag">H1</div><div class="type-sample h1">Section title</div></div>
+            <div class="type-row"><div class="type-tag">H2</div><div class="type-sample h2">Sub-section</div></div>
+            <div class="type-row"><div class="type-tag">Body</div><div class="type-sample body">Body copy for explanations, guidance, and helper text.</div></div>
+            <div class="type-row"><div class="type-tag">Caption</div><div class="type-sample caption">CAPTION · METADATA</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FLOW ============ -->
+  <section class="block" id="flow">
+    <div class="wrap">
+      <div class="section-label">User flow</div>
+      <h2 class="head">Two phases instead of one big wall.</h2>
+      <p class="lede">
+        Phase one asks for the minimum needed to create a real account. Phase two enriches the profile
+        after the user has already seen value — the moment trust is highest.
+      </p>
+
+      <div class="flow-wrap">
+        <div class="flow">
+          <div class="flow-node accent"><b>Start</b><span>Landing → Sign up</span></div>
+          <div class="flow-arrow"></div>
+          <div class="flow-node"><b>Phase 1</b><span>Email · name · secure password · mobile</span></div>
+          <div class="flow-arrow"></div>
+          <div class="flow-node"><b>Verify</b><span>reCAPTCHA + email link</span></div>
+          <div class="flow-arrow"></div>
+          <div class="flow-node"><b>First value</b><span>Dashboard preview + tour</span></div>
+          <div class="flow-arrow"></div>
+          <div class="flow-node accent"><b>Phase 2</b><span>Role · department · location · prefs</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENS ============ -->
+  <section class="block alt" id="screens">
+    <div class="wrap">
+      <div class="section-label reveal">Final UI</div>
+      <h2 class="head reveal">The redesigned experience, screen by screen.</h2>
+      <p class="lede reveal">
+        Four moments from the phased signup — login, quick account, verification, and profile completion.
+        Every screen is rendered from the live design system: SF-style spacing, teal-to-blue gradient
+        primary, real password strength meter, brand social logins, and inline trust chips.
+      </p>
+
+      <div class="screens-grid">
+
+        <!-- ============ Screen 1: Login ============ -->
+        <div class="reveal d1">
+          <div class="screen-stage cool">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar">
+                  <span>9:41</span>
+                  <span class="rside">
+                    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 6a10 10 0 0112 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><path d="M3 7.5a7 7 0 018 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9" r="1" fill="#0f1a2b"/></svg>
+                    <svg width="16" height="10" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="18" height="10" rx="2.5" stroke="#0f1a2b" stroke-width="1.2"/><rect x="2.5" y="2.5" width="15" height="7" rx="1" fill="#0f1a2b"/><rect x="20" y="4" width="1.5" height="4" rx="0.5" fill="#0f1a2b"/></svg>
+                  </span>
+                </div>
+                <div class="mock">
+                  <div class="top-brand">
+                    <div class="logo">LEKAB</div>
+                    <div class="lang-chip">🇸🇪 SV</div>
+                  </div>
+                  <div style="margin-top: 0.5rem;">
+                    <div class="greeting">Welcome <em>back.</em></div>
+                    <div class="subtitle">Sign in to continue where you left off.</div>
+                  </div>
+
+                  <div class="in" style="margin-top: 0.3rem;">
+                    <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" fill="none"/></svg></span>
+                    <div class="val"><b>Work email</b><span>ahsan@lekab.se</span></div>
+                    <span class="end ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  </div>
+                  <div class="in active">
+                    <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="4" y="11" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                    <div class="val"><b>Password</b><span>••••••••••</span></div>
+                    <span class="end"><svg width="16" height="14" viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                  </div>
+
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: -0.15rem;">
+                    <div style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.62rem; color: #5c6a80; font-weight: 600;">
+                      <span style="width: 22px; height: 13px; border-radius: 999px; background: linear-gradient(90deg, #0b57d0, #10cbb1); display: inline-block; position: relative;"><span style="position: absolute; top: 1.5px; right: 1.5px; width: 10px; height: 10px; background: #fff; border-radius: 50%;"></span></span>
+                      Remember me
+                    </div>
+                    <div class="ghost" style="padding: 0; font-size: 0.65rem;">Forgot password?</div>
+                  </div>
+
+                  <div class="cta">Sign in →</div>
+
+                  <div class="divider">or continue with</div>
+
+                  <div class="socials">
+                    <div class="soc"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 015.5 12c0-.73.13-1.44.34-2.1V7.06H2.18A11 11 0 001 12c0 1.77.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg></div>
+                    <div class="soc"><svg width="16" height="18" viewBox="0 0 24 24" fill="#0f1a2b"><path d="M17.05 12.06a4.32 4.32 0 012.06-3.62 4.42 4.42 0 00-3.48-1.88c-1.46-.15-2.87.87-3.62.87-.77 0-1.9-.85-3.13-.83a4.65 4.65 0 00-3.9 2.4c-1.68 2.9-.43 7.19 1.19 9.54.81 1.15 1.76 2.44 3 2.4 1.21-.05 1.67-.78 3.13-.78 1.46 0 1.88.78 3.14.75 1.3-.02 2.12-1.16 2.92-2.32a10.24 10.24 0 001.32-2.72 4.19 4.19 0 01-2.55-3.81M14.4 4.9a4.24 4.24 0 001-3.06 4.4 4.4 0 00-2.83 1.47 4 4 0 00-1 2.94 3.65 3.65 0 002.83-1.35"/></svg></div>
+                    <div class="soc"><svg width="16" height="16" viewBox="0 0 24 24"><rect fill="#f25022" x="1" y="1" width="10" height="10"/><rect fill="#7fba00" x="13" y="1" width="10" height="10"/><rect fill="#00a4ef" x="1" y="13" width="10" height="10"/><rect fill="#ffb900" x="13" y="13" width="10" height="10"/></svg></div>
+                  </div>
+
+                  <div style="display: flex; justify-content: center; gap: 4px; font-size: 0.62rem; color: #5c6a80; margin-top: 0.2rem;">
+                    New here?
+                    <span style="color: #0b57d0; font-weight: 600;">Create account</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Login — “Welcome back”</strong>
+            <span>Warm greeting, one-tap social login, gradient primary with sheen — trust starts here.</span>
+          </div>
+        </div>
+
+        <!-- ============ Screen 2: Phase 1 signup ============ -->
+        <div class="reveal d2">
+          <div class="screen-stage warm">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar">
+                  <span>9:41</span>
+                  <span class="rside">
+                    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 6a10 10 0 0112 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><path d="M3 7.5a7 7 0 018 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9" r="1" fill="#0f1a2b"/></svg>
+                    <svg width="16" height="10" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="18" height="10" rx="2.5" stroke="#0f1a2b" stroke-width="1.2"/><rect x="2.5" y="2.5" width="15" height="7" rx="1" fill="#0f1a2b"/><rect x="20" y="4" width="1.5" height="4" rx="0.5" fill="#0f1a2b"/></svg>
+                  </span>
+                </div>
+                <div class="mock">
+                  <div class="top-brand">
+                    <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.65rem; color: #5c6a80; font-weight: 600;">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      Back
+                    </span>
+                    <span class="trust"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> ISO 27001</span>
+                  </div>
+
+                  <div class="stepbar">
+                    <span>Step 1 of 2</span>
+                    <div class="track"><i style="width: 50%;"></i></div>
+                  </div>
+
+                  <div>
+                    <div class="greeting">Get <em>started.</em></div>
+                    <div class="subtitle">Takes less than a minute · optional social login.</div>
+                  </div>
+
+                  <div class="in">
+                    <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" fill="none"/></svg></span>
+                    <div class="val"><b>Work email</b><span>ahsan@lekab.se</span></div>
+                    <span class="end ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  </div>
+                  <div class="in">
+                    <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+                    <div class="val"><b>Full name</b><span>Ahsan Javaid</span></div>
+                  </div>
+
+                  <div class="in active">
+                    <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="4" y="11" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                    <div class="val" style="gap: 4px;">
+                      <b>Password</b>
+                      <span>••••••••••</span>
+                      <div class="strength" style="margin-top: 3px;"><i class="w"></i><i class="m"></i><i class="g"></i><i class="g"></i></div>
+                    </div>
+                  </div>
+                  <div class="strength-label" style="margin-top: -0.35rem; padding: 0 0.7rem;"><span>Strong password</span><span style="color: #8593a8;">14 chars</span></div>
+
+                  <div class="terms-line" style="margin-top: 0.2rem;">
+                    <span class="cbox"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    I agree to the <a>Terms</a> and <a>Privacy Policy</a>
+                  </div>
+
+                  <div class="cta">Continue →</div>
+
+                  <div style="display: flex; justify-content: center; gap: 4px; font-size: 0.62rem; color: #5c6a80;">
+                    Already have an account?
+                    <span style="color: #0b57d0; font-weight: 600;">Sign in</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Phase 1 — Quick account creation</strong>
+            <span>Four fields, live password strength, ISO trust chip, terms as first-class UI.</span>
+          </div>
+        </div>
+
+        <!-- ============ Screen 3: Email verification ============ -->
+        <div class="reveal d3">
+          <div class="screen-stage soft">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar">
+                  <span>9:41</span>
+                  <span class="rside">
+                    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 6a10 10 0 0112 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><path d="M3 7.5a7 7 0 018 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9" r="1" fill="#0f1a2b"/></svg>
+                    <svg width="16" height="10" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="18" height="10" rx="2.5" stroke="#0f1a2b" stroke-width="1.2"/><rect x="2.5" y="2.5" width="15" height="7" rx="1" fill="#0f1a2b"/><rect x="20" y="4" width="1.5" height="4" rx="0.5" fill="#0f1a2b"/></svg>
+                  </span>
+                </div>
+                <div class="mock">
+                  <div class="top-brand">
+                    <div class="logo">LEKAB</div>
+                    <div class="lang-chip" style="background: rgba(16, 203, 177, 0.1); color: #059669;">🔒 Secure</div>
+                  </div>
+
+                  <div class="stepbar">
+                    <span>Verify email</span>
+                    <div class="track"><i style="width: 75%;"></i></div>
+                  </div>
+
+                  <div class="envelope-hero">
+                    <div class="envelope-box">
+                      <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
+                        <rect x="2" y="4" width="36" height="24" rx="4" fill="#fff" stroke="#0b57d0" stroke-width="1.6"/>
+                        <path d="M2 8l18 12 18-12" stroke="#0b57d0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <circle cx="33" cy="7" r="5" fill="#10cbb1"/>
+                        <path d="M31 7l1.5 1.5L35 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                      </svg>
+                    </div>
+                    <div style="text-align: center; margin-top: 0.3rem;">
+                      <div class="greeting" style="font-size: 1.15rem;">Check your <em>inbox.</em></div>
+                      <div class="subtitle" style="margin-top: 0.3rem;">Code sent to <b style="color: #0f1a2b;">ahsan@lekab.se</b></div>
+                    </div>
+                  </div>
+
+                  <div class="otp" style="margin-top: 0.3rem;">
+                    <div class="box filled">3</div>
+                    <div class="box filled">7</div>
+                    <div class="box filled">2</div>
+                    <div class="box active"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                  </div>
+
+                  <div style="text-align: center; font-size: 0.6rem; color: #8593a8; margin-top: -0.3rem;">
+                    or <span style="color: #0b57d0; font-weight: 600;">paste code from email</span>
+                  </div>
+
+                  <div class="cta">Verify email</div>
+
+                  <div class="countdown">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="2.2"/><path d="M12 9v4l3 2M9 3h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                    Resend code in 0:45
+                  </div>
+
+                  <div class="ghost" style="padding: 0.2rem 0; font-size: 0.62rem; color: #5c6a80; font-weight: 500;">Change email address</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Email verification — “Check your inbox”</strong>
+            <span>Pulsing envelope, paste-from-email affordance, live countdown chip. Zero admin in the loop.</span>
+          </div>
+        </div>
+
+        <!-- ============ Screen 4: Phase 2 profile ============ -->
+        <div class="reveal d4">
+          <div class="screen-stage mint">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar">
+                  <span>9:41</span>
+                  <span class="rside">
+                    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 6a10 10 0 0112 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><path d="M3 7.5a7 7 0 018 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9" r="1" fill="#0f1a2b"/></svg>
+                    <svg width="16" height="10" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="18" height="10" rx="2.5" stroke="#0f1a2b" stroke-width="1.2"/><rect x="2.5" y="2.5" width="15" height="7" rx="1" fill="#0f1a2b"/><rect x="20" y="4" width="1.5" height="4" rx="0.5" fill="#0f1a2b"/></svg>
+                  </span>
+                </div>
+                <div class="mock">
+                  <div class="stepbar">
+                    <span>Almost there · 90%</span>
+                    <div class="track"><i style="width: 90%;"></i></div>
+                  </div>
+
+                  <div class="avatar-block">
+                    <div class="avatar-lg">AJ</div>
+                    <div>
+                      <div class="name">Ahsan Javaid</div>
+                      <div class="email">ahsan@lekab.se</div>
+                    </div>
+                    <div class="badge">✓ VERIFIED</div>
+                  </div>
+
+                  <div>
+                    <div class="field-label">Your role</div>
+                    <div class="pill-row" style="margin-top: 5px;">
+                      <span class="pill on"><span class="dot"></span>Ops Lead</span>
+                      <span class="pill">Support</span>
+                      <span class="pill">Engineer</span>
+                      <span class="pill">PM</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="field-label">Department</div>
+                    <div class="pill-row" style="margin-top: 5px;">
+                      <span class="pill on"><span class="dot"></span>Communications</span>
+                      <span class="pill">Retail</span>
+                    </div>
+                  </div>
+
+                  <div class="in">
+                    <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6 7-12a7 7 0 10-14 0c0 6 7 12 7 12z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                    <div class="val"><b>Location</b><span>🇸🇪 Malmö, SE</span></div>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                    <div class="toggle-row">
+                      <span class="lbl"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Push</span>
+                      <span class="switch on"></span>
+                    </div>
+                    <div class="toggle-row">
+                      <span class="lbl"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Email</span>
+                      <span class="switch on"></span>
+                    </div>
+                  </div>
+
+                  <div class="success-preview">
+                    <div class="emo">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div>
+                      <div class="t">You're all set</div>
+                      <div class="s">Personalization ready in your workspace</div>
+                    </div>
+                  </div>
+
+                  <div class="cta">Finish setup</div>
+                  <div class="ghost" style="font-size: 0.65rem; color: #5c6a80; font-weight: 500;">Skip for now →</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Phase 2 — Profile completion</strong>
+            <span>Trust already earned. Enrichment feels like personalization, not gatekeeping.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUTCOME ============ -->
+  <section class="block" id="outcome">
+    <div class="wrap">
+      <div class="section-label">Outcome</div>
+      <h2 class="head">The numbers moved. The tickets dropped. Trust went up.</h2>
+
+      <div class="outcome-grid">
+        <div class="out-tile reveal d1 hover-lift">
+          <b>+<span class="count-up" data-count="35">0</span>%</b>
+          <strong>Usability improvement</strong>
+          <span>Measured against the legacy signup path, cohort over cohort.</span>
+        </div>
+        <div class="out-tile reveal d2 hover-lift">
+          <b>−<span class="count-up" data-count="30">0</span>%</b>
+          <strong>Support load</strong>
+          <span>Fewer "can't finish signup" tickets after admin was removed from the loop.</span>
+        </div>
+        <div class="out-tile reveal d3 hover-lift">
+          <b>+<span class="count-up" data-count="22">0</span>%</b>
+          <strong>Data accuracy</strong>
+          <span>Progressive disclosure reduced falsified secondary contacts.</span>
+        </div>
+        <div class="out-tile reveal d4 hover-lift">
+          <b>−<span class="count-up" data-count="50">0</span>%</b>
+          <strong>Visual bugs</strong>
+          <span>Tokenized design system killed most implementation drift at the source.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPLIANCE ============ -->
+  <section class="block">
+    <div class="wrap">
+      <div class="section-label reveal">Compliance by design</div>
+      <h2 class="head reveal">Accessibility, GDPR, and consent — built into the flow, not stapled to it.</h2>
+      <p class="lede reveal">
+        Progressive signup wasn't just a UX pattern here — it was a compliance strategy. Less data
+        upfront meant less risk, less liability, and less need for the customer to trust us before we'd
+        earned it. Every step below shipped in the design spec, not the legal review.
+      </p>
+
+      <div class="compliance-panel">
+        <div class="comp-tile reveal d1" style="background: var(--paper); border-color: var(--line); color: #2f7a5a;">
+          <div class="comp-tile-head">
+            <span class="comp-badge wcag">WCAG 2.2 AA</span>
+            <strong style="font-family: 'Fraunces', serif; font-size: 1.05rem; color: var(--ink); font-weight: 500;">Accessibility</strong>
+          </div>
+          <p style="margin: 0; color: var(--ink-2); font-size: 0.92rem; line-height: 1.6;">
+            Contrast ≥ 4.5:1 on all body text, 3:1 on large text. Full keyboard navigation with visible focus
+            rings. Screen-reader tested with NVDA + VoiceOver. Error messages describe the fix, not just the fault.
+          </p>
+        </div>
+        <div class="comp-tile reveal d2" style="background: var(--paper); border-color: var(--line); color: #2b5aa8;">
+          <div class="comp-tile-head">
+            <span class="comp-badge gdpr">GDPR Art. 5(1)(c)</span>
+            <strong style="font-family: 'Fraunces', serif; font-size: 1.05rem; color: var(--ink); font-weight: 500;">Data minimization</strong>
+          </div>
+          <p style="margin: 0; color: var(--ink-2); font-size: 0.92rem; line-height: 1.6;">
+            Phase 1 asks for four fields, not eleven. Phase 2 enriches after value is delivered.
+            Personal data collected drops by ~60% at the moment of first commitment.
+          </p>
+        </div>
+        <div class="comp-tile reveal d3" style="background: var(--paper); border-color: var(--line); color: #8b3a3a;">
+          <div class="comp-tile-head">
+            <span class="comp-badge dpa">Consent</span>
+            <strong style="font-family: 'Fraunces', serif; font-size: 1.05rem; color: var(--ink); font-weight: 500;">Explain the why</strong>
+          </div>
+          <p style="margin: 0; color: var(--ink-2); font-size: 0.92rem; line-height: 1.6;">
+            Every field carries inline helper text explaining why we ask. No pre-checked marketing boxes.
+            Withdrawal of consent lives one tap deep in account settings — not buried in policy.
+          </p>
+        </div>
+        <div class="comp-tile reveal d4" style="background: var(--paper); border-color: var(--line); color: #b47a2a;">
+          <div class="comp-tile-head">
+            <span class="comp-badge a11y">Right to erasure</span>
+            <strong style="font-family: 'Fraunces', serif; font-size: 1.05rem; color: var(--ink); font-weight: 500;">One-tap forget</strong>
+          </div>
+          <p style="margin: 0; color: var(--ink-2); font-size: 0.92rem; line-height: 1.6;">
+            Account deletion is a single confirmed action, no email chain required. Downstream systems
+            receive a signed erasure event within 30 days per Article 17.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REFLECTION ============ -->
+  <section class="block alt">
+    <div class="wrap">
+      <div class="section-label">Reflection</div>
+      <h2 class="head">What I'd carry into the next enterprise product.</h2>
+
+      <div class="reflect-grid">
+        <div class="reflect-cell">
+          <strong>What worked</strong>
+          <p>Treating signup as a two-act experience — commitment before completeness — held up in usability testing and in the live cohort. The token-first design system paid for itself the first time a component changed and no one had to hunt for a hex code.</p>
+          <p>The biggest surprise: explaining <em>why</em> a field was needed moved the completion needle almost as much as removing the field itself.</p>
+        </div>
+        <div class="reflect-cell">
+          <strong>What I'd do next</strong>
+          <p>Introduce a lightweight sandbox preview before phase 2 — let users experience one real message send before we ask them for their role and department. That collapses the value-to-trust loop even further.</p>
+          <p>And I'd invest earlier in a shared vocabulary with engineering. Aligned language on states, empty states, and error states probably saved more sprint time than any single component did.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="footer-cta">
+    <div class="wrap-narrow">
+      <div class="kicker">Next</div>
+      <h2>Want to talk about a similar redesign?</h2>
+      <p>I'm open to senior product design roles across Sweden, Denmark, and hybrid/remote in the EU.</p>
+      <div class="cta-row">
+        <a class="cta primary" href="mailto:ahsang2003@yahoo.com">Email me →</a>
+        <a class="cta ghost" href="https://www.linkedin.com/in/ahsanjavaidch" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="cta ghost" href="index.html">Back to portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    © Ahsan Javaid · Case study · Malmö, Sweden
+  </div>
+
+  <script src="portfolio.js" defer></script>
+
+</body>
+</html>

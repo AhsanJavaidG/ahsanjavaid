@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cross-Team Support Platform — service design at LEKAB | Ahsan Javaid</title>
+  <meta name="description" content="UX/UI case study: an internal cross-team support platform designed through service design, stakeholder ecosystem mapping, and co-design workshops." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case-study.css" />
+  <style>
+    /* Page-specific: queue view + role badges */
+    .queue { padding: 0.8rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; overflow: hidden; }
+    .q-item {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.55rem 0.7rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.7rem;
+    }
+    .q-badge {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.05em;
+      padding: 0.15rem 0.4rem; border-radius: 4px; color: #fff;
+    }
+    .q-badge.support { background: var(--accent); }
+    .q-badge.ops { background: var(--warn); }
+    .q-badge.eng { background: var(--ok); }
+    .q-item b { display: block; font-family: "Fraunces", serif; font-weight: 500; font-size: 0.75rem; color: var(--ink); }
+    .q-item span { color: var(--muted); font-size: 0.6rem; }
+    .q-item em { font-style: normal; color: var(--muted-2); font-size: 0.6rem; font-weight: 500; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">Ahsan Javaid <span>· Case Study</span></a>
+      <nav class="nav-side">
+        <a href="#overview">Overview</a>
+        <a href="#problem">Problem</a>
+        <a href="#ecosystem">Ecosystem</a>
+        <a href="#roles">Roles</a>
+        <a href="#blueprint">Blueprint</a>
+        <a href="#screens">Screens</a>
+        <a href="#outcome">Outcome</a>
+      </nav>
+      <a class="back-link" href="index.html">← Portfolio</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker">Case Study 04 · Service design · Internal tool</div>
+      <h1 class="display">One workspace for three teams that used to talk in <em>tickets.</em></h1>
+      <p class="deck">
+        LEKAB's support, ops, and engineering teams shared a customer, but not a workspace. Every
+        incident bounced across three tools, four Slack channels, and two spreadsheets. This is a study
+        in service design: mapping the ecosystem, co-designing with role holders, and shipping a shared
+        internal product that respects each team's autonomy.
+      </p>
+
+      <div class="meta-strip">
+        <div class="meta-cell"><strong>Role</strong><span>Lead Designer · Service designer</span></div>
+        <div class="meta-cell"><strong>Client</strong><span>LEKAB · internal</span></div>
+        <div class="meta-cell"><strong>Timeline</strong><span>Jan – May 2023</span></div>
+        <div class="meta-cell"><strong>Method</strong><span>Ecosystem · Blueprint · Co-design</span></div>
+        <div class="meta-cell"><strong>Platform</strong><span>Web · Desktop-only</span></div>
+        <div class="meta-cell"><strong>Users</strong><span>18 across 3 teams</span></div>
+      </div>
+
+      <div class="hero-stage cool">
+        <div class="stage-grid">
+          <!-- Phone: role-based notification -->
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+              <div class="app-body">
+                <div class="app-crumb">Ops · Assigned to you</div>
+                <div class="app-title">Delivery outage · SE-North</div>
+                <div class="field focus"><b>Owner</b><span class="val">You · Ops</span></div>
+                <div class="field"><b>Support lead</b><span class="val">Elin B.</span></div>
+                <div class="field"><b>Eng on-call</b><span class="val">Jonas T.</span></div>
+                <div class="field"><b>Customer impact</b><span class="val">3 accounts · Tier 1</span></div>
+                <div class="btn-primary-mini">Accept &amp; open thread</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desktop: unified queue -->
+          <div class="desktop">
+            <div class="desktop-bar"><i></i><i></i><i></i></div>
+            <div class="desktop-screen">
+              <div class="side">
+                <div class="side-logo">LEKAB · Hub</div>
+                <div class="side-item on">● Queue</div>
+                <div class="side-item">○ My cases</div>
+                <div class="side-item">○ Handoffs</div>
+                <div class="side-item">○ Postmortems</div>
+                <div class="side-item">○ Runbooks</div>
+              </div>
+              <div class="queue">
+                <div class="q-item">
+                  <span class="q-badge support">SUP</span>
+                  <div><b>Password reset loop · Bank of North</b><span>Elin B. → assigned</span></div>
+                  <em>P2 · 4m</em>
+                </div>
+                <div class="q-item">
+                  <span class="q-badge ops">OPS</span>
+                  <div><b>Delivery outage · SE-North</b><span>You → owner</span></div>
+                  <em>P1 · 12m</em>
+                </div>
+                <div class="q-item">
+                  <span class="q-badge eng">ENG</span>
+                  <div><b>Rate-limit spike · EU cluster</b><span>Jonas T. → investigating</span></div>
+                  <em>P2 · 18m</em>
+                </div>
+                <div class="q-item">
+                  <span class="q-badge support">SUP</span>
+                  <div><b>Integration error · Volvo Cars</b><span>→ awaiting ops</span></div>
+                  <em>P3 · 42m</em>
+                </div>
+                <div class="q-item">
+                  <span class="q-badge ops">OPS</span>
+                  <div><b>Provisioning stuck · SEB</b><span>→ closed by Emma</span></div>
+                  <em>Done</em>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section class="block" id="overview">
+    <div class="wrap">
+      <div class="section-label">Overview</div>
+      <h2 class="head">Designing for the workflow between teams — not the teams.</h2>
+      <p class="lede">
+        Support could see the customer's problem. Ops knew the platform's state. Engineering held the
+        fix. None of them saw each other. The product wasn't a ticketing tool — it was a shared workspace
+        where a case could move without losing context.
+      </p>
+
+      <div class="overview">
+        <div class="over-cell">
+          <strong>Context</strong>
+          <p>18 people across three teams handling ~120 cases per week. Customer impact of a mis-handoff: measured in trust, not just SLA.</p>
+        </div>
+        <div class="over-cell">
+          <strong>My Role</strong>
+          <p>Lead designer + service design facilitator. Owned discovery workshops, role personas, blueprint, prototype, and rollout.</p>
+        </div>
+        <div class="over-cell">
+          <strong>Approach</strong>
+          <p>Stakeholder ecosystem map → role personas → service safari → service blueprint → co-design workshops → prototype → dogfood → ship.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM ============ -->
+  <section class="block alt" id="problem">
+    <div class="wrap">
+      <div class="section-label">The problem</div>
+      <h2 class="head">A customer, three tools, four Slack channels.</h2>
+
+      <p class="problem-quote">
+        "By the time it got to me, <span>the customer had already told the story twice."</span>
+      </p>
+
+      <div class="stat-grid">
+        <div class="stat-tile"><b>3</b><p>Different tools involved in a single cross-team case: Zendesk, Jira, an internal ops CLI.</p></div>
+        <div class="stat-tile"><b>~4</b><p>Median Slack channels a P1 incident touched before someone owned it.</p></div>
+        <div class="stat-tile"><b>~42 m</b><p>Median handoff time between teams — most of it re-explaining what already happened.</p></div>
+        <div class="stat-tile"><b>0</b><p>Cases where all three teams could see the same live status at the same moment.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ECOSYSTEM ============ -->
+  <section class="block" id="ecosystem">
+    <div class="wrap">
+      <div class="section-label">Research method · Stakeholder ecosystem map</div>
+      <h2 class="head">Who touches this workflow, and how?</h2>
+      <p class="lede">
+        I facilitated a two-hour workshop with representatives from each team. Together we mapped every
+        actor, system, and artifact touching a customer case — including the ones nobody wanted to
+        acknowledge (the "shadow" spreadsheets, the WhatsApp group between two ops leads). Nothing shipped
+        until this map was accurate.
+      </p>
+
+      <div class="ecosystem">
+        <div class="eco-node"><span class="eco-dot"></span><div><b>Customer</b><span>Enterprise operator raising a case via portal, email, or phone.</span></div></div>
+        <div class="eco-node"><span class="eco-dot"></span><div><b>Support agent</b><span>First responder. Triages, translates from customer language to internal.</span></div></div>
+        <div class="eco-node"><span class="eco-dot warm"></span><div><b>Ops coordinator</b><span>Owns platform health. Knows what "SE-North cluster" means.</span></div></div>
+        <div class="eco-node"><span class="eco-dot mint"></span><div><b>Engineer on-call</b><span>Root-cause fixes and rollbacks. Values async, low-noise handoffs.</span></div></div>
+        <div class="eco-node"><span class="eco-dot muted"></span><div><b>Support lead</b><span>SLA guardian. Needs cross-case visibility for weekly reviews.</span></div></div>
+        <div class="eco-node"><span class="eco-dot muted"></span><div><b>Account manager</b><span>Owns the customer relationship. Wants to be informed, not surprised.</span></div></div>
+        <div class="eco-node"><span class="eco-dot muted"></span><div><b>Product manager</b><span>Turns incidents into backlog items. Attends postmortems.</span></div></div>
+        <div class="eco-node"><span class="eco-dot muted"></span><div><b>Existing tools</b><span>Zendesk, Jira, ops CLI, Slack, WhatsApp, 3 spreadsheets. All in scope for consolidation.</span></div></div>
+      </div>
+
+      <p class="lede" style="margin-top: 2rem;">
+        Three actors — support lead, account manager, PM — had been invisible in the original brief.
+        Adding them into the design early prevented three politically expensive change requests later.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ ROLE PERSONAS ============ -->
+  <section class="block alt" id="roles">
+    <div class="wrap">
+      <div class="section-label">Role personas · Not customer personas</div>
+      <h2 class="head">Internal tools deserve real user research too.</h2>
+      <p class="lede">
+        Internal products often skip persona work because "we know our users". That's wrong — the
+        assumption is what causes internal tools to be hated. I ran contextual inquiries with three
+        role holders from each team and distilled a lightweight role persona per function.
+      </p>
+
+      <div class="roles-grid">
+        <div class="role-card">
+          <div class="role-head">
+            <div class="avatar">EB</div>
+            <div><b>Elin B.</b><span>Support agent · 32</span></div>
+          </div>
+          <p><strong>Goal</strong>Close cases without escalating.</p>
+          <p><strong>Frustration</strong>Ops doesn't respond in Slack fast enough — she loses SLA.</p>
+          <p><strong>Signal</strong>Wants ops presence and case status visible in one glance.</p>
+        </div>
+        <div class="role-card">
+          <div class="role-head">
+            <div class="avatar warm">MO</div>
+            <div><b>Mikael O.</b><span>Ops coordinator · 38</span></div>
+          </div>
+          <p><strong>Goal</strong>Protect platform health while unblocking support.</p>
+          <p><strong>Frustration</strong>Support pings him for questions he's already answered.</p>
+          <p><strong>Signal</strong>Wants a runbook link inline so support self-serves the easy cases.</p>
+        </div>
+        <div class="role-card">
+          <div class="role-head">
+            <div class="avatar mint">JT</div>
+            <div><b>Jonas T.</b><span>Engineer on-call · 29</span></div>
+          </div>
+          <p><strong>Goal</strong>Fix the underlying issue without becoming a chat bot.</p>
+          <p><strong>Frustration</strong>Being tagged in Slack when he's mid-debug.</p>
+          <p><strong>Signal</strong>Wants async updates, no @-mentions unless it's a P1.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICE BLUEPRINT ============ -->
+  <section class="block" id="blueprint">
+    <div class="wrap">
+      <div class="section-label">Research method · Service blueprint</div>
+      <h2 class="head">Front-stage, back-stage, and everything the customer doesn't see.</h2>
+      <p class="lede">
+        Personas told me who the users were. A service blueprint told me what the <em>service</em>
+        did across time. Each column is a case lifecycle stage; each row is a lane (customer,
+        front-stage, back-stage, systems). The gaps in the "systems" row became the product spec.
+      </p>
+
+      <div class="blueprint">
+        <div class="blueprint-row stage">
+          <div class="lane">Stage</div>
+          <div>Report</div>
+          <div>Triage</div>
+          <div>Handoff</div>
+          <div>Resolve</div>
+        </div>
+        <div class="blueprint-row">
+          <div class="lane">Customer</div>
+          <div>Sends email or opens portal case</div>
+          <div>Answers clarifying question</div>
+          <div>Waits · loses context</div>
+          <div>Receives resolution + explanation</div>
+        </div>
+        <div class="blueprint-row">
+          <div class="lane">Front-stage</div>
+          <div>Support agent acknowledges</div>
+          <div>Support classifies + tags</div>
+          <div>Support routes to ops / eng</div>
+          <div>Support summarizes fix to customer</div>
+        </div>
+        <div class="blueprint-row">
+          <div class="lane">Back-stage</div>
+          <div>—</div>
+          <div>Support checks runbook, escalates if needed</div>
+          <div>Ops confirms scope, engages eng if needed</div>
+          <div>Eng deploys fix · ops verifies · PM logs</div>
+        </div>
+        <div class="blueprint-row">
+          <div class="lane">Systems</div>
+          <div>Zendesk ticket</div>
+          <div>Runbooks · manual lookup</div>
+          <div>Slack ping · manual re-explain</div>
+          <div>Jira ticket + postmortem doc</div>
+        </div>
+      </div>
+
+      <p class="lede" style="margin-top: 2rem;">
+        The <em>Handoff</em> column was the failure mode. It relied on human retelling in Slack.
+        The new product turned that column into a single owned artifact — the case thread — that all
+        three roles could read, edit, and subscribe to. No re-explaining.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ SCREENS ============ -->
+  <section class="block alt" id="screens">
+    <div class="wrap">
+      <div class="section-label">Final UI</div>
+      <h2 class="head">One workspace, three viewpoints.</h2>
+      <p class="lede">
+        Each role sees the same case, filtered by what they need to act on. Support sees customer
+        language; ops sees platform state; engineering sees error signatures and diffs. Same underlying
+        thread, three different lenses.
+      </p>
+
+      <div class="screens-grid">
+        <div>
+          <div class="screen-stage cool">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Support view</div>
+                  <div class="app-title">Case #4821</div>
+                  <div class="field focus"><b>Customer</b><span class="val">Bank of North · Tier 1</span></div>
+                  <div class="field"><b>Reported</b><span class="val">"Password reset stuck in loop"</span></div>
+                  <div class="field"><b>Runbook</b><span class="val">RB-023 · Reset flow</span></div>
+                  <div class="field"><b>Waiting on</b><span class="val">Ops · Mikael O.</span></div>
+                  <div class="btn-primary-mini">Ping ops (async)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Support view — customer language + runbook first</strong>
+            <span>Async ping button forces a status update instead of a @-mention.</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="screen-stage warm">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Ops view</div>
+                  <div class="app-title">Case #4821</div>
+                  <div class="field"><b>Cluster</b><span class="val">SE-North · degraded</span></div>
+                  <div class="field focus"><b>Platform state</b><span class="val">Reset service 502 · retry</span></div>
+                  <div class="field"><b>Affected</b><span class="val">3 tenants · Tier 1</span></div>
+                  <div class="field"><b>Runbook</b><span class="val">RB-023 · applied 09:12</span></div>
+                  <div class="btn-primary-mini">Escalate to eng</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Ops view — same case, platform language</strong>
+            <span>Cluster + service state replace customer wording. Runbook is one tap.</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="screen-stage mint">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Eng view</div>
+                  <div class="app-title">Case #4821</div>
+                  <div class="field"><b>Signature</b><span class="val">ResetService.OAuthLoop @ v4.2.1</span></div>
+                  <div class="field focus"><b>Recent deploy</b><span class="val">v4.2.1 · 07:04 today</span></div>
+                  <div class="field"><b>Rollback ready</b><span class="val">v4.1.9 · 1-click</span></div>
+                  <div class="field"><b>Postmortem</b><span class="val">Draft · linked</span></div>
+                  <div class="btn-primary-mini">Roll back</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Eng view — signature, deploy diff, rollback</strong>
+            <span>Everything eng needs to decide in 30 seconds. No customer language, no chat noise.</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="screen-stage soft">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+                <div class="app-body">
+                  <div class="app-crumb">Postmortem</div>
+                  <div class="app-title">Case #4821 · closed</div>
+                  <div class="field"><b>Resolution</b><span class="val">Rollback to v4.1.9</span></div>
+                  <div class="field"><b>Duration</b><span class="val">37m · SLA met</span></div>
+                  <div class="field focus"><b>Root cause</b><span class="val">OAuth loop in reset flow</span></div>
+                  <div class="field"><b>Follow-up</b><span class="val">PM logged · sprint 42</span></div>
+                  <div class="btn-primary-mini">Share summary</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-caption">
+            <strong>Postmortem — same thread, closed with context</strong>
+            <span>Auto-composed from the case history. PM picks it up in the next backlog grooming.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUTCOME ============ -->
+  <section class="block" id="outcome">
+    <div class="wrap">
+      <div class="section-label">Outcome</div>
+      <h2 class="head">Handoffs stopped being political.</h2>
+
+      <div class="outcome-grid">
+        <div class="out-tile">
+          <b>−45%</b>
+          <strong>Handoff time</strong>
+          <span>Median team-to-team handoff dropped from ~42m to ~23m within 60 days.</span>
+        </div>
+        <div class="out-tile">
+          <b>+60%</b>
+          <strong>Cross-team visibility</strong>
+          <span>Cases with active engagement from all three teams tripled in Q2.</span>
+        </div>
+        <div class="out-tile">
+          <b>−33%</b>
+          <strong>Regression QA</strong>
+          <span>Postmortems captured in the same thread fed better test coverage.</span>
+        </div>
+        <div class="out-tile">
+          <b>1st</b>
+          <strong>Shared design system</strong>
+          <span>First LEKAB product built entirely on tokenized components — pattern for the rest.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REFLECTION ============ -->
+  <section class="block alt">
+    <div class="wrap">
+      <div class="section-label">Reflection</div>
+      <h2 class="head">Internal tools are still services.</h2>
+
+      <div class="reflect-grid">
+        <div class="reflect-cell">
+          <strong>What service design brought</strong>
+          <p>The blueprint made <em>invisible work visible</em>. Nobody had to argue about whether handoffs were painful — the systems row of the blueprint showed every one of them was manual retelling.</p>
+          <p>The co-design workshops turned three teams that had been at odds into three teams that owned the same design. Adoption was almost frictionless because the users had built it with me.</p>
+        </div>
+        <div class="reflect-cell">
+          <strong>What I'd carry forward</strong>
+          <p>Blueprint before wireframes, every time. Cheaper alignment, and it kills feature debates that shouldn't exist.</p>
+          <p>Next time I'd add a lightweight "shadow" service safari — following a case across the three tools for a full day — <em>before</em> the workshops. My own map would have been sharper going in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="footer-cta">
+    <div class="wrap-narrow">
+      <div class="kicker">Next</div>
+      <h2>Read another case study.</h2>
+      <p>Three more studies — each demonstrating a different UX process.</p>
+      <div class="cta-row">
+        <a class="cta ghost" href="case-study-lekab.html">01 · LEKAB signup</a>
+        <a class="cta ghost" href="case-study-messaging.html">02 · Messaging platform</a>
+        <a class="cta primary" href="case-study-onboarding.html">03 · Onboarding CRO →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">© Ahsan Javaid · Case study 04 · Malmö, Sweden</div>
+
+</body>
+</html>

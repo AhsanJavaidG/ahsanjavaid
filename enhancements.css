@@ -1,0 +1,224 @@
+/* ==========================================================================
+   Shared enhancements — motion, accessibility, focus, scroll
+   Loaded by index.html and all case-study pages.
+   Theme-agnostic: only adds primitives, never overrides theme colors.
+   Respects prefers-reduced-motion.
+   ========================================================================== */
+
+/* ===== Skip link (WCAG 2.4.1 Bypass Blocks) ===== */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 9999;
+  padding: 0.7rem 1.2rem;
+  background: #101827;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 2px solid #fff;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0.8rem;
+  outline: 3px solid #5eead4;
+  outline-offset: 2px;
+}
+
+/* ===== Scroll progress bar (WCAG 3.2 predictable) ===== */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #2b5aa8, #5eead4);
+  z-index: 9998;
+  transition: width 0.08s linear;
+  pointer-events: none;
+  will-change: width;
+}
+
+/* ===== Focus indicators (WCAG 2.4.7) ===== */
+:focus-visible {
+  outline: 3px solid #5eead4;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+a:focus-visible, button:focus-visible {
+  outline-offset: 4px;
+}
+
+/* ===== Reveal on scroll ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal.reveal-left { transform: translateX(-28px); }
+.reveal.reveal-left.is-in { transform: translateX(0); }
+.reveal.reveal-right { transform: translateX(28px); }
+.reveal.reveal-right.is-in { transform: translateX(0); }
+.reveal.reveal-scale { transform: scale(0.94); }
+.reveal.reveal-scale.is-in { transform: scale(1); }
+
+.reveal.d1 { transition-delay: 0.08s; }
+.reveal.d2 { transition-delay: 0.16s; }
+.reveal.d3 { transition-delay: 0.24s; }
+.reveal.d4 { transition-delay: 0.32s; }
+.reveal.d5 { transition-delay: 0.40s; }
+.reveal.d6 { transition-delay: 0.48s; }
+.reveal.d7 { transition-delay: 0.56s; }
+.reveal.d8 { transition-delay: 0.64s; }
+
+/* ===== Counter animation (values set via JS) ===== */
+.count-up {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== Magnetic hover ===== */
+.magnet {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* ===== Card tilt on hover ===== */
+.tilt {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt:hover {
+  transform: translateY(-4px) scale(1.005);
+}
+
+/* ===== Cursor spotlight (light-mode friendly) ===== */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  top: var(--mouse-y, 50%);
+  left: var(--mouse-x, 50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(94, 234, 212, 0.14), transparent 60%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform, opacity;
+}
+.spotlight:hover::after { opacity: 1; }
+
+/* ===== Text reveal (word by word) ===== */
+.text-reveal .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.35em);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.text-reveal.is-in .word { opacity: 1; transform: translateY(0); }
+
+/* ===== Marquee (used in case 02) — pausable ===== */
+@keyframes marquee-scroll { to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee-scroll 40s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ===== Live pulse dot ===== */
+@keyframes live-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+.pulse-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.2);
+  animation: live-pulse 2s ease-in-out infinite;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+}
+
+/* ===== Compliance panel (shared shell) — theme overrides colors ===== */
+.compliance-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.comp-tile {
+  padding: 1.5rem;
+  border-radius: 14px;
+  border: 1px solid currentColor;
+  border-color: color-mix(in srgb, currentColor 15%, transparent);
+}
+.comp-tile-head {
+  display: flex; align-items: center; gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+.comp-badge {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+.comp-badge.wcag { color: #2f7a5a; }
+.comp-badge.gdpr { color: #2b5aa8; }
+.comp-badge.dpa { color: #8b3a3a; }
+.comp-badge.a11y { color: #b47a2a; }
+
+/* ===== Micro-interaction: hover lift for cards ===== */
+.hover-lift { transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+.hover-lift:hover { transform: translateY(-3px); }
+
+/* ===== ARIA-friendly visually hidden utility ===== */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== Global respect for prefers-reduced-motion (WCAG 2.3.3) ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .text-reveal .word { opacity: 1 !important; transform: none !important; }
+  .marquee-track { animation: none !important; }
+  .pulse-dot { animation: none !important; }
+  .spotlight::after { display: none !important; }
+  .tilt:hover { transform: none !important; }
+}
+
+@media (prefers-color-scheme: dark) {
+  .skip-link { background: #f6f7f9; color: #101827; border-color: #101827; }
+}

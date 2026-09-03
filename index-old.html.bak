@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahsan Javaid | Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --ink: #142035;
+      --muted: #52617d;
+      --line: #d8e0ef;
+      --card: #ffffff;
+      --accent: #0a7f7b;
+      --accent-2: #0b57d0;
+      --hero: linear-gradient(145deg, #0f1f38 0%, #12325a 45%, #175a7a 100%);
+      --shadow: 0 24px 64px rgba(11, 30, 68, 0.16);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, #deedf9 0, transparent 26%),
+        radial-gradient(circle at 86% 2%, #e4f4f0 0, transparent 22%),
+        var(--bg);
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(245, 247, 251, 0.85);
+      border-bottom: 1px solid rgba(216, 224, 239, 0.8);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+    }
+
+    .brand {
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.6px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .hero {
+      margin-top: 1.1rem;
+      border-radius: calc(var(--radius) + 6px);
+      background: var(--hero);
+      color: #eff5ff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      animation: appear 700ms ease-out;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 380px;
+      height: 380px;
+      right: -120px;
+      top: -160px;
+      background: rgba(66, 212, 199, 0.22);
+    }
+
+    .hero::after {
+      width: 300px;
+      height: 300px;
+      left: -110px;
+      bottom: -170px;
+      background: rgba(84, 135, 255, 0.2);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+      padding: 2.2rem;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: "Clash Display", sans-serif;
+      letter-spacing: 0.2px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      line-height: 1.06;
+    }
+
+    .hero-sub {
+      margin-top: 0.65rem;
+      max-width: 750px;
+      font-size: 1.04rem;
+      color: #d2dff6;
+    }
+
+    .meta {
+      margin-top: 1.1rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.1);
+      color: #f4f8ff;
+      border-radius: 999px;
+      padding: 0.38rem 0.72rem;
+      font-size: 0.83rem;
+      font-weight: 600;
+    }
+
+    .hero-card {
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.09);
+      border-radius: 14px;
+      padding: 1rem;
+    }
+
+    .hero-card p {
+      margin: 0;
+      color: #ecf3ff;
+      font-size: 0.92rem;
+    }
+
+    .hero-links {
+      margin-top: 0.8rem;
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 11px;
+      padding: 0.62rem 0.95rem;
+      font-size: 0.88rem;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .btn-main {
+      background: #ffffff;
+      color: #0f2f57;
+    }
+
+    .btn-ghost {
+      color: #ebf3ff;
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .section {
+      margin-top: 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 1.2rem;
+      animation: slide-up 700ms ease both;
+    }
+
+    .section h2 {
+      font-size: 1.35rem;
+      color: #1a315a;
+      margin-bottom: 0.7rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .metric {
+      border: 1px solid #d4dfec;
+      border-radius: 12px;
+      padding: 0.8rem;
+      background: linear-gradient(170deg, #f8fcff 0%, #f4f9f7 100%);
+    }
+
+    .metric strong {
+      display: block;
+      font-family: "Clash Display", sans-serif;
+      color: #073a79;
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .metric span {
+      color: #41597f;
+      font-size: 0.86rem;
+    }
+
+    .timeline-item {
+      border-top: 1px dashed #d5e0ef;
+      padding-top: 0.95rem;
+      margin-top: 0.95rem;
+    }
+
+    .timeline-item:first-child {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .role {
+      font-size: 1.05rem;
+      color: #122d53;
+    }
+
+    .meta-line {
+      color: #4f6384;
+      margin: 0.3rem 0 0.5rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    ul {
+      margin: 0.25rem 0 0 1.15rem;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 0.45rem;
+      color: #2f405e;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tag {
+      background: #f1f6fd;
+      border: 1px solid #d6e3f7;
+      border-radius: 9px;
+      padding: 0.3rem 0.52rem;
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: #274b7c;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+
+    .gallery figure,
+    .case-gallery figure {
+      margin: 0;
+      border: 1px solid #d7e3f1;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fbfdff;
+    }
+
+    .gallery img,
+    .case-gallery img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .gallery figcaption,
+    .case-gallery figcaption {
+      padding: 0.65rem 0.75rem;
+      color: #4f6384;
+      font-size: 0.84rem;
+    }
+
+    .project-text {
+      margin-top: 0.95rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .project-text article {
+      border: 1px solid #d7e3f1;
+      border-radius: 12px;
+      background: #f8fbff;
+      padding: 0.85rem;
+    }
+
+    .project-text h3 {
+      margin-bottom: 0.35rem;
+      font-size: 1rem;
+      color: #18386c;
+    }
+
+    .project-text p {
+      margin: 0;
+      color: #405b85;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .note-box {
+      margin-top: 0.95rem;
+      border-left: 4px solid #0b57d0;
+      background: #eff5ff;
+      padding: 0.8rem 0.9rem;
+      border-radius: 10px;
+      color: #2d4d7c;
+      font-size: 0.9rem;
+    }
+
+    .note-box a {
+      color: #0b57d0;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .case-study-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 0.85rem;
+    }
+
+    .case-hero {
+      border: 1px solid #d7e3f1;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #10223d 0%, #143a67 55%, #0f766e 100%);
+      color: #eef5ff;
+      padding: 1.15rem;
+      box-shadow: 0 18px 40px rgba(16, 38, 78, 0.14);
+      margin-top: 0.85rem;
+    }
+
+    .case-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .case-hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #9fe9dc;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      margin-bottom: 0.55rem;
+    }
+
+    .case-hero h3 {
+      font-size: clamp(1.55rem, 4vw, 2.35rem);
+      line-height: 1.08;
+      margin-bottom: 0.55rem;
+      color: #ffffff;
+    }
+
+    .case-hero p {
+      margin: 0;
+      color: #d7e8ff;
+      font-size: 0.96rem;
+      line-height: 1.65;
+      max-width: 78ch;
+    }
+
+    .case-hero-side {
+      display: grid;
+      gap: 0.7rem;
+      align-content: start;
+    }
+
+    .case-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .case-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      padding: 0.38rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .case-badge strong {
+      font-family: "Clash Display", sans-serif;
+      font-size: 1rem;
+      color: #9fe9dc;
+    }
+
+    .case-hero-stat {
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 0.8rem;
+    }
+
+    .case-hero-stat strong {
+      display: block;
+      color: #ffffff;
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .case-hero-stat span {
+      color: #d7e8ff;
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .case-card {
+      border: 1px solid #d7e3f1;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fbfdff 0%, #f7fbff 100%);
+      padding: 1rem;
+      box-shadow: 0 10px 28px rgba(16, 38, 78, 0.05);
+    }
+
+    .case-card h3 {
+      font-size: 1.05rem;
+      color: #16386b;
+      margin-bottom: 0.65rem;
+    }
+
+    .case-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #0b57d0;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 0.55rem;
+    }
+
+    .case-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #0b57d0, #0a7f7b);
+      color: #fff;
+      font-size: 0.92rem;
+      box-shadow: 0 8px 18px rgba(11, 87, 208, 0.18);
+    }
+
+    .case-header {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .case-summary {
+      color: #486184;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      max-width: 62ch;
+    }
+
+    .case-quickfacts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+      margin-top: 0.75rem;
+    }
+
+    .case-quickfact {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.6rem;
+      align-items: start;
+      background: #ffffff;
+      border: 1px solid #d8e4f3;
+      border-radius: 12px;
+      padding: 0.72rem 0.8rem;
+    }
+
+    .case-quickfact strong {
+      color: #0b57d0;
+      font-family: "Clash Display", sans-serif;
+      font-size: 1rem;
+      min-width: 3.5rem;
+    }
+
+    .case-quickfact span {
+      color: #324766;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .case-editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+      margin-top: 0.85rem;
+    }
+
+    .case-overview {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+    }
+
+    .case-panel {
+      background: #ffffff;
+      border: 1px solid #d8e4f3;
+      border-radius: 12px;
+      padding: 0.78rem 0.85rem;
+    }
+
+    .case-panel strong {
+      display: block;
+      color: #0b57d0;
+      margin-bottom: 0.3rem;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .case-panel p {
+      margin: 0;
+      color: #334969;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .case-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.9rem;
+    }
+
+    .mini-metric {
+      border: 1px solid #d8e4f3;
+      border-radius: 12px;
+      padding: 0.72rem;
+      background: #ffffff;
+    }
+
+    .mini-metric strong {
+      display: block;
+      color: #073a79;
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .mini-metric span {
+      color: #4a6282;
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.7rem;
+      margin-top: 0.8rem;
+    }
+
+    .timeline-step {
+      border: 1px solid #d8e4f3;
+      background: #f8fbff;
+      border-radius: 12px;
+      padding: 0.78rem;
+    }
+
+    .timeline-step strong {
+      display: block;
+      color: #0b57d0;
+      margin-bottom: 0.3rem;
+      font-size: 0.88rem;
+      letter-spacing: 0.25px;
+      text-transform: uppercase;
+    }
+
+    .timeline-step p {
+      margin: 0;
+      color: #324766;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .case-gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+      margin-top: 0.85rem;
+    }
+
+    .footer {
+      margin: 1.4rem 0 1.8rem;
+      text-align: center;
+      color: #50617f;
+      font-size: 0.86rem;
+    }
+
+    @keyframes appear {
+      from { transform: translateY(12px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slide-up {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (min-width: 860px) {
+      .hero-grid { grid-template-columns: 1.2fr 0.8fr; }
+      .split { grid-template-columns: 1.2fr 0.8fr; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .project-text { grid-template-columns: 1fr 1fr; }
+      .case-study-grid { grid-template-columns: 1fr 1fr; }
+      .case-hero-grid { grid-template-columns: 1.3fr 0.7fr; align-items: start; }
+      .case-quickfacts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .case-header { grid-template-columns: 1fr auto; align-items: start; }
+      .case-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .case-editorial-grid { grid-template-columns: 1.05fr 0.95fr; }
+      .case-gallery { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .stats { grid-template-columns: 1fr; }
+      .topbar-inner { padding: 0.4rem 0; }
+      .nav { gap: 0.7rem; }
+      .hero-grid { padding: 1.35rem; }
+      .section { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">AHSAN JAVAID</div>
+      <nav class="nav">
+        <a href="#summary">Summary</a>
+        <a href="#impact">Impact</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Snapshots</a>
+        <a href="#case-study">Case Study</a>
+        <a href="case-study-lekab.html">Full Case Study →</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="hero">
+      <div class="hero-grid">
+        <div>
+          <h1>Senior Product Designer | Transforming Complex B2B/B2C SaaS & AI Workflows into High-Adoption Platforms</h1>
+          <p class="hero-sub">Senior UX/UI and Product Designer with 8 years of experience in enterprise SaaS, B2B/B2C platforms, and data-heavy workflows. I transform backend complexity into intuitive products that improve adoption, speed delivery, and reduce support load.</p>
+          <div class="meta">
+            <span class="pill">Malmo, Sweden</span>
+            <span class="pill">EU Citizen (Danish)</span>
+            <span class="pill">SE / DK / Hybrid / Remote</span>
+            <span class="pill">MSc Information Technology, Aalborg University</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <p><strong>Contact</strong></p>
+          <p>Email: ahsang2003@yahoo.com</p>
+          <p>Phone (SE): +46 73 553 7366</p>
+          <p>Phone (DK): +45 22 25 80 16</p>
+          <p>LinkedIn: linkedin.com/in/ahsanjavaidch</p>
+          <div class="hero-links">
+            <a class="btn btn-main" href="mailto:ahsang2003@yahoo.com">Email Me</a>
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/ahsanjavaidch" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="summary">
+      <h2>Professional Summary</h2>
+      <div class="split">
+        <div>
+          <p>As a systems-level designer, I bridge product vision and technical delivery through DesignOps, component architecture, and code-aligned design tokens. My focus is to reduce ambiguity for engineers and create reliable, scalable experiences for users.</p>
+          <p>I work across discovery, interaction design, accessibility, prototyping, and production QA, with a strong record of aligning technical constraints to measurable business outcomes.</p>
+        </div>
+        <div>
+          <div class="tags">
+            <span class="tag">Enterprise SaaS</span>
+            <span class="tag">B2B/B2C UX</span>
+            <span class="tag">Design Systems</span>
+            <span class="tag">Design Tokens</span>
+            <span class="tag">UX Research</span>
+            <span class="tag">Prototyping</span>
+            <span class="tag">WCAG / ARIA</span>
+            <span class="tag">Agile Delivery</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="impact">
+      <h2>Core Value and Measurable Impact</h2>
+      <div class="stats">
+        <div class="metric"><strong>35%</strong><span>Usability improvement in complex legacy platform redesigns</span></div>
+        <div class="metric"><strong>40%</strong><span>Faster feature time-to-market via scalable Figma component libraries</span></div>
+        <div class="metric"><strong>50%</strong><span>Reduction in post-implementation visual bugs through token alignment</span></div>
+        <div class="metric"><strong>22%</strong><span>Conversion lift through UX friction analysis and iterative optimization</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <h2>Selected Experience</h2>
+
+      <article class="timeline-item">
+        <h3 class="role">UX/UI Design and Quality Engineer</h3>
+        <div class="meta-line">LEKAB Communication System AB | Stockholm, Sweden | 2022 - 2025</div>
+        <ul>
+          <li>Architected a unified self-service experience that moved manual IT-gated tasks into intuitive customer workflows, reducing support overhead by 30%.</li>
+          <li>Scaled a cross-platform design system as engineering's single source of truth, increasing front-end delivery velocity by 20%.</li>
+          <li>Built manual testing frameworks and edge-case documentation under strict privacy constraints, reducing regression testing effort by 33%.</li>
+          <li>Led QA and usability checks in staging and sandbox builds, aligning design intent with implementation quality before release.</li>
+        </ul>
+      </article>
+
+      <article class="timeline-item">
+        <h3 class="role">UX/UI Designer and Graphic Artist</h3>
+        <div class="meta-line">Nordic and Asia | Independent Contractor Marketplace | 2022 - 2025</div>
+        <ul>
+          <li>Delivered end-to-end UX/UI solutions for web and mobile products, combining research, branding, and interaction design.</li>
+          <li>Improved onboarding and personalization through user interviews, testing, and analytics-driven iteration.</li>
+          <li>Created responsive, accessible interfaces and scalable component systems aligned to iOS and Material patterns.</li>
+        </ul>
+      </article>
+
+      <article class="timeline-item">
+        <h3 class="role">Design Assistant</h3>
+        <div class="meta-line">LOLO | Copenhagen, Denmark | 2016 - 2018</div>
+        <ul>
+          <li>Maintained centralized design documentation and supported stakeholder coordination across schedules and deliverables.</li>
+          <li>Aligned design processes with timeline and compliance requirements to improve delivery consistency.</li>
+        </ul>
+      </article>
+
+      <article class="timeline-item">
+        <h3 class="role">Graphic and Web Designer</h3>
+        <div class="meta-line">MS Tech | Copenhagen, Denmark | 2015 - 2017</div>
+        <ul>
+          <li>Designed digital assets, prototypes, and branding visuals tailored to client business objectives.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section split" id="skills">
+      <div>
+        <h2>Skills and Methods</h2>
+        <ul>
+          <li><strong>Product Strategy and Leadership:</strong> user-centered design, information architecture, roadmap and sprint collaboration.</li>
+          <li><strong>Research and Validation:</strong> interviews, usability testing, heatmaps/session recordings, and iterative prototyping.</li>
+          <li><strong>DesignOps and Handoff:</strong> Figma variables, design tokens, component libraries, and implementation QA.</li>
+          <li><strong>Tooling:</strong> Figma, Adobe XD, Illustrator, Photoshop, Jira, Miro, SharePoint, Teams, Google Meet.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Education and Languages</h2>
+        <ul>
+          <li>MCS Information Technology, Aalborg University (2015 - 2017)</li>
+          <li>IT-com, ICT Certification, Aalborg University (2014 - 2015)</li>
+          <li>Bachelor's Top-Up, Digital Concept Development, Business Academy Copenhagen (2010 - 2012)</li>
+          <li>Multimedia Design and Communication, Lyngby Business Academy (2005 - 2007)</li>
+          <li>Languages: English (Fluent), Danish (Good understanding), Swedish (Actively advancing)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="case-study">
+      <h2>Case Study: LEKAB Communication Systems AB</h2>
+      <p>This section follows the same flow shown in the PDF and turns it into a cleaner portfolio story.</p>
+
+      <div class="case-hero">
+        <div class="case-hero-grid">
+          <div>
+            <div class="case-hero-kicker"><span class="case-icon">✦</span> Featured Case Study</div>
+            <h3>Designing for secure, high-stakes communication workflows.</h3>
+            <p>LEKAB is a communication and workflow automation platform used across healthcare, finance, logistics, public sector, retail, and manufacturing. The work centered on reducing friction, increasing trust, and making complex flows feel calm and structured.</p>
+          </div>
+          <div class="case-hero-side">
+            <div class="case-badges">
+              <span class="case-badge"><strong>8</strong> years experience</span>
+              <span class="case-badge"><strong>12</strong> step flow</span>
+              <span class="case-badge"><strong>1</strong> platform redesign</span>
+            </div>
+            <div class="case-hero-stat">
+              <strong>LEKAB AB</strong>
+              <span>End-to-end UX ownership across research, architecture, design, validation, and handoff for sandbox and production portals.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-study-grid">
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">01</span> Problem</div>
+              <h3>Users were blocked by manual access and unclear data requirements.</h3>
+            </div>
+          </div>
+          <p class="case-summary">Users had to contact an admin for an ID and access code, and many abandoned the flow when too much information was requested upfront. Missing or incorrect data created risk, support overhead, and poor trust.</p>
+          <div class="case-quickfacts">
+            <div class="case-quickfact"><strong>Who</strong><span>Enterprise users, admins, and support teams.</span></div>
+            <div class="case-quickfact"><strong>Pain</strong><span>Abandonment, missing data, and operational friction.</span></div>
+            <div class="case-quickfact"><strong>Need</strong><span>A clearer, safer, and more progressive onboarding experience.</span></div>
+          </div>
+          <div class="case-metrics">
+            <div class="mini-metric"><strong>Risk</strong><span>Incorrect data affected security and personalization.</span></div>
+            <div class="mini-metric"><strong>Support</strong><span>Admin workload increased because of manual steps.</span></div>
+            <div class="mini-metric"><strong>Trust</strong><span>The upfront flow felt heavy and unclear.</span></div>
+            <div class="mini-metric"><strong>Drop-off</strong><span>Many users abandoned the process early.</span></div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">02</span> Objective</div>
+              <h3>Make signup feel guided, safe, and easy to complete.</h3>
+            </div>
+          </div>
+          <p class="case-summary">The goal was to implement a user-friendly signup flow that reduces abandonment while collecting accurate information gradually. The experience had to explain why details matter without compromising security.</p>
+          <div class="case-quickfacts">
+            <div class="case-quickfact"><strong>Goal</strong><span>Reduce abandonment while improving data quality.</span></div>
+            <div class="case-quickfact"><strong>Tone</strong><span>Clear, reassuring, and high trust.</span></div>
+            <div class="case-quickfact"><strong>Constraint</strong><span>Security and compliance remained non-negotiable.</span></div>
+          </div>
+          <div class="case-metrics">
+            <div class="mini-metric"><strong>Explain</strong><span>Why each field is required.</span></div>
+            <div class="mini-metric"><strong>Progressive</strong><span>Ask for data step by step.</span></div>
+            <div class="mini-metric"><strong>Minimize</strong><span>Admin involvement and confusion.</span></div>
+            <div class="mini-metric"><strong>Increase</strong><span>Accuracy and completeness of records.</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="case-editorial-grid">
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">03</span> Approach</div>
+              <h3>Map the workflow, remove friction, and validate early.</h3>
+            </div>
+          </div>
+          <p class="case-summary">User research identified the key friction points, so the flow was redesigned as a phased signup with minimal upfront input. Wireframes and prototypes were developed collaboratively with engineers and product managers with a strong focus on accessibility, responsiveness, and visual consistency.</p>
+          <div class="case-overview">
+            <div class="case-panel">
+              <strong>Discovery and Research</strong>
+              <p>Led user research to identify bottlenecks, risky steps, and places where users lost confidence.</p>
+            </div>
+            <div class="case-panel">
+              <strong>Workflow Architecture</strong>
+              <p>Mapped the end-to-end logic and reorganized information hierarchy to keep each step focused.</p>
+            </div>
+            <div class="case-panel">
+              <strong>Prototype and Test</strong>
+              <p>Built high-fidelity prototypes and validated them with usability checks before handoff.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">04</span> Solution</div>
+              <h3>A phased signup flow with clearer explanations and less stress.</h3>
+            </div>
+          </div>
+          <p class="case-summary">The solution introduced a phased signup flow to reduce friction, with clear explanations for why specific information is required. Notifications and admin processes were streamlined to improve efficiency, and the flow was validated through usability testing to ensure smooth completion and accurate data collection.</p>
+          <div class="case-overview">
+            <div class="case-panel">
+              <strong>What Changed</strong>
+              <p>Users could provide data at the right moment instead of being overwhelmed at the start.</p>
+            </div>
+            <div class="case-panel">
+              <strong>System Impact</strong>
+              <p>Admin processes were simplified, and the platform felt more mature and dependable.</p>
+            </div>
+            <div class="case-panel">
+              <strong>Design Outcome</strong>
+              <p>The experience became more readable, responsive, and consistent across screens.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <article class="case-card" style="margin-top: 1rem;">
+        <div class="case-header">
+          <div>
+            <div class="case-kicker"><span class="case-icon">05</span> Impact</div>
+            <h3>Measured outcomes and business value.</h3>
+          </div>
+        </div>
+        <div class="case-overview">
+          <div class="case-panel">
+            <strong>Impact Summary</strong>
+            <p>The updated flow reduced signup abandonment, improved the accuracy and completeness of user information, increased user trust and satisfaction, and lowered the administrative workload required for account creation.</p>
+          </div>
+          <div class="case-panel">
+            <strong>Business Value</strong>
+            <p>The redesign reduced friction in a high-stakes environment while strengthening the platform’s credibility and operational efficiency.</p>
+          </div>
+          <div class="case-panel">
+            <strong>Editorial Takeaway</strong>
+            <p>This version mirrors the structure of the PDF, but it reads more cleanly on the web and is easier for a portfolio reviewer to scan.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="case-editorial-grid">
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">06</span> 12-Step Flow</div>
+              <h3>End-to-end design process</h3>
+            </div>
+          </div>
+          <div class="timeline-grid">
+            <div class="timeline-step"><strong>01 Discovery and research</strong><p>User interviews, workflow observations, and bottleneck analysis.</p></div>
+            <div class="timeline-step"><strong>02 Synthesis and insights</strong><p>Patterns, risks, and opportunities grouped into themes.</p></div>
+            <div class="timeline-step"><strong>03 Problem definition</strong><p>Clear problem statements aligned with business goals and constraints.</p></div>
+            <div class="timeline-step"><strong>04 Workflow and structure</strong><p>Redundant steps removed and decision points clarified.</p></div>
+            <div class="timeline-step"><strong>05 Information architecture</strong><p>Content hierarchy simplified and labels clarified.</p></div>
+            <div class="timeline-step"><strong>06 Wireframing</strong><p>Low-fidelity layouts tested screen hierarchy and flow.</p></div>
+            <div class="timeline-step"><strong>07 Interactive prototyping</strong><p>Clickable prototypes explored realistic user journeys.</p></div>
+            <div class="timeline-step"><strong>08 UI design</strong><p>Accessible, responsive interfaces were refined with strong visual consistency.</p></div>
+            <div class="timeline-step"><strong>09 Design system alignment</strong><p>Reusable components and patterns kept the product scalable.</p></div>
+            <div class="timeline-step"><strong>10 Validation and testing</strong><p>Direct user sessions checked trust, clarity, and behavior.</p></div>
+            <div class="timeline-step"><strong>11 Iteration</strong><p>Feedback was applied to reduce friction and visual noise.</p></div>
+            <div class="timeline-step"><strong>12 Handoff and delivery</strong><p>Final designs, prototypes, and implementation notes were prepared for engineers.</p></div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-header">
+            <div>
+              <div class="case-kicker"><span class="case-icon">07</span> Screen Sequence</div>
+              <h3>Signup, login, and reset flows shown as a visual story.</h3>
+            </div>
+          </div>
+          <div class="case-overview">
+            <div class="case-panel">
+              <strong>Login</strong>
+              <p>Start with a clean welcome screen, username and password, remember-me, and forgot-password support.</p>
+            </div>
+            <div class="case-panel">
+              <strong>Create Account</strong>
+              <p>Use a phased account creation flow with email input, additional details, and sign-up confirmation.</p>
+            </div>
+            <div class="case-panel">
+              <strong>Password Reset</strong>
+              <p>Flow through email capture, code verification, password creation, and return to login.</p>
+            </div>
+          </div>
+          <div class="case-gallery">
+            <figure>
+              <img src="case study.jpeg" alt="LEKAB case study screenshot showing the problem, objective, research, and design strategy sections." />
+              <figcaption>Exact screenshot from the case-study flow, preserved as a visual reference.</figcaption>
+            </figure>
+            <figure>
+              <img src="figma-task-snapshot.png" alt="Figma canvas snapshot showing the broader layout reference for the LEKAB design work." />
+              <figcaption>Figma snapshot used as the layout reference for the final web presentation.</figcaption>
+            </figure>
+          </div>
+          <div class="case-metrics">
+            <div class="mini-metric"><strong>Clear</strong><span>Screen states are easy to understand at a glance.</span></div>
+            <div class="mini-metric"><strong>Connected</strong><span>Each step follows naturally into the next.</span></div>
+            <div class="mini-metric"><strong>Trusted</strong><span>The experience feels safer and more predictable.</span></div>
+            <div class="mini-metric"><strong>Beautified</strong><span>The flow is now presented as a polished portfolio story.</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="note-box">
+        The page now follows the same flow shown in the PDF and presents the LEKAB work as a cleaner, more portfolio-like story.
+      </div>
+    </section>
+
+    <p class="footer">Built from your CV content in CV-M-long-AhsanJavaid.pdf. Last updated: August 2026.</p>
+  </main>
+</body>
+</html>

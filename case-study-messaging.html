@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Messaging Platform — Bento build log | Ahsan Javaid</title>
+  <meta name="description" content="UX/UI case study: designing an SMS and RCS campaign builder from scratch using Jobs-to-be-Done, information architecture, and a component-first design system." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ========================================================================
+       Case 02 · Business Messaging Platform
+       Theme: BENTO DASHBOARD — dark navy, teal accent, monospace, live data
+       ======================================================================== */
+    :root {
+      --bg: #0a0e1a;
+      --bg-2: #0f1524;
+      --card: #131a2c;
+      --card-2: #1a2237;
+      --line: #22304d;
+      --line-strong: #2e3f60;
+      --ink: #e6ecf5;
+      --ink-2: #a9b6cd;
+      --muted: #7185a3;
+      --muted-2: #4a5a7a;
+      --accent: #5eead4;
+      --accent-2: #7dd3fc;
+      --accent-glow: rgba(94, 234, 212, 0.14);
+      --warn: #fbbf24;
+      --danger: #f87171;
+      --ok: #4ade80;
+      --radius: 20px;
+      --radius-sm: 12px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 20% 0%, rgba(94, 234, 212, 0.06), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(125, 211, 252, 0.05), transparent 40%);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1280px, 94%); margin: 0 auto; }
+
+    /* ===== Marquee ticker ===== */
+    .ticker {
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+      padding: 0.7rem 0;
+      overflow: hidden;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 3rem;
+      white-space: nowrap;
+      animation: scroll 40s linear infinite;
+      width: max-content;
+    }
+    .ticker-item {
+      color: var(--muted);
+    }
+    .ticker-item b { color: var(--accent); font-weight: 600; }
+    .ticker-item i { font-style: normal; color: var(--muted-2); margin: 0 0.5rem; }
+    @keyframes scroll {
+      to { transform: translateX(-50%); }
+    }
+
+    /* ===== Topbar ===== */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 64px;
+    }
+    .brand {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .brand span { color: var(--muted); font-weight: 400; }
+    .nav-side { display: none; gap: 1.4rem; }
+    .nav-side a {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--muted); font-size: 0.78rem;
+    }
+    .nav-side a:hover { color: var(--accent); }
+    .back-link {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ===== Hero ===== */
+    .hero { padding: 5rem 0 3rem; }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      color: var(--accent);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      padding: 0.35rem 0.85rem;
+      background: var(--accent-glow);
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      border-radius: 999px;
+    }
+    .kicker .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    h1.display {
+      font-family: "Fraunces", serif;
+      font-weight: 400;
+      font-size: clamp(2.6rem, 6.5vw, 5.2rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin: 0 0 1.5rem;
+      max-width: 18ch;
+      color: var(--ink);
+    }
+    h1.display em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .deck {
+      font-size: 1.15rem;
+      color: var(--ink-2);
+      max-width: 62ch;
+      margin: 0 0 3rem;
+      line-height: 1.6;
+    }
+
+    /* ===== Bento grid ===== */
+    .bento {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .cell {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cell.accent {
+      background: linear-gradient(145deg, var(--card), var(--card-2));
+      border-color: rgba(94, 234, 212, 0.25);
+    }
+    .cell.accent::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .cell-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .cell-label::before {
+      content: "◆"; color: var(--accent); font-size: 0.6rem;
+    }
+
+    /* Big metric */
+    .metric-big {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin: 0.5rem 0 0.6rem;
+    }
+    .metric-big.teal { color: var(--accent); }
+    .metric-caption {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .metric-mono {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      color: var(--muted-2);
+      margin-top: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Meta grid */
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem 2rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin: 3rem 0;
+    }
+    .meta > div strong {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.68rem;
+      color: var(--muted-2);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .meta > div span {
+      font-size: 0.9rem;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ===== Sections ===== */
+    section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .section-title {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .section-title::before {
+      content: attr(data-num);
+      font-family: "JetBrains Mono", monospace;
+      color: var(--muted-2);
+      font-size: 0.85rem;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+    }
+    h2.head {
+      font-family: "Fraunces", serif;
+      font-weight: 400;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.2rem;
+      max-width: 22ch;
+      color: var(--ink);
+    }
+    .lede {
+      font-size: 1.05rem;
+      color: var(--ink-2);
+      max-width: 62ch;
+      margin: 0 0 2.5rem;
+      line-height: 1.65;
+    }
+
+    /* ===== Research flow ===== */
+    .flow-track {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      overflow-x: auto;
+      margin-top: 2rem;
+    }
+    .flow-line {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      min-width: 900px;
+      position: relative;
+    }
+    .flow-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+      position: relative;
+    }
+    .flow-dot {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--card-2);
+      border: 1px solid var(--line-strong);
+      display: flex; align-items: center; justify-content: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+      z-index: 2;
+    }
+    .flow-step.active .flow-dot {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+    .flow-step b {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--ink);
+      text-align: center;
+    }
+    .flow-step span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-align: center;
+      max-width: 12ch;
+      line-height: 1.4;
+    }
+    .flow-connector {
+      flex: 0 0 40px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--line-strong), var(--accent), var(--line-strong));
+      align-self: center;
+      margin-top: 1rem;
+    }
+
+    /* ===== JTBD cards ===== */
+    .jtbd-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .jtbd {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      position: relative;
+    }
+    .jtbd .tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+    .jtbd .story {
+      font-family: "Fraunces", serif;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: var(--ink);
+      margin: 0;
+    }
+    .jtbd .story b { color: var(--accent); font-weight: 500; }
+    .jtbd .story em { color: var(--ink-2); font-style: italic; }
+
+    /* ===== IA / code panel ===== */
+    .code-panel {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .code-head {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.8rem 1.2rem;
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+    }
+    .code-head .dot-r { width: 10px; height: 10px; border-radius: 50%; background: #ef4444; }
+    .code-head .dot-y { width: 10px; height: 10px; border-radius: 50%; background: #fbbf24; }
+    .code-head .dot-g { width: 10px; height: 10px; border-radius: 50%; background: #22c55e; }
+    .code-head .file { color: var(--muted); margin-left: 1rem; }
+    .code-body {
+      padding: 1.4rem 1.5rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: var(--ink-2);
+      overflow-x: auto;
+    }
+    .code-body .k { color: var(--accent); }
+    .code-body .s { color: #a5f3fc; }
+    .code-body .c { color: var(--muted-2); font-style: italic; }
+    .code-body .n { color: var(--warn); }
+
+    /* ===== Screen preview ===== */
+    .screen-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .screen {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+    }
+    .screen h4 {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin: 0 0 0.4rem;
+      color: var(--ink);
+    }
+    .screen p { color: var(--muted); margin: 0 0 1.2rem; font-size: 0.9rem; }
+
+    /* ===== Beauty mode-screen mockups (rich dashboards) ===== */
+    .mock-app {
+      background: linear-gradient(180deg, #0d1424 0%, #0a0f1c 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(94, 234, 212, 0.12);
+      padding: 0.9rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+    }
+    .mock-app::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 10% 0%, rgba(94, 234, 212, 0.06), transparent 60%);
+      pointer-events: none;
+    }
+    .mock-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(94, 234, 212, 0.08);
+    }
+    .mock-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .mock-tag .dot-live {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
+      animation: mock-blink 1.6s ease-in-out infinite;
+    }
+    @keyframes mock-blink { 50% { opacity: 0.4; } }
+    .mock-badge {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .mock-title {
+      font-family: "Fraunces", serif;
+      font-size: 0.98rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    /* Compose */
+    .msg-preview {
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.08), rgba(125, 211, 252, 0.05));
+      border: 1px solid rgba(94, 234, 212, 0.16);
+      border-radius: 10px;
+      padding: 0.65rem 0.8rem;
+      display: flex; flex-direction: column; gap: 4px;
+      position: relative;
+    }
+    .msg-preview::before {
+      content: "SMS · LIVE PREVIEW";
+      position: absolute;
+      top: -6px; left: 0.7rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.55rem;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      background: #0d1424;
+      padding: 0 6px;
+    }
+    .msg-preview .from {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+    }
+    .msg-preview .body {
+      font-size: 0.78rem;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .msg-preview .body b { color: var(--accent); font-weight: 500; font-family: "JetBrains Mono", monospace; font-size: 0.72rem; }
+
+    .char-meter {
+      display: flex; align-items: center; gap: 8px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+    .char-meter .bar {
+      flex: 1; height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .char-meter .bar i {
+      display: block; height: 100%;
+      background: linear-gradient(90deg, var(--accent), #4ade80);
+      width: 68%;
+      border-radius: 2px;
+    }
+    .char-meter b { color: var(--accent); }
+
+    .channel-toggle {
+      display: flex; gap: 5px;
+    }
+    .channel-toggle .ch {
+      flex: 1;
+      padding: 0.4rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      text-align: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .channel-toggle .ch.on {
+      background: rgba(94, 234, 212, 0.14);
+      border-color: rgba(94, 234, 212, 0.35);
+      color: var(--accent);
+    }
+    .channel-toggle .ch b { color: var(--ink); font-family: "Fraunces", serif; font-weight: 500; display: block; font-size: 0.78rem; margin-bottom: 2px; }
+    .channel-toggle .ch.on b { color: var(--accent); }
+
+    /* Schedule — calendar mini */
+    .cal-mini {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px;
+    }
+    .cal-mini i {
+      aspect-ratio: 1;
+      background: rgba(255,255,255,0.04);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.58rem;
+      color: var(--muted);
+    }
+    .cal-mini i.head { background: transparent; color: var(--muted-2); font-size: 0.5rem; letter-spacing: 0.08em; }
+    .cal-mini i.today {
+      background: linear-gradient(135deg, var(--accent), #7dd3fc);
+      color: var(--bg);
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(94, 234, 212, 0.28);
+    }
+    .cal-mini i.next { color: var(--ink); }
+
+    .rate-slider {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 0.6rem 0.7rem;
+    }
+    .rate-slider .lbl {
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .rate-slider .lbl b {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+    }
+    .rate-slider .track {
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      position: relative;
+    }
+    .rate-slider .track i {
+      position: absolute; inset: 0 60% 0 0;
+      background: linear-gradient(90deg, var(--accent), #7dd3fc);
+      border-radius: 2px;
+    }
+    .rate-slider .track::after {
+      content: "";
+      position: absolute; top: -4px; left: 40%;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(94, 234, 212, 0.2);
+      transform: translateX(-50%);
+    }
+
+    /* Monitor — SVG donut chart + KPIs */
+    .monitor-grid {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+    .donut-wrap {
+      position: relative;
+      width: 90px; height: 90px;
+    }
+    .donut-wrap svg { display: block; width: 100%; height: 100%; }
+    .donut-wrap .donut-center {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: "Fraunces", serif;
+    }
+    .donut-wrap .donut-center b {
+      font-size: 1.1rem; color: var(--ink); font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .donut-wrap .donut-center span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.52rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .kpi-stack { display: flex; flex-direction: column; gap: 4px; }
+    .kpi-row {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      padding: 0.35rem 0.5rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+    .kpi-row b { color: var(--ink); font-weight: 500; }
+    .kpi-row .dt { display: inline-flex; align-items: center; gap: 4px; }
+    .kpi-row .dt .d { width: 5px; height: 5px; border-radius: 50%; }
+    .kpi-row .dt .d.g { background: #4ade80; }
+    .kpi-row .dt .d.r { background: #f87171; }
+    .kpi-row .dt .d.y { background: #fbbf24; }
+
+    .pause-cta {
+      background: linear-gradient(135deg, #f87171, #dc2626);
+      color: #fff;
+      text-align: center;
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      box-shadow: 0 6px 18px rgba(248, 113, 113, 0.25);
+    }
+
+    /* Analyze — big revenue + spark bars */
+    .rev-hero {
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.08), rgba(94, 234, 212, 0.04));
+      border: 1px solid rgba(74, 222, 128, 0.16);
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+    }
+    .rev-hero .lbl {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6rem;
+      color: #4ade80;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .rev-hero .val {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 1.5rem;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-top: 4px;
+    }
+    .rev-hero .roi {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      color: #4ade80;
+      margin-top: 4px;
+    }
+
+    .seg-bars {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .seg-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 40px;
+      gap: 6px;
+      align-items: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6rem;
+    }
+    .seg-row span:first-child { color: var(--muted); }
+    .seg-row .bar {
+      height: 5px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden;
+    }
+    .seg-row .bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), #7dd3fc); border-radius: 3px; }
+    .seg-row b { text-align: right; color: var(--ink); font-family: "Fraunces", serif; font-weight: 500; font-size: 0.72rem; }
+
+    /* Export CTA */
+    .export-cta {
+      background: rgba(94, 234, 212, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(94, 234, 212, 0.3);
+      text-align: center;
+      padding: 0.55rem;
+      border-radius: 8px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      letter-spacing: 0.03em;
+    }
+    .app-preview {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+    }
+    .app-row {
+      display: flex; justify-content: space-between; padding: 0.5rem 0.7rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .app-row.on {
+      background: var(--accent-glow);
+      border-color: rgba(94, 234, 212, 0.3);
+      color: var(--accent);
+    }
+    .app-row b { color: var(--ink); font-weight: 500; }
+    .app-row .val { color: var(--muted); }
+
+    /* Insights */
+    .insights { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
+    .insight {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+    .insight-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent-glow);
+      color: var(--accent);
+      border: 1px solid rgba(94, 234, 212, 0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Fraunces", serif; font-weight: 500; font-size: 1.05rem;
+    }
+    .insight h4 { font-family: "Fraunces", serif; font-weight: 500; font-size: 1.1rem; margin: 0 0 0.4rem; color: var(--ink); }
+    .insight p { color: var(--ink-2); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+
+    /* Outcome bento */
+    .outcome-bento {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Footer */
+    .cta-block {
+      padding: 5rem 0;
+      background: var(--card);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+    .cta-block h2 {
+      font-family: "Fraunces", serif;
+      font-weight: 400;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      margin: 0 0 1rem;
+      color: var(--ink);
+    }
+    .cta-block p { color: var(--muted); margin: 0 0 2rem; }
+    .cta-row { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; }
+    .cta {
+      padding: 0.75rem 1.3rem;
+      border-radius: 10px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .cta.primary { background: var(--accent); color: var(--bg); }
+    .cta.ghost { border: 1px solid var(--line-strong); color: var(--ink-2); }
+    .foot {
+      padding: 1.5rem 0;
+      color: var(--muted); font-size: 0.8rem;
+      text-align: center;
+      font-family: "JetBrains Mono", monospace;
+      border-top: 1px solid var(--line);
+      background: var(--bg-2);
+    }
+
+    /* Responsive bento */
+    @media (min-width: 720px) {
+      .nav-side { display: flex; }
+      .meta { grid-template-columns: repeat(3, 1fr); }
+      .jtbd-grid { grid-template-columns: repeat(2, 1fr); }
+      .insights { grid-template-columns: 1fr 1fr; }
+      .screen-grid { grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+    }
+    @media (min-width: 960px) {
+      .meta { grid-template-columns: repeat(6, 1fr); }
+      .bento {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: 240px 240px;
+        gap: 1.2rem;
+      }
+      .cell.tall { grid-row: span 2; }
+      .cell.wide-2 { grid-column: span 2; }
+      .cell.wide-3 { grid-column: span 3; }
+      .cell.wide-4 { grid-column: span 4; }
+      .cell.wide-6 { grid-column: span 6; }
+      .outcome-bento {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 200px 200px;
+      }
+      .outcome-bento .out-wide { grid-column: span 2; }
+      .jtbd-grid { grid-template-columns: repeat(3, 1fr); }
+      .screen-grid { grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 3rem 0 1.5rem; }
+      section { padding: 3.5rem 0; }
+      .bento { gap: 0.7rem; }
+      .cell { padding: 1.2rem; }
+      .metric-big { font-size: 2rem !important; }
+      .flow-track { padding: 1.4rem 1rem; }
+      .screen-grid { gap: 1.6rem; }
+      .screen { padding: 1.2rem; }
+      .mock-app { min-height: unset; padding: 0.8rem; }
+      .meta { gap: 0.8rem 1.4rem; padding: 1.1rem 0; margin: 2rem 0; }
+      .cta-block { padding: 3.5rem 0; }
+    }
+  </style>
+  <link rel="stylesheet" href="enhancements.css" />
+</head>
+<body>
+
+  <!-- ============ TICKER ============ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item"><b>128,402</b> sent<i>·</i></span>
+      <span class="ticker-item"><b>98.8%</b> delivered<i>·</i></span>
+      <span class="ticker-item"><b>SEK 2.4M</b> attributed<i>·</i></span>
+      <span class="ticker-item"><b>15 min</b> time to launch<i>·</i></span>
+      <span class="ticker-item"><b>+40%</b> feature TTM<i>·</i></span>
+      <span class="ticker-item"><b>0</b> spreadsheets remaining<i>·</i></span>
+      <span class="ticker-item"><b>9→1</b> playbook consolidation<i>·</i></span>
+      <span class="ticker-item"><b>6</b> jobs, 1 product<i>·</i></span>
+      <!-- duplicate for infinite loop -->
+      <span class="ticker-item"><b>128,402</b> sent<i>·</i></span>
+      <span class="ticker-item"><b>98.8%</b> delivered<i>·</i></span>
+      <span class="ticker-item"><b>SEK 2.4M</b> attributed<i>·</i></span>
+      <span class="ticker-item"><b>15 min</b> time to launch<i>·</i></span>
+      <span class="ticker-item"><b>+40%</b> feature TTM<i>·</i></span>
+      <span class="ticker-item"><b>0</b> spreadsheets remaining<i>·</i></span>
+      <span class="ticker-item"><b>9→1</b> playbook consolidation<i>·</i></span>
+      <span class="ticker-item"><b>6</b> jobs, 1 product<i>·</i></span>
+    </div>
+  </div>
+
+  <!-- ============ TOPBAR ============ -->
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">// AHSAN.JAVAID <span>· case_02</span></a>
+      <nav class="nav-side">
+        <a href="#overview">01 Overview</a>
+        <a href="#process">02 Process</a>
+        <a href="#jtbd">03 JTBD</a>
+        <a href="#ia">04 IA</a>
+        <a href="#screens">05 Screens</a>
+        <a href="#outcome">06 Outcome</a>
+      </nav>
+      <a class="back-link" href="index.html">← portfolio</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker"><span class="dot"></span>Case 02 · Greenfield B2B · Live 2024</div>
+      <h1 class="display reveal d1">Building a messaging platform from a <em>blank canvas.</em></h1>
+      <p class="deck reveal d2">
+        Nine ops people, forty spreadsheets, zero shared vocabulary. A greenfield SMS &amp; RCS campaign
+        builder for LEKAB — designed component-first, framed by Jobs-to-be-Done, and validated by users
+        long before we shipped.
+      </p>
+
+      <!-- Hero bento -->
+      <div class="bento">
+        <div class="cell tall wide-3 accent spotlight reveal d3">
+          <div class="cell-label">Featured metric</div>
+          <div class="metric-big teal"><span class="count-up" data-count="15">0</span> min</div>
+          <div class="metric-caption">Median time-to-launch a new campaign, down from ~4 hours in the old spreadsheet-plus-CLI stack.</div>
+          <div class="metric-mono">// measured over 60 days · n=214 campaigns</div>
+        </div>
+        <div class="cell wide-3 spotlight reveal d4 hover-lift">
+          <div class="cell-label">Delivery accuracy</div>
+          <div class="metric-big"><span class="count-up" data-count="98.8">0</span><span style="color: var(--muted); font-size: 0.5em;">%</span></div>
+          <div class="metric-caption">Successful message delivery rate on production traffic.</div>
+        </div>
+        <div class="cell wide-3 spotlight reveal d5 hover-lift">
+          <div class="cell-label">Revenue attributed</div>
+          <div class="metric-big">SEK 2.4M</div>
+          <div class="metric-caption">Single Black Friday campaign — traceable back to the audience segment.</div>
+        </div>
+        <div class="cell wide-3 reveal d6">
+          <div class="cell-label">// stack</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 2; color: var(--ink-2);">
+            <div><span style="color: var(--accent);">design</span> = Figma variables + tokens</div>
+            <div><span style="color: var(--accent);">research</span> = JTBD, card sort</div>
+            <div><span style="color: var(--accent);">validation</span> = usability + prototype</div>
+            <div><span style="color: var(--accent);">delivery</span> = Agile squad · 6 eng</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div><strong>role</strong><span>Lead Designer</span></div>
+        <div><strong>client</strong><span>LEKAB AB</span></div>
+        <div><strong>year</strong><span>2024</span></div>
+        <div><strong>method</strong><span>JTBD · IA · Component-first</span></div>
+        <div><strong>platform</strong><span>Web · Desktop</span></div>
+        <div><strong>users</strong><span>Ops · Marketing · Finance</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section id="overview">
+    <div class="wrap">
+      <div class="section-title" data-num="01">Overview</div>
+      <h2 class="head">Turning tribal knowledge into a scalable product.</h2>
+      <p class="lede">
+        Ops had built a working system — but it lived in their heads and inboxes. The product had to
+        expose that logic without dumbing it down. That meant treating the design as an interface to a
+        domain, not just a set of screens.
+      </p>
+
+      <div class="bento" style="grid-template-rows: auto;">
+        <div class="cell wide-2">
+          <div class="cell-label">// context</div>
+          <p style="color: var(--ink-2); margin: 0; font-size: 0.95rem; line-height: 1.65;">
+            Enterprise operators sending <b style="color: var(--ink);">100k+</b> SMS bursts, drip flows, and
+            transactional alerts across <b style="color: var(--ink);">40+ markets</b>. Every ops person had their
+            own spreadsheet, methodology, and vocabulary.
+          </p>
+        </div>
+        <div class="cell wide-2">
+          <div class="cell-label">// my role</div>
+          <p style="color: var(--ink-2); margin: 0; font-size: 0.95rem; line-height: 1.65;">
+            Lead designer, partnered with a PM and a squad of 6 engineers. Owned discovery, IA,
+            component design, spec, and <b style="color: var(--ink);">production QA</b>.
+          </p>
+        </div>
+        <div class="cell wide-2">
+          <div class="cell-label">// approach</div>
+          <p style="color: var(--ink-2); margin: 0; font-size: 0.95rem; line-height: 1.65;">
+            <b style="color: var(--accent);">Jobs-to-be-Done</b> to frame outcomes over features.
+            <b style="color: var(--accent);">Card sort</b> to shape navigation.
+            <b style="color: var(--accent);">Component-first</b> design in Figma before any screens existed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESEARCH PROCESS FLOW ============ -->
+  <section id="process">
+    <div class="wrap">
+      <div class="section-title" data-num="02">Research process</div>
+      <h2 class="head">Eight steps from ambiguity to production.</h2>
+      <p class="lede">
+        No wireframe was drawn until step 5. Everything upstream was research, synthesis, and
+        vocabulary alignment — the cheapest place to change a product.
+      </p>
+
+      <div class="flow-track">
+        <div class="flow-line">
+          <div class="flow-step active">
+            <div class="flow-dot">01</div>
+            <b>Contextual inquiry</b>
+            <span>9 ops holders shadowed at their desks</span>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-step active">
+            <div class="flow-dot">02</div>
+            <b>Insight synthesis</b>
+            <span>Affinity mapping in FigJam · 3 days</span>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-step active">
+            <div class="flow-dot">03</div>
+            <b>JTBD statements</b>
+            <span>6 jobs signed off by PM + eng lead</span>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-step active">
+            <div class="flow-dot">04</div>
+            <b>Card sort</b>
+            <span>12 users · hybrid open/closed</span>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-step active">
+            <div class="flow-dot">05</div>
+            <b>Information architecture</b>
+            <span>Nav model + object graph</span>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-step">
+            <div class="flow-dot">06</div>
+            <b>Component library</b>
+            <span>Atoms + molecules in Figma variables</span>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-step">
+            <div class="flow-dot">07</div>
+            <b>Prototype</b>
+            <span>Clickable end-to-end · 2 weeks</span>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-step">
+            <div class="flow-dot">08</div>
+            <b>Validate + ship</b>
+            <span>5 users · task-based · then dogfood</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JTBD ============ -->
+  <section id="jtbd">
+    <div class="wrap">
+      <div class="section-title reveal" data-num="03">Jobs-to-be-Done</div>
+      <h2 class="head reveal">Six job statements ran the whole product spec.</h2>
+      <p class="lede reveal">
+        When engineers debated an implementation, we came back to these. When PM prioritized a sprint,
+        we ranked against these. Written by users in their own words, sharpened by me for reuse.
+      </p>
+
+      <div class="jtbd-grid">
+        <div class="jtbd reveal d1 hover-lift">
+          <div class="tag">// JTBD_01 · launch</div>
+          <p class="story">When I'm <b>preparing a Black Friday burst</b>, I want to <b>schedule and rate-limit sends</b> so I can <em>hit peak revenue windows without triggering carrier throttling.</em></p>
+        </div>
+        <div class="jtbd reveal d2 hover-lift">
+          <div class="tag">// JTBD_02 · segment</div>
+          <p class="story">When I'm <b>targeting opt-in customers by market</b>, I want to <b>build reusable audiences from live data</b> so I can <em>stop re-exporting CSVs for every campaign.</em></p>
+        </div>
+        <div class="jtbd reveal d3 hover-lift">
+          <div class="tag">// JTBD_03 · compose</div>
+          <p class="story">When I'm <b>writing a message</b>, I want to <b>preview SMS and RCS side-by-side with real merge fields</b> so I can <em>catch broken personalization before send.</em></p>
+        </div>
+        <div class="jtbd reveal d4 hover-lift">
+          <div class="tag">// JTBD_04 · route</div>
+          <p class="story">When a <b>message fails to deliver</b>, I want to <b>fall back to a cheaper channel automatically</b> so I can <em>reach the customer without ballooning cost.</em></p>
+        </div>
+        <div class="jtbd reveal d5 hover-lift">
+          <div class="tag">// JTBD_05 · prove</div>
+          <p class="story">When finance <b>asks what a campaign earned</b>, I want to <b>attribute revenue by audience segment</b> so I can <em>defend the marketing budget.</em></p>
+        </div>
+        <div class="jtbd reveal d6 hover-lift">
+          <div class="tag">// JTBD_06 · trust</div>
+          <p class="story">When a <b>customer replies STOP</b>, I want to <b>see the opt-out honored across every future campaign</b> so I can <em>stay compliant with market regulators.</em></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IA (as code) ============ -->
+  <section id="ia">
+    <div class="wrap">
+      <div class="section-title reveal" data-num="04">Information architecture</div>
+      <h2 class="head reveal">Users grouped by <em>lifecycle</em>, not object type.</h2>
+      <p class="lede">
+        Hybrid open/closed card sort with 12 ops and marketing users across 3 markets. My mental model
+        was wrong twice — users think in campaigns, drilling down. The final IA reflects their words.
+      </p>
+
+      <div class="code-panel">
+        <div class="code-head">
+          <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+          <span class="file">// nav-model.json · signed off by 12 users</span>
+        </div>
+        <div class="code-body">
+<span class="c">// Root object: campaign</span>
+<span class="k">const</span> <span class="n">nav</span> = {
+  <span class="s">"dashboard"</span>:  <span class="c">// live health, delivery, spend</span>
+  <span class="s">"campaigns"</span>: {
+    <span class="s">"draft"</span>:      [...],
+    <span class="s">"scheduled"</span>:  [...],
+    <span class="s">"live"</span>:       [...],
+    <span class="s">"archive"</span>:    [...]
+    <span class="c">// each owns → audience, template, schedule, routing, attribution</span>
+  },
+  <span class="s">"audiences"</span>: {
+    <span class="s">"segments"</span>: <span class="c">// rule-based, live</span>,
+    <span class="s">"lists"</span>:    <span class="c">// uploaded / synced</span>
+  },
+  <span class="s">"templates"</span>:  <span class="c">// SMS + RCS in one library</span>
+  <span class="s">"analytics"</span>:  <span class="c">// delivery, engagement, attributed revenue</span>
+  <span class="s">"settings"</span>: {
+    <span class="s">"senders"</span>, <span class="s">"compliance"</span>, <span class="s">"opt-outs"</span>, <span class="s">"billing"</span>
+    <span class="c">// STOP handling lives here, not per campaign</span>
+  }
+};</div>
+      </div>
+
+      <div class="insights" style="margin-top: 3rem;">
+        <div class="insight">
+          <div class="insight-num">A</div>
+          <div>
+            <h4>"Campaign" is the noun that matters.</h4>
+            <p>Users didn't think in templates or audiences first. They thought in campaigns and drilled into the components. The nav had to reflect that primacy.</p>
+          </div>
+        </div>
+        <div class="insight">
+          <div class="insight-num">B</div>
+          <div>
+            <h4>Opt-outs deserved settings, not campaigns.</h4>
+            <p>Compliance was a global concern, not per-campaign. Users needed to trust that STOP replies were honored everywhere by default — no toggle.</p>
+          </div>
+        </div>
+        <div class="insight">
+          <div class="insight-num">C</div>
+          <div>
+            <h4>Analytics is a mode, not a page.</h4>
+            <p>Every object had numbers on it. Analytics as a top-level tab held cross-cutting reports; contextual metrics lived inline on each object.</p>
+          </div>
+        </div>
+        <div class="insight">
+          <div class="insight-num">D</div>
+          <div>
+            <h4>Empty states are onboarding.</h4>
+            <p>Emerged mid-sort: for a greenfield tool, the empty state <em>is</em> the tutorial. We built a library of guided empty states for every entity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENS ============ -->
+  <section id="screens">
+    <div class="wrap">
+      <div class="section-title reveal" data-num="05">Four modes of one object</div>
+      <h2 class="head reveal">Compose · Schedule · Monitor · Analyze.</h2>
+      <p class="lede">
+        One campaign lives across four modes. Each is a different screen but they share the same header,
+        breadcrumbs, and inline metrics — so context never resets.
+      </p>
+
+      <div class="screen-grid">
+        <div class="screen reveal d1 hover-lift">
+          <h4>01 · Compose</h4>
+          <p>Write once, preview SMS + RCS with real merge data.</p>
+          <div class="mock-app">
+            <div class="mock-head">
+              <div class="mock-tag">◆ COMPOSE</div>
+              <div class="mock-badge">v3 · draft</div>
+            </div>
+            <div class="mock-title">Black Friday burst</div>
+
+            <div class="msg-preview">
+              <div class="from">from LEKAB · to +46 73 …</div>
+              <div class="body">Hi <b>{first_name}</b>, your <b>{offer}</b> is live for the next 4h. Tap to unlock →</div>
+            </div>
+
+            <div class="char-meter">
+              <span>Length</span>
+              <div class="bar"><i></i></div>
+              <b>109 / 160</b>
+            </div>
+
+            <div class="channel-toggle">
+              <div class="ch on"><b>SMS</b>primary</div>
+              <div class="ch"><b>RCS</b>fallback</div>
+              <div class="ch"><b>WA</b>disabled</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen reveal d2 hover-lift">
+          <h4>02 · Schedule</h4>
+          <p>Throttling made obvious. Carrier limits, quiet hours, retries.</p>
+          <div class="mock-app">
+            <div class="mock-head">
+              <div class="mock-tag">◆ SCHEDULE · NOV 2024</div>
+              <div class="mock-badge">SE +46</div>
+            </div>
+
+            <div class="cal-mini">
+              <i class="head">M</i><i class="head">T</i><i class="head">W</i><i class="head">T</i><i class="head">F</i><i class="head">S</i><i class="head">S</i>
+              <i>18</i><i>19</i><i>20</i><i>21</i><i>22</i><i>23</i><i class="today">24</i>
+              <i class="next">25</i><i class="next">26</i><i>27</i><i>28</i><i>29</i><i>30</i><i style="opacity: 0.3;">1</i>
+            </div>
+
+            <div class="rate-slider">
+              <div class="lbl"><span>Send rate</span><b>2,000<span style="color: var(--muted); font-size: 0.65rem; font-weight: 400;"> /min</span></b></div>
+              <div class="track"><i></i></div>
+            </div>
+
+            <div class="kpi-stack">
+              <div class="kpi-row"><span>Quiet hours</span><b>22:00 – 08:00</b></div>
+              <div class="kpi-row"><span>Retry policy</span><b>3× on failure</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen reveal d3 hover-lift">
+          <h4>03 · Monitor</h4>
+          <p>Live delivery view with a one-tap pause. Intervene, not investigate.</p>
+          <div class="mock-app">
+            <div class="mock-head">
+              <div class="mock-tag"><span class="dot-live"></span>LIVE · IN FLIGHT</div>
+              <div class="mock-badge">42,910 / 130k</div>
+            </div>
+
+            <div class="monitor-grid">
+              <div class="donut-wrap">
+                <svg viewBox="0 0 42 42">
+                  <circle cx="21" cy="21" r="15.9" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="4"/>
+                  <circle cx="21" cy="21" r="15.9" fill="none" stroke="url(#donut-grad)" stroke-width="4"
+                    stroke-dasharray="98.7 100" stroke-dashoffset="25" stroke-linecap="round"
+                    transform="rotate(-90 21 21)"/>
+                  <defs>
+                    <linearGradient id="donut-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#5eead4"/>
+                      <stop offset="100%" stop-color="#4ade80"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="donut-center"><b>98.7%</b><span>DELIVERED</span></div>
+              </div>
+              <div class="kpi-stack">
+                <div class="kpi-row"><span class="dt"><span class="d g"></span>Delivered</span><b>42,340</b></div>
+                <div class="kpi-row"><span class="dt"><span class="d r"></span>Failed</span><b>570</b></div>
+                <div class="kpi-row"><span class="dt"><span class="d y"></span>Fallback → RCS</span><b>210</b></div>
+              </div>
+            </div>
+
+            <div class="pause-cta">
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><rect x="1" y="1" width="3" height="10" rx="1"/><rect x="6" y="1" width="3" height="10" rx="1"/></svg>
+              PAUSE SEND
+            </div>
+          </div>
+        </div>
+
+        <div class="screen reveal d4 hover-lift">
+          <h4>04 · Analyze</h4>
+          <p>Revenue attribution built into the object. Exports match the ledger.</p>
+          <div class="mock-app">
+            <div class="mock-head">
+              <div class="mock-tag">◆ ATTRIBUTION</div>
+              <div class="mock-badge">last 24h</div>
+            </div>
+
+            <div class="rev-hero">
+              <div class="lbl">Revenue attributed</div>
+              <div class="val">SEK 2.4M</div>
+              <div class="roi">▲ ROI 12.8× · SEK 0.18 / delivered</div>
+            </div>
+
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted-2); letter-spacing: 0.1em; margin-top: 0.2rem;">TOP SEGMENTS</div>
+
+            <div class="seg-bars">
+              <div class="seg-row"><span>SE · 30–45</span><div class="bar"><i style="width: 92%;"></i></div><b>SEK 1.1M</b></div>
+              <div class="seg-row"><span>DK · 30–45</span><div class="bar"><i style="width: 61%;"></i></div><b>SEK 720k</b></div>
+              <div class="seg-row"><span>SE · 18–29</span><div class="bar"><i style="width: 38%;"></i></div><b>SEK 480k</b></div>
+            </div>
+
+            <div class="export-cta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Export for finance
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUTCOME ============ -->
+  <section id="outcome">
+    <div class="wrap">
+      <div class="section-title reveal" data-num="06">Outcome</div>
+      <h2 class="head reveal">Nine playbooks became one product.</h2>
+
+      <div class="outcome-bento">
+        <div class="cell out-wide accent reveal d1">
+          <div class="cell-label">Time to first campaign</div>
+          <div class="metric-big teal">4h → 15m</div>
+          <div class="metric-caption">Median build time for a new campaign, end-to-end. Old = spreadsheet + CLI + Slack.</div>
+        </div>
+        <div class="cell reveal d2 hover-lift">
+          <div class="cell-label">Feature TTM</div>
+          <div class="metric-big">+<span class="count-up" data-count="40">0</span>%</div>
+          <div class="metric-caption">Component-first system meant new features composed from atoms.</div>
+        </div>
+        <div class="cell reveal d3 hover-lift">
+          <div class="cell-label">Delivery</div>
+          <div class="metric-big"><span class="count-up" data-count="98.8">0</span>%</div>
+          <div class="metric-caption">Confidence let ops run tighter rate limits without bounces.</div>
+        </div>
+        <div class="cell wide-2 reveal d4">
+          <div class="cell-label">// spreadsheets retired</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; margin: 1rem 0; color: var(--ink-2);">
+            <div>2024-06 · <span style="color: var(--warn);">32 active</span></div>
+            <div>2024-09 · <span style="color: var(--warn);">18 active</span></div>
+            <div>2024-12 · <span style="color: var(--ok);">0 active ✓</span></div>
+          </div>
+        </div>
+        <div class="cell reveal d5 hover-lift">
+          <div class="cell-label">Adoption</div>
+          <div class="metric-big">9/9</div>
+          <div class="metric-caption">All ops team members onboarded within 30 days of GA.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPLIANCE ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-title" data-num="07">Compliance by design</div>
+      <h2 class="head">Consent, opt-out, and accessibility — built as first-class objects.</h2>
+      <p class="lede">
+        A messaging platform lives or dies on trust. STOP replies aren't a feature — they're a design
+        primitive. Every screen assumes the recipient is one bad experience from unsubscribing.
+      </p>
+
+      <div class="bento" style="grid-template-rows: auto;">
+        <div class="cell wide-3 accent">
+          <div class="cell-label">// GDPR · Art. 6 + 7</div>
+          <p style="color: var(--ink-2); font-size: 0.95rem; line-height: 1.7; margin: 0 0 1rem;">
+            <b style="color: var(--accent);">Opt-in lists are audited</b> at import time. Every audience
+            row carries its consent source, timestamp, and market. Compliance officers can trace any
+            send back to the moment consent was given.
+          </p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted);">
+            audit_trail = { consent_source, timestamp_utc, market, subject_id }
+          </div>
+        </div>
+        <div class="cell wide-3">
+          <div class="cell-label">// STOP handling</div>
+          <p style="color: var(--ink-2); font-size: 0.95rem; line-height: 1.7; margin: 0;">
+            <b style="color: var(--ink);">Global</b>, not per-campaign. A STOP reply in one send
+            propagates to every future campaign across all markets in under 60 seconds. No toggle.
+            No exception path.
+          </p>
+        </div>
+        <div class="cell wide-2">
+          <div class="cell-label">// WCAG 2.2 AA</div>
+          <p style="color: var(--ink-2); font-size: 0.9rem; line-height: 1.65; margin: 0;">
+            Keyboard shortcuts for every canvas action. Screen-reader labels on every node. High-contrast
+            variant tested against 4.5:1 on the dark theme.
+          </p>
+        </div>
+        <div class="cell wide-2">
+          <div class="cell-label">// Rate + revoke</div>
+          <p style="color: var(--ink-2); font-size: 0.9rem; line-height: 1.65; margin: 0;">
+            Sender rate limits visible on every campaign. Audience revocation clears queued messages
+            for the revoked subject before send.
+          </p>
+        </div>
+        <div class="cell wide-2">
+          <div class="cell-label">// Data residency</div>
+          <p style="color: var(--ink-2); font-size: 0.9rem; line-height: 1.65; margin: 0;">
+            EU-only processing. Market-scoped audiences never cross regions. Enforced at IA level, not runtime.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REFLECTION ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-title" data-num="07">Reflection</div>
+      <h2 class="head">What JTBD did for us — and what I'd change.</h2>
+
+      <div class="bento" style="grid-template-rows: auto;">
+        <div class="cell wide-3">
+          <div class="cell-label">What worked</div>
+          <p style="color: var(--ink-2); font-size: 0.95rem; line-height: 1.7; margin: 0 0 1rem;">
+            The six job statements became acceptance criteria for every sprint. When engineers proposed
+            a shortcut, we asked <em style="color: var(--accent);">"which job does this serve?"</em> and the
+            answer usually resolved the debate.
+          </p>
+          <p style="color: var(--ink-2); font-size: 0.95rem; line-height: 1.7; margin: 0;">
+            The biggest win was <b style="color: var(--ink);">shared language</b>. PM, design, and eng
+            finally used the same nouns for the same things.
+          </p>
+        </div>
+        <div class="cell wide-3">
+          <div class="cell-label">What I'd change</div>
+          <p style="color: var(--ink-2); font-size: 0.95rem; line-height: 1.7; margin: 0 0 1rem;">
+            Run the card sort <em style="color: var(--accent);">earlier</em> — before wireframes. Two weeks
+            wasted on a nav I assumed was obvious.
+          </p>
+          <p style="color: var(--ink-2); font-size: 0.95rem; line-height: 1.7; margin: 0;">
+            Invest in an in-product <b style="color: var(--ink);">empty state library</b> from day one.
+            For a greenfield tool, empty states <em>are</em> onboarding.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-block">
+    <div class="wrap">
+      <div class="kicker" style="margin: 0 auto 1.5rem; width: fit-content;"><span class="dot"></span>Next</div>
+      <h2>Read the other case studies.</h2>
+      <p>Four studies · four visual languages · one designer.</p>
+      <div class="cta-row">
+        <a class="cta ghost" href="case-study-lekab.html">01 · LEKAB</a>
+        <a class="cta ghost" href="case-study-onboarding.html">03 · Onboarding CRO</a>
+        <a class="cta primary" href="case-study-support.html">04 · Support platform →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">// © Ahsan Javaid · case_02 · Malmö · SE</div>
+
+  <script src="portfolio.js" defer></script>
+
+</body>
+</html>
