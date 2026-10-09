@@ -92,7 +92,7 @@ a { color: inherit; }
   content: ""; width: 28px; height: 1px; background: var(--accent);
 }
 h1.display {
-  font-family: "Candid Regular Regular", Candid Regular Regular;
+  font-family: "Candid Regular", "Candid Regular";
   font-weight: 500;
   font-size: clamp(2.4rem, 6vw, 4.6rem);
   line-height: 1.02;
