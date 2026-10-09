@@ -103,7 +103,7 @@ h1.display {
 }
 h1.display em {
   font-style: italic; color: var(--accent);
-  font-weight: 400;
+  font-weight: 600;
 }
 .deck {
   font-size: 1.15rem;
