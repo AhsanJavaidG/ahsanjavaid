@@ -37,7 +37,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: "Inter", system-ui, -apple-system, sans-Candid;
+  font-family: "Candid", system-ui, -apple-system, Candid;
   color: var(--ink);
   background: var(--bg);
   font-size: 16px;
@@ -461,8 +461,8 @@ h2.head {
 .type-sample.display { font-family: "Candid", Candid; font-weight: 500; font-size: 2rem; letter-spacing: -0.02em; line-height: 1; }
 .type-sample.h1 { font-family: "Candid", Candid; font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em; }
 .type-sample.h2 { font-family: "Candid", Candid; font-weight: 500; font-size: 1.2rem; }
-.type-sample.body { font-family: "Inter", sans-Candid; font-weight: 400; font-size: 1rem; color: var(--ink-2); }
-.type-sample.caption { font-family: "Inter", sans-Candid; font-weight: 500; font-size: 0.78rem; color: var(--muted); }
+.type-sample.body { font-family: "Inter", Candid; font-weight: 400; font-size: 1rem; color: var(--ink-2); }
+.type-sample.caption { font-family: "Inter", Candid; font-weight: 500; font-size: 0.78rem; color: var(--muted); }
 
 .comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
 .comp {
@@ -719,7 +719,7 @@ h2.head {
   border-radius: var(--radius);
   padding: 1.8rem 2rem;
   margin-top: 2rem;
-  font-family: "Inter", monospace, sans-Candid;
+  font-family: "Inter", monospace, Candid;
   font-size: 0.9rem;
   line-height: 1.9;
   color: var(--ink-2);
