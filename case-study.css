@@ -37,7 +37,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: "Candid Regular", system-ui, -apple-system, Candid Regular;
+  font-family: "Figtree", system-ui, -apple-system, sans-serif;
   color: var(--ink);
   background: var(--bg);
   font-size: 16px;
@@ -61,8 +61,8 @@ a { color: inherit; }
   min-height: 62px;
 }
 .brand {
-  font-family: "Candid Regular", Candid Regular;
-  font-weight: 600;
+  font-family: "Figtree";
+  font-weight: 800;
   letter-spacing: -0.01em;
   font-size: 1.05rem;
   text-decoration: none;
