@@ -199,7 +199,7 @@ h1.display em {
   display: flex; flex-direction: column; gap: 0.6rem; flex: 1;
 }
 .app-crumb { font-size: 0.58rem; color: var(--muted-2); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
-.app-title { font-family: "Candid Regular", Candid Regular; font-size: 1rem; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; }
+.app-title { font-family: "Figtree", Figtree; font-size: 1rem; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; }
 .progress { display: flex; gap: 4px; margin: 0.2rem 0 0.4rem; }
 .progress i { flex: 1; height: 3px; border-radius: 2px; background: var(--line); display: block; }
 .progress i.on { background: var(--accent); }
@@ -250,7 +250,7 @@ h1.display em {
   display: flex; flex-direction: column; gap: 0.4rem;
 }
 .side-logo {
-  font-family: "Candid Regular", Candid Regular; font-size: 0.9rem; font-weight: 600;
+  font-family: "Figtree", Figtree; font-size: 0.9rem; font-weight: 600;
   color: var(--accent); margin-bottom: 0.6rem;
 }
 .side-item {
@@ -261,7 +261,7 @@ h1.display em {
   padding: 1rem 1.2rem; display: flex; flex-direction: column; gap: 0.8rem;
 }
 .main-title {
-  font-family: "Candid Regular", Candid Regular; font-size: 1.05rem; font-weight: 500;
+  font-family: "Figtree", Figtree; font-size: 1.05rem; font-weight: 500;
   letter-spacing: -0.01em; color: var(--ink);
 }
 .main-sub { font-size: 0.68rem; color: var(--muted); }
@@ -283,7 +283,7 @@ section.block.alt { background: var(--paper); }
   content: ""; width: 22px; height: 1px; background: var(--muted-2);
 }
 h2.head {
-  font-family: "Candid Regular", Candid Regular;
+  font-family: "Figtree", Figtree;
   font-weight: 500;
   font-size: clamp(1.8rem, 3.6vw, 2.8rem);
   line-height: 1.1;
@@ -316,7 +316,7 @@ h2.head {
 
 /* ===== Problem ===== */
 .problem-quote {
-  font-family: "Candid Regular", Candid Regular;
+  font-family: "Figtree", Figtree;
   font-weight: 400;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   line-height: 1.25;
@@ -339,7 +339,7 @@ h2.head {
 }
 .stat-tile b {
   display: block;
-  font-family: "Candid Regular", Candid Regular;
+  font-family: "Figtree", Figtree;
   font-size: 2.4rem; font-weight: 500;
   color: var(--accent);
   letter-spacing: -0.02em;
@@ -372,11 +372,11 @@ h2.head {
   background: linear-gradient(145deg, var(--accent), #6b8ec9);
   color: #fff;
   display: flex; align-items: center; justify-content: center;
-  font-family: "Candid Regular", Candid Regular; font-size: 1.3rem; font-weight: 600;
+  font-family: "Figtree", Figtree; font-size: 1.3rem; font-weight: 600;
 }
 .avatar.warm { background: linear-gradient(145deg, #b47a2a, #d4a668); }
 .avatar.mint { background: linear-gradient(145deg, #2f7a5a, #6ca88a); }
-.persona-head h3 { margin: 0; font-family: "Candid Regular", Candid Regular; font-weight: 500; font-size: 1.15rem; letter-spacing: -0.01em; }
+.persona-head h3 { margin: 0; font-family: "Figtree", Figtree; font-weight: 500; font-size: 1.15rem; letter-spacing: -0.01em; }
 .persona-head span { color: var(--muted); font-size: 0.85rem; }
 .persona-row { display: grid; grid-template-columns: 1fr; gap: 0.9rem; margin-bottom: 1.2rem; }
 .persona-row strong { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted-2); margin-bottom: 0.3rem; }
@@ -387,7 +387,7 @@ h2.head {
   padding: 1rem 1.2rem;
   border-radius: 0 10px 10px 0;
   color: var(--ink);
-  font-family: "Candid Regular", Candid Regular; font-style: italic;
+  font-family: "Figtree", Figtree; font-style: italic;
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -408,9 +408,9 @@ h2.head {
   width: 36px; height: 36px; border-radius: 50%;
   background: var(--accent-tint); color: var(--accent);
   display: flex; align-items: center; justify-content: center;
-  font-family: "Candid Regular", Candid Regular; font-weight: 600; font-size: 0.95rem;
+  font-family: "Figtree", Figtree; font-weight: 600; font-size: 0.95rem;
 }
-.insight h4 { margin: 0 0 0.4rem; font-family: "Candid Regular", Candid Regular; font-weight: 500; font-size: 1.05rem; letter-spacing: -0.01em; }
+.insight h4 { margin: 0 0 0.4rem; font-family: "Figtree", Figtree; font-weight: 500; font-size: 1.05rem; letter-spacing: -0.01em; }
 .insight p { margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
 
 /* ===== Design system panels ===== */
@@ -458,11 +458,11 @@ h2.head {
   font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--muted-2); font-weight: 600;
 }
-.type-sample.display { font-family: "Candid Regular", Candid Regular; font-weight: 500; font-size: 2rem; letter-spacing: -0.02em; line-height: 1; }
-.type-sample.h1 { font-family: "Candid Regular", Candid Regular; font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em; }
-.type-sample.h2 { font-family: "Candid Regular", Candid Regular; font-weight: 500; font-size: 1.2rem; }
-.type-sample.body { font-family: "Inter", Candid Regular; font-weight: 400; font-size: 1rem; color: var(--ink-2); }
-.type-sample.caption { font-family: "Inter", Candid Regular; font-weight: 500; font-size: 0.78rem; color: var(--muted); }
+.type-sample.display { font-family: "Figtree", Figtree; font-weight: 500; font-size: 2rem; letter-spacing: -0.02em; line-height: 1; }
+.type-sample.h1 { font-family: "Figtree", Figtree; font-weight: 500; font-size: 1.5rem; letter-spacing: -0.01em; }
+.type-sample.h2 { font-family: "Figtree", Figtree; font-weight: 500; font-size: 1.2rem; }
+.type-sample.body { font-family: "Inter", Figtree; font-weight: 400; font-size: 1rem; color: var(--ink-2); }
+.type-sample.caption { font-family: "Inter", Figtree; font-weight: 500; font-size: 0.78rem; color: var(--muted); }
 
 .comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
 .comp {
@@ -501,7 +501,7 @@ h2.head {
 }
 .flow-node b {
   display: block;
-  font-family: "Candid Regular", Candid Regular; font-weight: 500;
+  font-family: "Figtree", Figtree; font-weight: 500;
   font-size: 0.95rem; margin-bottom: 0.3rem;
   color: var(--ink);
 }
@@ -547,7 +547,7 @@ h2.head {
 .screen-stage.mint { background: linear-gradient(160deg, #e2efe8, #cfe1d6); }
 .screen-caption { margin-top: 1.1rem; }
 .screen-caption strong {
-  display: block; font-family: "Candid Regular", Candid Regular; font-weight: 500;
+  display: block; font-family: "Figtree", Figtree; font-weight: 500;
   font-size: 1.05rem; letter-spacing: -0.01em; margin-bottom: 0.3rem;
 }
 .screen-caption span { color: var(--muted); font-size: 0.88rem; }
@@ -567,7 +567,7 @@ h2.head {
 }
 .out-tile b {
   display: block;
-  font-family: "Candid Regular", Candid Regular;
+  font-family: "Figtree", Figtree;
   font-size: clamp(2.6rem, 5vw, 4rem);
   font-weight: 500;
   color: var(--accent);
@@ -601,7 +601,7 @@ h2.head {
   text-align: center;
 }
 .footer-cta h2 {
-  font-family: "Candid Regular", Candid Regular; font-weight: 500;
+  font-family: "Figtree", Figtree; font-weight: 500;
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   letter-spacing: -0.01em; margin: 0 0 1rem;
 }
@@ -646,7 +646,7 @@ h2.head {
 }
 .jtbd p {
   margin: 0;
-  font-family: "Candid Regular", Candid Regular;
+  font-family: "Figtree", Figtree;
   font-weight: 400;
   font-size: 1.05rem;
   line-height: 1.45;
@@ -706,7 +706,7 @@ h2.head {
 }
 .variant.winner .variant-tag { color: var(--ok); }
 .variant-result {
-  font-family: "Candid Regular", Candid Regular; font-weight: 500;
+  font-family: "Figtree", Figtree; font-weight: 500;
   font-size: 1.1rem; letter-spacing: -0.01em;
 }
 .variant.winner .variant-result { color: var(--ok); }
@@ -719,13 +719,13 @@ h2.head {
   border-radius: var(--radius);
   padding: 1.8rem 2rem;
   margin-top: 2rem;
-  font-family: "Inter", monospace, Candid Regular;
+  font-family: "Inter", monospace, Figtree;
   font-size: 0.9rem;
   line-height: 1.9;
   color: var(--ink-2);
   overflow-x: auto;
 }
-.ia-tree .root { color: var(--accent); font-weight: 700; font-family: "Candid Regular", Candid Regular; font-size: 1rem; }
+.ia-tree .root { color: var(--accent); font-weight: 700; font-family: "Figtree", Figtree; font-size: 1rem; }
 .ia-tree .l1 { padding-left: 1.5rem; }
 .ia-tree .l2 { padding-left: 3rem; color: var(--muted); }
 .ia-tree .l3 { padding-left: 4.5rem; color: var(--muted-2); font-size: 0.84rem; }
@@ -767,7 +767,7 @@ h2.head {
 .blueprint-row.stage > div {
   background: var(--accent-tint);
   color: var(--accent);
-  font-family: "Candid Regular", Candid Regular;
+  font-family: "Figtree", Figtree;
   font-weight: 500;
   font-size: 0.98rem;
   border-color: var(--accent-soft);
@@ -801,7 +801,7 @@ h2.head {
 .eco-dot.warm { background: var(--warn); }
 .eco-dot.mint { background: var(--ok); }
 .eco-dot.muted { background: var(--muted-2); }
-.eco-node b { display: block; font-family: "Candid Regular", Candid Regular; font-weight: 500; font-size: 0.98rem; margin-bottom: 0.15rem; }
+.eco-node b { display: block; font-family: "Figtree", Figtree; font-weight: 500; font-size: 0.98rem; margin-bottom: 0.15rem; }
 .eco-node span { font-size: 0.85rem; color: var(--muted); }
 
 /* Role persona compact card */
@@ -824,7 +824,7 @@ h2.head {
   border-bottom: 1px solid var(--line);
 }
 .role-head .avatar { width: 40px; height: 40px; font-size: 0.9rem; }
-.role-head b { font-family: "Candid Regular", Candid Regular; font-weight: 500; font-size: 1rem; display: block; }
+.role-head b { font-family: "Figtree", Figtree; font-weight: 500; font-size: 1rem; display: block; }
 .role-head span { color: var(--muted); font-size: 0.8rem; }
 .role-card p { margin: 0.4rem 0; color: var(--ink-2); font-size: 0.9rem; line-height: 1.55; }
 .role-card p strong { color: var(--muted-2); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; font-weight: 600; }
