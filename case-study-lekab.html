@@ -873,6 +873,108 @@
       .hero-stage .phone::before { width: 76px; height: 18px; top: 10px; }
       .hero-stage .desktop-bar .url { font-size: 0.55rem; padding: 3px 6px; }
     }
+
+    /* ========================================================================
+       Hero Slider & Dashes (Parent White Background & Full Width Expansion)
+       ======================================================================== */
+
+    .hero-stage {
+      position: relative;
+      background: #ffffff; /* Solid white parent background so the container looks large and clean */
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      width: 100%;
+      max-width: 100%; /* Spans the full parent container width */
+      margin: 2rem auto 0;
+    }
+
+    /* Hide the default radio buttons */
+    .hero-stage input[type="radio"] {
+      display: none;
+    }
+
+    /* Container clipping */
+    .slider-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    /* Track holding all 5 slides side-by-side (500% total width) */
+    .slider-track {
+      display: flex;
+      width: 500%;
+      will-change: transform;
+      animation: pureAutoSlide 20s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Pause auto-rotation when user hovers over the stage */
+    .hero-stage:hover .slider-track {
+      animation-play-state: paused;
+    }
+
+    /* Individual slides */
+    .slide {
+      flex: 0 0 20%;
+      width: 20%;
+      box-sizing: border-box;
+      display: block;
+    }
+
+    /* Make images fill the parent width completely */
+    .slide img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: none; /* Removed inner shadow so it blends seamlessly with white background */
+    }
+
+    /* Dash / Dot Navigation Bar */
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1.5rem;
+    }
+
+    /* Dash Buttons */
+    .dot-btn {
+      background: #cbd5e1;
+      border: none;
+      width: 28px;
+      height: 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .dot-btn:hover {
+      background: #94a3b8;
+    }
+
+    /* Pure CSS Auto-Slide Keyframes */
+    @keyframes pureAutoSlide {
+      0%, 15%   { transform: translateX(0%); }
+      20%, 35%  { transform: translateX(-20%); }
+      40%, 55%  { transform: translateX(-40%); }
+      60%, 75%  { transform: translateX(-60%); }
+      80%, 95%  { transform: translateX(-80%); }
+      100%      { transform: translateX(0%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slider-track {
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -913,224 +1015,39 @@
         <div class="meta-cell"><strong>Industry</strong><span>Comms · Fintech · Public</span></div>
       </div>
 
-      <!-- Hero visual: beauty mockups (phone + admin dashboard) -->
+      <!-- Hero visual: Pure CSS auto-slider with full parent width and white background -->
       <div class="hero-stage">
-        <div class="stage-grid">
-
-          <!-- Phone: beautified signup Phase 1 -->
-          <div class="phone">
-            <div class="phone-screen">
-              <div class="status-bar">
-                <span>9:41</span>
-                <span class="rside">
-                  <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 6a10 10 0 0112 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><path d="M3 7.5a7 7 0 018 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9" r="1" fill="#0f1a2b"/></svg>
-                  <svg width="16" height="10" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="18" height="10" rx="2.5" stroke="#0f1a2b" stroke-width="1.2"/><rect x="2.5" y="2.5" width="15" height="7" rx="1" fill="#0f1a2b"/><rect x="20" y="4" width="1.5" height="4" rx="0.5" fill="#0f1a2b"/></svg>
-                </span>
-              </div>
-              <div class="mock">
-                <div class="top-brand">
-                  <div class="logo">LEKAB</div>
-                  <span class="trust"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z" stroke="currentColor" stroke-width="2.4"/></svg> ISO 27001</span>
-                </div>
-
-                <div class="stepbar">
-                  <span>Step 1 of 2</span>
-                  <div class="track"><i style="width: 50%;"></i></div>
-                </div>
-
-                <div>
-                  <div class="greeting">Create <em>your</em> account.</div>
-                  <div class="subtitle">Takes less than a minute · optional social login.</div>
-                </div>
-
-                <div class="in">
-                  <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
-                  <div class="val"><b>Work email</b><span>ahsan@lekab.se</span></div>
-                  <span class="end ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
-                <div class="in">
-                  <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-                  <div class="val"><b>Full name</b><span>Ahsan Javaid</span></div>
-                </div>
-                <div class="in active">
-                  <span class="icn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="4" y="11" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.7"/></svg></span>
-                  <div class="val" style="gap: 4px;">
-                    <b>Password</b>
-                    <span>••••••••••</span>
-                    <div class="strength" style="margin-top: 3px;"><i class="w"></i><i class="m"></i><i class="g"></i><i class="g"></i></div>
-                  </div>
-                </div>
-                <div class="strength-label" style="margin-top: -0.35rem; padding: 0 0.7rem;"><span>Strong password</span><span style="color: #8593a8;">14 chars</span></div>
-
-                <div class="cta">Continue →</div>
-
-                <div class="divider">or continue with</div>
-
-                <div class="socials">
-                  <div class="soc"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 015.5 12c0-.73.13-1.44.34-2.1V7.06H2.18A11 11 0 001 12c0 1.77.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg></div>
-                  <div class="soc"><svg width="16" height="18" viewBox="0 0 24 24" fill="#0f1a2b"><path d="M17.05 12.06a4.32 4.32 0 012.06-3.62 4.42 4.42 0 00-3.48-1.88c-1.46-.15-2.87.87-3.62.87-.77 0-1.9-.85-3.13-.83a4.65 4.65 0 00-3.9 2.4c-1.68 2.9-.43 7.19 1.19 9.54.81 1.15 1.76 2.44 3 2.4 1.21-.05 1.67-.78 3.13-.78 1.46 0 1.88.78 3.14.75 1.3-.02 2.12-1.16 2.92-2.32a10.24 10.24 0 001.32-2.72 4.19 4.19 0 01-2.55-3.81M14.4 4.9a4.24 4.24 0 001-3.06 4.4 4.4 0 00-2.83 1.47 4 4 0 00-1 2.94 3.65 3.65 0 002.83-1.35"/></svg></div>
-                  <div class="soc"><svg width="16" height="16" viewBox="0 0 24 24"><rect fill="#f25022" x="1" y="1" width="10" height="10"/><rect fill="#7fba00" x="13" y="1" width="10" height="10"/><rect fill="#00a4ef" x="1" y="13" width="10" height="10"/><rect fill="#ffb900" x="13" y="13" width="10" height="10"/></svg></div>
-                </div>
-              </div>
-            </div>
+        <!-- Slider Viewport -->
+        <div class="slider-container">
+          <div class="slider-track">
+            <a href="case-study-lekab.html" class="slide">
+              <img src="img/case1_login.png" alt="Create Account - Slide 1">
+            </a>
+            <a href="case-study-lekab.html" class="slide">
+              <img src="img/case1_login.png" alt="Create Account - Slide 2">
+            </a>
+            <a href="case-study-lekab.html" class="slide">
+              <img src="img/case1_login.png" alt="Create Account - Slide 3">
+            </a>
+            <a href="case-study-lekab.html" class="slide">
+              <img src="img/case1_login.png" alt="Create Account - Slide 4">
+            </a>
+            <a href="case-study-lekab.html" class="slide">
+              <img src="img/case1_login.png" alt="Create Account - Slide 5">
+            </a>
           </div>
+        </div>
 
-          <!-- Desktop: rich admin dashboard -->
-          <div class="desktop">
-            <div class="desktop-bar">
-              <i></i><i></i><i></i>
-              <div class="url">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><rect x="4" y="11" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.8"/></svg>
-                app.lekab.se/admin/analytics
-              </div>
-            </div>
-            <div class="desktop-screen">
-
-              <!-- Rich sidebar -->
-              <aside class="side-rich">
-                <div class="brand-row">
-                  <div class="logo-mark"></div>
-                  <div class="brand-name">LEKAB</div>
-                  <span class="brand-plan">PRO</span>
-                </div>
-
-                <div class="group-lbl">Workspace</div>
-                <div class="nav-i on">
-                  <span class="icn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2h-4v-6H10v6H6a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
-                  Overview
-                </div>
-                <div class="nav-i">
-                  <span class="icn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.7"/></svg></span>
-                  Accounts
-                  <span class="badge">12</span>
-                </div>
-                <div class="nav-i">
-                  <span class="icn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.7"/></svg></span>
-                  Messaging
-                </div>
-                <div class="nav-i">
-                  <span class="icn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M2 10h20" stroke="currentColor" stroke-width="1.7"/></svg></span>
-                  Billing
-                </div>
-                <div class="nav-i">
-                  <span class="icn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  Support
-                  <span class="badge">3</span>
-                </div>
-
-                <div class="side-user">
-                  <div class="av">AJ</div>
-                  <div>
-                    <b>Ahsan Javaid</b>
-                    <span>Admin</span>
-                  </div>
-                </div>
-              </aside>
-
-              <!-- Main content -->
-              <div class="main-rich">
-                <div class="main-header">
-                  <div>
-                    <div class="breadcrumb">Overview <span>›</span> <b>Signup accuracy</b></div>
-                    <div class="head-title-row">
-                      <h5>Signup accuracy</h5>
-                    </div>
-                    <div class="sub">Trailing 30 days · Enterprise cohort · n = 8,412</div>
-                  </div>
-                  <div class="range-picker">
-                    <span>24h</span>
-                    <span>7d</span>
-                    <span class="on">30d</span>
-                    <span>90d</span>
-                  </div>
-                </div>
-
-                <div class="kpi-row-rich">
-                  <div class="kpi-card ok">
-                    <div class="lbl">COMPLETION</div>
-                    <div class="val">+35<em>%</em></div>
-                    <span class="delta up">
-                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M12 5v14m-6-8l6-6 6 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      vs prev
-                    </span>
-                    <svg class="spark" viewBox="0 0 40 16" preserveAspectRatio="none">
-                      <path d="M0,12 L8,10 L16,8 L24,6 L32,3 L40,2" fill="none" stroke="#10b981" stroke-width="1.4" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <div class="kpi-card">
-                    <div class="lbl">SUPPORT LOAD</div>
-                    <div class="val" style="color: #0b57d0;">−30<em>%</em></div>
-                    <span class="delta up">
-                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M12 19V5m-6 8l6 6 6-6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      fewer tickets
-                    </span>
-                    <svg class="spark" viewBox="0 0 40 16" preserveAspectRatio="none">
-                      <path d="M0,4 L8,6 L16,7 L24,10 L32,12 L40,14" fill="none" stroke="#0b57d0" stroke-width="1.4" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <div class="kpi-card accent">
-                    <div class="lbl">DATA ACCURACY</div>
-                    <div class="val">+22<em>%</em></div>
-                    <span class="delta up">
-                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M12 5v14m-6-8l6-6 6 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      cleaner records
-                    </span>
-                    <svg class="spark" viewBox="0 0 40 16" preserveAspectRatio="none">
-                      <path d="M0,11 L8,9 L16,10 L24,7 L32,5 L40,3" fill="none" stroke="#10cbb1" stroke-width="1.4" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="chart-card">
-                  <div class="chart-head">
-                    <b>Signup completion trend</b>
-                    <div class="chart-legend">
-                      <span class="dt"><span class="d b"></span>Redesign</span>
-                      <span class="dt"><span class="d t"></span>Legacy</span>
-                    </div>
-                  </div>
-                  <div class="chart-svg-wrap">
-                    <svg viewBox="0 0 320 100" preserveAspectRatio="none">
-                      <defs>
-                        <linearGradient id="area-blue" x1="0" x2="0" y1="0" y2="1">
-                          <stop offset="0" stop-color="#0b57d0" stop-opacity="0.24"/>
-                          <stop offset="1" stop-color="#0b57d0" stop-opacity="0"/>
-                        </linearGradient>
-                        <linearGradient id="line-blue" x1="0" x2="1" y1="0" y2="0">
-                          <stop offset="0" stop-color="#0b57d0"/>
-                          <stop offset="1" stop-color="#10cbb1"/>
-                        </linearGradient>
-                      </defs>
-                      <!-- Grid -->
-                      <g stroke="#eef1f6" stroke-width="0.5">
-                        <line x1="0" y1="20" x2="320" y2="20"/>
-                        <line x1="0" y1="45" x2="320" y2="45"/>
-                        <line x1="0" y1="70" x2="320" y2="70"/>
-                      </g>
-                      <!-- Legacy trend (flat dashed) -->
-                      <path d="M0,72 L40,70 L80,71 L120,72 L160,70 L200,72 L240,71 L280,70 L320,72"
-                            fill="none" stroke="#10cbb1" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.55"/>
-                      <!-- Redesign trend area + line -->
-                      <path d="M0,68 C40,60 60,52 90,48 C120,42 150,36 180,30 C215,22 245,18 280,14 L320,10 L320,100 L0,100 Z"
-                            fill="url(#area-blue)"/>
-                      <path d="M0,68 C40,60 60,52 90,48 C120,42 150,36 180,30 C215,22 245,18 280,14 L320,10"
-                            fill="none" stroke="url(#line-blue)" stroke-width="1.8" stroke-linecap="round"/>
-                      <!-- Data point highlight -->
-                      <circle cx="280" cy="14" r="3" fill="#ffffff" stroke="#0b57d0" stroke-width="1.6"/>
-                      <circle cx="280" cy="14" r="6" fill="#0b57d0" opacity="0.15"/>
-                    </svg>
-                    <div class="chart-tooltip">
-                      Sep 28 · <b>91.2%</b>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
+        <!-- Dash Indicators -->
+        <div class="slider-dots">
+          <span class="dot-btn active"></span>
+          <span class="dot-btn"></span>
+          <span class="dot-btn"></span>
+          <span class="dot-btn"></span>
+          <span class="dot-btn"></span>
         </div>
       </div>
+
     </div>
   </section>
 
