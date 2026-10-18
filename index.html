@@ -102,7 +102,7 @@
       line-height: 1.02;
       letter-spacing: -0.02em;
       margin: 0 0 1.6rem;
-      max-width: 18ch;
+      max-width: none;
       color: var(--ink);
     }
     h1.display em {
@@ -112,7 +112,7 @@
     .deck {
       font-size: 1.15rem;
       color: var(--muted);
-      max-width: 62ch;
+      max-width: none;
       margin: 0 0 3rem;
       line-height: 1.6;
     }
@@ -177,13 +177,13 @@
       line-height: 1.1;
       letter-spacing: -0.015em;
       margin: 0 0 1.2rem;
-      max-width: 22ch;
+      max-width: none;
       color: var(--ink);
     }
     .lede {
       font-size: 1.1rem;
       color: var(--ink-2);
-      max-width: 62ch;
+      max-width: none;
       margin: 0 0 2.5rem;
       line-height: 1.6;
     }
@@ -326,65 +326,115 @@
     .skill-col li b { color: var(--ink); font-weight: 600; }
 
     /* ===== Featured case study ===== */
+/* ===== Featured case study ===== */
+.feature-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
     .feature-card {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      margin-top: 2rem;
+        grid-template-columns: 1.1fr 0.9fr;
     }
-    .feature-visual {
-      background: linear-gradient(160deg, var(--bg-tint) 0%, #dfe6f2 100%);
-      padding: 3rem 2rem 2.5rem;
-      display: flex; align-items: end; justify-content: center;
-      min-height: 320px;
-      overflow: hidden;
-    }
-    .feature-copy {
-      padding: 2.4rem 2rem;
-      display: flex; flex-direction: column;
-      gap: 1rem;
-    }
-    .feature-copy h3 {
-      margin: 0;
-      font-family: "Figtree", system-ui, -apple-system, sans-serif;
-      font-weight: 500;
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      line-height: 1.15;
-      letter-spacing: -0.015em;
-    }
-    .feature-copy h3 em { color: var(--accent); font-style: italic; font-weight: 400; }
-    .feature-copy p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-      line-height: 1.6;
-    }
-    .feature-meta {
-      display: flex; flex-wrap: wrap; gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    .feature-chip {
-      background: var(--accent-tint);
-      color: var(--accent);
-      padding: 0.35rem 0.8rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-    .feature-link {
-      margin-top: 1rem;
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      align-self: flex-start;
-    }
-    .feature-link:hover { text-decoration: underline; }
+}
+
+.feature-visual {
+    background: linear-gradient(160deg, var(--bg-tint) 0%, #dfe6f2 100%);
+    padding: 1.5rem;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    overflow: hidden;
+}
+
+.feature-visual a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.feature-visual img {
+    width: 99%;
+    max-width: 99%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.feature-copy {
+    padding: 2.4rem 2rem;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.feature-copy h3 {
+    margin: 0;
+    font-family: "Figtree", system-ui, -apple-system, sans-serif;
+    font-weight: 500;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+}
+
+.feature-copy h3 em { 
+    color: var(--accent); 
+    font-style: italic; 
+    font-weight: 400; 
+}
+
+.feature-copy p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+.feature-meta {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.feature-chip {
+    background: var(--accent-tint);
+    color: var(--accent);
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.feature-link {
+    margin-top: 1rem;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-flex; 
+    align-items: center; 
+    gap: 0.4rem;
+    align-self: flex-start;
+}
+
+.feature-link:hover { 
+    text-decoration: underline; 
+}
 
     /* CSS phone for feature visual */
     .phone {
@@ -779,6 +829,30 @@
       .feature-visual .socials-mini { gap: 4px; }
       h1.display { font-size: 2.2rem; }
     }
+.hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap; /* Keeps items on a single line */
+    gap: 1rem;
+}
+
+.cv-download-link {
+    text-decoration: none !important;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--accent, #2563eb);
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+.cv-download-link:hover .btn-link {
+    text-decoration: underline !important;
+}
   </style>
 </head>
 <body>
@@ -815,6 +889,9 @@
       <div class="hero-actions reveal d3">
         <a class="btn btn-primary" href="#work">See all case studies →</a>
         <a class="btn btn-ghost" href="#contact">Contact</a>
+        <a href="CV-M-AhsanJavaid.pdf" download class="cv-download-link">
+        <button type="button" class="btn btn-link">Download CV</button>
+        </a>
       </div>
 
       <div class="reveal d4" style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: -2rem 0 3rem;" aria-label="Quick links to each case study">
@@ -922,53 +999,13 @@
         research journal, and FigJam blueprint, to demonstrate range while keeping the same rigor.
         Start with the featured one below.
       </p>
-
+ <!-- ============ FEATURED CASE STUDY 1- LEKAB Signup ============ -->
       <div class="feature-card">
         <div class="feature-visual">
-          <div class="phone">
-            <div class="phone-screen">
-              <div class="status-bar">
-                <span>9:41</span>
-                <span class="rside">
-                  <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 6a10 10 0 0112 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><path d="M3 7.5a7 7 0 018 0" stroke="#0f1a2b" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9" r="1" fill="#0f1a2b"/></svg>
-                  <svg width="16" height="10" viewBox="0 0 22 12" fill="none"><rect x="1" y="1" width="18" height="10" rx="2.5" stroke="#0f1a2b" stroke-width="1.2"/><rect x="2.5" y="2.5" width="15" height="7" rx="1" fill="#0f1a2b"/><rect x="20" y="4" width="1.5" height="4" rx="0.5" fill="#0f1a2b"/></svg>
-                </span>
-              </div>
-              <div class="app-body">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <div class="mini-logo">LEKAB</div>
-                  <span class="m-trust"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z" stroke="currentColor" stroke-width="2.4"/></svg> SECURE</span>
-                </div>
-                <div>
-                  <div class="mini-greet">Create <em>your</em> account.</div>
-                  <div class="mini-sub">Takes less than a minute · no admin needed.</div>
-                </div>
-                <div class="mini-progress"><span>Step 1 of 2</span><div class="track"><i></i></div></div>
-
-                <div class="m-in">
-                  <span class="icn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <div class="val"><b>Work email</b><span>ahsan@lekab.se</span></div>
-                  <span class="ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
-                <div class="m-in on">
-                  <span class="icn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="4" y="11" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.7"/></svg></span>
-                  <div class="val"><b>Password</b><span>••••••••••</span></div>
-                </div>
-                <div class="m-strength"><i class="w"></i><i class="m"></i><i class="g"></i><i class="g"></i></div>
-                <div class="m-lbl"><span>Strong password</span><span>14 chars</span></div>
-
-                <div class="m-cta">Continue →</div>
-
-                <div class="m-divider">or continue with</div>
-
-                <div class="socials-mini">
-                  <div class="soc-mini"><svg width="15" height="15" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 015.5 12c0-.73.13-1.44.34-2.1V7.06H2.18A11 11 0 001 12c0 1.77.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg></div>
-                  <div class="soc-mini"><svg width="14" height="15" viewBox="0 0 24 24" fill="#0f1a2b"><path d="M17.05 12.06a4.32 4.32 0 012.06-3.62 4.42 4.42 0 00-3.48-1.88c-1.46-.15-2.87.87-3.62.87-.77 0-1.9-.85-3.13-.83a4.65 4.65 0 00-3.9 2.4c-1.68 2.9-.43 7.19 1.19 9.54.81 1.15 1.76 2.44 3 2.4 1.21-.05 1.67-.78 3.13-.78 1.46 0 1.88.78 3.14.75 1.3-.02 2.12-1.16 2.92-2.32a10.24 10.24 0 001.32-2.72 4.19 4.19 0 01-2.55-3.81M14.4 4.9a4.24 4.24 0 001-3.06 4.4 4.4 0 00-2.83 1.47 4 4 0 00-1 2.94 3.65 3.65 0 002.83-1.35"/></svg></div>
-                  <div class="soc-mini"><svg width="14" height="14" viewBox="0 0 24 24"><rect fill="#f25022" x="1" y="1" width="10" height="10"/><rect fill="#7fba00" x="13" y="1" width="10" height="10"/><rect fill="#00a4ef" x="1" y="13" width="10" height="10"/><rect fill="#ffb900" x="13" y="13" width="10" height="10"/></svg></div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <a href="case-study-lekab.html">
+        <img src="img/case1.png" alt="Create Account">
+    </a>
+    </a>
         </div>
         <div class="feature-copy">
           <div class="feature-meta">
@@ -986,33 +1023,75 @@
           <a class="feature-link" href="case-study-lekab.html">Read the full case study →</a>
         </div>
       </div>
-
-      <div class="work-grid">
-        <a class="work-card available reveal d1 hover-lift" href="case-study-lekab.html">
-          <span class="work-tag">Case study · 01 · Nordic clean</span>
-          <h3>LEKAB Self-Service Portal</h3>
-          <p>Progressive signup, tokenized design system, and admin-loop removal for a Nordic communications platform. Persona-driven qualitative research.</p>
-          <span class="work-status">Read case study →</span>
-        </a>
-        <a class="work-card available reveal d2 hover-lift" href="case-study-messaging.html">
-          <span class="work-tag">Case study · 02 · Bento dashboard</span>
-          <h3>Business Messaging Platform</h3>
-          <p>Built from scratch at LEKAB SMS and RCS campaign builder for enterprise operators. Jobs-to-be-Done + card-sort IA replaced feature-list design.</p>
-          <span class="work-status">Read case study →</span>
-        </a>
-        <a class="work-card available reveal d3 hover-lift" href="case-study-onboarding.html">
-          <span class="work-tag">Case study · 03 · Editorial journal</span>
-          <h3>Onboarding CRO Nordic client</h3>
-          <p>Written as a research paper. Funnel analysis, Hotjar heatmaps, and A/B testing. Every change was a written hypothesis two failed, four shipped, +22% CVR.</p>
-          <span class="work-status">Read case study →</span>
-        </a>
-        <a class="work-card available reveal d4 hover-lift" href="case-study-support.html">
-          <span class="work-tag">Case study · 04 · FigJam blueprint</span>
-          <h3>Cross-Team Support Platform</h3>
-          <p>Presented as a working board. Stakeholder ecosystem, service blueprint, role personas, and co-design workshops for an internal LEKAB tool.</p>
-          <span class="work-status">Read case study →</span>
-        </a>
+ <!-- ============ FEATURED CASE STUDY 2 - LEKAB BMP ============ -->
+      <div class="feature-card">
+        <div class="feature-visual">
+                 <a href="case-study-messaging.html">
+        <img src="img/case2.png" alt="Create Account">
+    </a>
+        </div>
+        <div class="feature-copy">
+  <div class="feature-meta">
+    <span class="feature-chip">Enterprise SaaS</span>
+    <span class="feature-chip">Business Messaging</span>
+    <span class="feature-chip">User Experience</span>
+  </div>
+  <h3>Enterprise Messaging Platform: Scaling business <em>communication</em> workflows.</h3>
+  <p>
+    Designing a robust business messaging platform for SMS and RCS campaigns that empowers teams 
+    to manage high-volume customer communications seamlessly. Integrated cross-channel analytics and 
+    streamlined campaign routing to drive engagement and optimize enterprise workflows.
+  </p>
+  <a class="feature-link" href="case-study-messaging.html">Read the full case study →</a>
+</div>
       </div>
+ <!-- ============ FEATURED CASE STUDY 3- Onboarding CRO Nordic client ============ -->
+       <div class="feature-card">
+        <div class="feature-visual">
+                 <a href="case-study-onboarding.html">
+        <img src="img/case3.png" alt="Create Account">
+    </a>
+        </div>
+<div class="feature-copy">
+  <div class="feature-meta">
+    <span class="feature-chip">Design Systems</span>
+    <span class="feature-chip">Enterprise B2B</span>
+    <span class="feature-chip">Information Architecture</span>
+  </div>
+  <h3>Omnichannel Messaging Platform: Simplifying <em>RCS & SMS</em> campaigns.</h3>
+  <p>
+    Designing a unified campaign builder for high-volume enterprise messaging. Streamlined audience 
+    segmentation, template compliance checks, and real-time delivery analytics to reduce campaign 
+    creation time by 45% while driving high conversion rates across Nordic enterprise accounts.
+  </p>
+  <a class="feature-link" href="case-study-messaging.html">Read the full case study →</a>
+</div>
+      </div>
+ <!-- ============ FEATURED CASE STUDY 4 - Cross-Team Support Platform ============ -->
+
+       <div class="feature-card">
+        <div class="feature-visual">
+                 <a href="case-study-support.html">
+        <img src="img/case4.png" alt="Create Account">
+    </a>
+        </div>
+       <div class="feature-copy">
+  <div class="feature-meta">
+    <span class="feature-chip">UX Research</span>
+    <span class="feature-chip">Information Architecture</span>
+    <span class="feature-chip">WCAG 2.2 AA</span>
+  </div>
+  <h3>Frictionless Enterprise Onboarding: Tenant provisioning & <em>billing</em>.</h3>
+  <p>
+    An extensive UX overhaul of account creation and organization management. By replacing rigid multi-page 
+    walls with progressive disclosure and inline validation, drop-off rates fell significantly and usability 
+    scores improved by 35% across Nordic accounts.
+  </p>
+  <a class="feature-link" href="case-study-onboarding.html">Read the full case study →</a>
+</div>
+      </div>
+
+     
     </div>
   </section>
 
@@ -1210,8 +1289,8 @@
           <div>
             <strong style="display: block; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8593a8; font-weight: 600; margin-bottom: 0.5rem;">This portfolio</strong>
             <p style="margin: 0; color: #2b3648; font-size: 0.92rem; line-height: 1.6;">
-              No cookies. No tracking scripts. No third-party analytics. No dark patterns. All fonts self-hostable.
-              Content loads without JavaScript,motion is progressive enhancement only. Total transferred size under 400&nbsp;KB.
+              No cookies. No tracking scripts. No third-party analytics. 
+              Content loads without JavaScript.
             </p>
           </div>
           <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
@@ -1219,8 +1298,7 @@
             <span class="tag">📊 No trackers</span>
             <span class="tag">🔐 No 3rd-party scripts</span>
             <span class="tag">♿ Keyboard-navigable</span>
-            <span class="tag">🎬 Reduced-motion aware</span>
-            <span class="tag">🌗 Prefers-color-scheme ready</span>
+
           </div>
         </div>
       </div>
