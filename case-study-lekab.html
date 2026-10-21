@@ -996,63 +996,350 @@
   </header>
 
   <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="kicker reveal">Case Study 01 · Enterprise SaaS</div>
-      <h1 class="display reveal d1">A calmer signup for <em>high-stakes</em> communication.</h1>
-      <p class="deck reveal d2">
-        Redesigning the LEKAB self-service portal so enterprise users could onboard without abandonment,
-        without losing trust, and without overwhelming admins. A study in progressive disclosure inside a
-        security-first environment.
-      </p>
+<style>
+/* 
+  Bento Persona Grid Layout (4 Separate Enterprise Personas)
+  Designed with dedicated background, actions, pain points, expectations, and quotes.
+*/
+.persona-bento-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    width: 100%;
+}
+.persona-bento-card {
+    display: grid;
+    grid-template-columns: 320px 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 1.25rem;
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 28px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(15, 26, 43, 0.04);
+}
+@media (max-width: 1100px) {
+    .persona-bento-card {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .persona-bento-card {
+        grid-template-columns: 1fr;
+    }
+}
+.bento-profile-box {
+    grid-row: span 3;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(15, 26, 43, 0.02);
+}
+@media (max-width: 1100px) {
+    .bento-profile-box {
+        grid-row: span 1;
+    }
+}
+.bento-avatar-lg {
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #0b57d0, #10cbb1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Fraunces", serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.2);
+}
+.bento-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(15, 26, 43, 0.02);
+}
+.bento-title {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8593a8;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+.bento-box p, .bento-box li {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #334155;
+    margin: 0;
+}
+.bento-bullets {
+    padding-left: 1.1rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.bento-quote-box {
+    grid-column: span 2;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 1.5rem 1.8rem;
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #0f1a2b;
+    border-left: 4px solid #0b57d0;
+    box-shadow: 0 2px 10px rgba(15, 26, 43, 0.02);
+}
+@media (max-width: 1100px) {
+    .bento-quote-box {
+        grid-column: span 1;
+    }
+}
+</style>
 
-      <div class="meta-strip">
-        <div class="meta-cell"><strong>Role</strong><span>UX/UI Designer, Lead</span></div>
-        <div class="meta-cell"><strong>Client</strong><span>LEKAB Communication AB</span></div>
-        <div class="meta-cell"><strong>Timeline</strong><span>4 Weeks</span></div>
-        <div class="meta-cell"><strong>Tools</strong><span>Figma, FigJam, Jira</span></div>
-        <div class="meta-cell"><strong>Platforms Supported</strong><span>Cross-platform (Desktop, Mobile, Tablet & Web/Native)</span></div>
-        <div class="meta-cell"><strong>Industry</strong><span>Comms · Fintech · Public</span></div>
-      </div>
+<section class="block" id="research">
+<div class="wrap">
+<div class="section-label">Research &amp; personas</div>
+<h2 class="head">Listening before we redesigned anything.</h2>
+<p class="lede">
+Conducted user interviews with 15 users across different companies and departments, mapping current journeys alongside support and establishing four comprehensive enterprise personas and user stories[cite: 61, 62].
+</p>
 
-      <!-- Hero visual: Pure CSS auto-slider with full parent width and white background -->
-      <div class="hero-stage">
-        <!-- Slider Viewport -->
-        <div class="slider-container">
-          <div class="slider-track">
-            <a href="case-study-lekab.html" class="slide">
-              <img src="img/case1_login.png" alt="Create Account - Slide 1">
-            </a>
-            <a href="case-study-lekab.html" class="slide">
-              <img src="img/case1_login2.png" alt="Create Account - Slide 2">
-            </a>
-            <a href="case-study-lekab.html" class="slide">
-              <img src="img/case1_login3.png" alt="Create Account - Slide 3">
-            </a>
-            <a href="case-study-lekab.html" class="slide">
-              <img src="img/case1_login4.png" alt="Create Account - Slide 4">
-            </a>
-            <a href="case-study-lekab.html" class="slide">
-              <img src="img/case1_login5.png" alt="Create Account - Slide 5">
-            </a>  <a href="case-study-lekab.html" class="slide">
-              <img src="img/case1_login6.png" alt="Create Account - Slide 5">
-            </a>
-          </div>
+<div class="persona-bento-wrapper">
+
+<!-- ============ PERSONA 1: MARCUS ============ -->
+<div class="persona-bento-card">
+    <div class="bento-profile-box">
+        <div>
+            <div class="bento-avatar-lg">MA</div>
+            <h3 style="margin: 0 0 2px 0; font-size: 1.25rem; font-weight: 600; color: #0f1a2b;">Marcus</h3>
+            <span style="font-size: 0.85rem; color: #64748b; font-weight: 500;">Enterprise IT Administrator</span>
+            <div style="margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.82rem; color: #475569;">
+                <div><strong>Focus:</strong> Security &amp; Compliance[cite: 62]</div>
+                <div><strong>Scope:</strong> Mid-sized Enterprise[cite: 62]</div>
+                <div><strong>Archetype:</strong> Gatekeeper &amp; Provisioner</div>
+            </div>
         </div>
-
-        <!-- Dash Indicators -->
-        <div class="slider-dots">
-          <span class="dot-btn active"></span>
-          <span class="dot-btn"></span>
-          <span class="dot-btn"></span>
-          <span class="dot-btn"></span>
-          <span class="dot-btn"></span>
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; font-style: italic; font-size: 0.8rem; color: #64748b;">
+            "Security should be robust without creating operational roadblocks."
         </div>
-      </div>
-
     </div>
-  </section>
 
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">Background</div>
+            <p>Marcus manages security compliance, user provisioning, and authentication protocols for a mid-sized enterprise. He lives by strict security audits and is responsible for ensuring that only authorized personnel gain access to company communication channels[cite: 62].</p>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">What He Wants to Do</div>
+            <p>Securely provision department access using trusted enterprise credentials (such as Google, Microsoft, or Apple SSO) and maintain strict reCAPTCHA spam protection without creating administrative roadblocks for his team[cite: 62].</p>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">In-Depth Pain Points</div>
+            <ul class="bento-bullets">
+                <li>Deeply frustrated by legacy enterprise software that uses rigid, bloated registration forms compared to modern developer tools (AWS, GitHub, Vercel)[cite: 62].</li>
+                <li>Excessive upfront data demands (corporate hierarchies, billing codes, unverified personal numbers) cause annoyance, field skipping, and falsified data, creating severe security blind spots[cite: 62].</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">What He Suggests / Expects</div>
+            <p>A clean, decoupled authentication flow where basic identity is confirmed instantly, allowing administrators and team members to enter the platform safely and complete secondary compliance data later through progressive prompts[cite: 62].</p>
+        </div>
+    </div>
+
+    <div class="bento-quote-box">
+        <strong>User Story:</strong> "As an IT Administrator, I want a secure authentication gateway with email verification, SSO, and spam protection so that I can safely provision access for my department without users abandoning the form or submitting fake credentials[cite: 62]."
+    </div>
+</div>
+
+<!-- ============ PERSONA 2: SOFIA ============ -->
+<div class="persona-bento-card">
+    <div class="bento-profile-box">
+        <div>
+            <div class="bento-avatar-lg" style="background: linear-gradient(135deg, #2563eb, #3b82f6);">SO</div>
+            <h3 style="margin: 0 0 2px 0; font-size: 1.25rem; font-weight: 600; color: #0f1a2b;">Sofia</h3>
+            <span style="font-size: 0.85rem; color: #64748b; font-weight: 500;">Marketing Campaign Manager</span>
+            <div style="margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.82rem; color: #475569;">
+                <div><strong>Focus:</strong> Bulk Campaigns &amp; Speed[cite: 63]</div>
+                <div><strong>Scope:</strong> National Retail Brand[cite: 63]</div>
+                <div><strong>Archetype:</strong> Fast-Paced Executioner</div>
+            </div>
+        </div>
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; font-style: italic; font-size: 0.8rem; color: #64748b;">
+            "Timing is everything when scheduling flash-sale broadcasts."
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">Background</div>
+            <p>Sofia coordinates high-volume bulk SMS, MMS, and RCS promotional campaigns across multiple channels for a national retail brand. She operates in a fast-paced environment where timing is everything[cite: 62, 63].</p>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">What She Wants to Do</div>
+            <p>Access the messaging portal instantly, create broadcast workflows, and input valid mobile routing parameters without administrative bottlenecks[cite: 63].</p>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">In-Depth Pain Points</div>
+            <ul class="bento-bullets">
+                <li>Detests cumbersome, outdated login walls when needing immediate access for time-sensitive flash-sale broadcasts (compares to Mailchimp, HubSpot)[cite: 63].</li>
+                <li>Long upfront forms caused high drop-offs; users rushed through and entered incorrect or fake phone numbers, sabotaging delivery metrics, blocking OTPs, and ruining analytics[cite: 63].</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">What She Suggests / Expects</div>
+            <p>A frictionless initial login that gets her straight to her dashboard, with intelligent, contextual prompts that only ask for specialized campaign or department attributes when setting up a live broadcast[cite: 63].</p>
+        </div>
+    </div>
+
+    <div class="bento-quote-box">
+        <strong>User Story:</strong> "As a Marketing Manager, I want a frictionless initial login so that I can quickly access the portal and input valid mobile routing parameters for bulk SMS/RCS campaigns without administrative delays[cite: 63]."
+    </div>
+</div>
+
+<!-- ============ PERSONA 3: DAVID ============ -->
+<div class="persona-bento-card">
+    <div class="bento-profile-box">
+        <div>
+            <div class="bento-avatar-lg" style="background: linear-gradient(135deg, #0284c7, #06b6d4);">DA</div>
+            <h3 style="margin: 0 0 2px 0; font-size: 1.25rem; font-weight: 600; color: #0f1a2b;">David</h3>
+            <span style="font-size: 0.85rem; color: #64748b; font-weight: 500;">Customer Support Lead</span>
+            <div style="margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.82rem; color: #475569;">
+                <div><strong>Focus:</strong> Incident Response &amp; Outages[cite: 63]</div>
+                <div><strong>Scope:</strong> Emergency Support[cite: 63]</div>
+                <div><strong>Archetype:</strong> Crisis Responder</div>
+            </div>
+        </div>
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; font-style: italic; font-size: 0.8rem; color: #64748b;">
+            "Uninterrupted communication during critical outages is non-negotiable."
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">Background</div>
+            <p>David oversees urgent customer incident alerts, staffing schedules, and two-way customer support workflows. His team relies on uninterrupted, instantaneous communication channels during critical outages[cite: 63].</p>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">What He Wants to Do</div>
+            <p>Log in seamlessly across desktop or mobile browsers to manage emergency incident alerts and ensure two-way SMS notifications are tied to accurate, working contact numbers on the go[cite: 63].</p>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">In-Depth Pain Points</div>
+            <ul class="bento-bullets">
+                <li>Deals with high-stress operational crises; if a portal lags, demands excessive paperwork, or locks him out during an outage, customer satisfaction plummets (compares to PagerDuty, Slack)[cite: 63].</li>
+                <li>Upfront data demands lead to fragmented contact records (missing work vs. private numbers), breaking automated notification chains during emergencies[cite: 63].</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">What He Suggests / Expects</div>
+            <p>Immediate dashboard access upon verification, with clear, non-intrusive reminders to update profile details later rather than locking him out or blocking his view during a crisis[cite: 63].</p>
+        </div>
+    </div>
+
+    <div class="bento-quote-box">
+        <strong>User Story:</strong> "As a Support Lead, I want reliable access across desktop and mobile browsers so that I can manage emergency incident alerts and ensure two-way SMS notifications are tied to accurate contact numbers on the go[cite: 63]."
+    </div>
+</div>
+
+<!-- ============ PERSONA 4: ELENA ============ -->
+<div class="persona-bento-card">
+    <div class="bento-profile-box">
+        <div>
+            <div class="bento-avatar-lg" style="background: linear-gradient(135deg, #059669, #10b981);">EL</div>
+            <h3 style="margin: 0 0 2px 0; font-size: 1.25rem; font-weight: 600; color: #0f1a2b;">Elena</h3>
+            <span style="font-size: 0.85rem; color: #64748b; font-weight: 500;">Finance &amp; Billing Manager</span>
+            <div style="margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.82rem; color: #475569;">
+                <div><strong>Focus:</strong> Data Accuracy &amp; Invoices[cite: 64]</div>
+                <div><strong>Scope:</strong> Enterprise Billing[cite: 64]</div>
+                <div><strong>Archetype:</strong> Financial Auditor</div>
+            </div>
+        </div>
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; font-style: italic; font-size: 0.8rem; color: #64748b;">
+            "Every euro spent must map correctly to the right department."
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">Background</div>
+            <p>Elena monitors operational expenditures, API usage metrics, campaign delivery costs, and monthly communication invoices. She is meticulous about data accuracy and ensures correct department attribution[cite: 63, 64].</p>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">What She Wants to Do</div>
+            <p>Ensure enterprise accounts are correctly linked to verified contact numbers and clear department attributes so billing history, account balances, and usage metrics match accurately[cite: 64].</p>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">In-Depth Pain Points</div>
+            <ul class="bento-bullets">
+                <li>Suffers from massive end-of-month reconciliation errors caused by bad data captured during flawed registration processes (compares to Stripe, NetSuite)[cite: 64].</li>
+                <li>Premature department and billing guesses lead to placeholder data, unverified numbers, and misattributed department codes, turning monthly auditing into a nightmare[cite: 64].</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bento-box">
+        <div>
+            <div class="bento-title">What She Suggests / Expects</div>
+            <p>Contextual task gating where secondary billing and department attributes are prompted precisely when the user attempts to access financial modules or run billable campaigns[cite: 64].</p>
+        </div>
+    </div>
+
+    <div class="bento-quote-box">
+        <strong>User Story:</strong> "As a Finance Manager, I want a clear profile structure ensuring our enterprise account is tied to verified contact numbers and correct department attributes for accurate billing tracking[cite: 64]."
+    </div>
+</div>
+
+</div>
+
+</div>
+</section>
   <!-- ============ OVERVIEW ============ -->
   <section class="block" id="overview">
     <div class="wrap">
